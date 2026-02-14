@@ -1,10 +1,20 @@
 extends CharacterBody2D
 
+var dream = "forest"
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
+@onready var color_rect: ColorRect = $CanvasLayer/ColorRect
+var worldshade = {
+	"forest" ={"color" :"3e23663d",
+					"opacity" : 0.2
+					 } 
+}
 var speed = 100
 var direction : Vector2
 
+func _ready():
+	color_rect.color = worldshade[dream]["color"]
+	color_rect.color.a = worldshade[dream]["opacity"]
+	
 func _physics_process(delta: float) -> void:
 	
 	if direction==Vector2(0,1):

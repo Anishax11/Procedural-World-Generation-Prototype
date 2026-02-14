@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://cj7orckcw0kiu"]
+
+[ext_resource type="Script" path="res://scripts/decor.gd" id="1_j808x"]
+[ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="2_x335e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_so6rc"]
+atlas = ExtResource("2_x335e")
+region = Rect2(176, 53, 16, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtg0c"]
+atlas = ExtResource("2_x335e")
+region = Rect2(192, 53, 16, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5a2j"]
+atlas = ExtResource("2_x335e")
+region = Rect2(208, 53, 16, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8jwq"]
+atlas = ExtResource("2_x335e")
+region = Rect2(177, 32, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fk41"]
+atlas = ExtResource("2_x335e")
+region = Rect2(192, 16, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcfji"]
+atlas = ExtResource("2_x335e")
+region = Rect2(96, 160, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dgk8"]
+atlas = ExtResource("2_x335e")
+region = Rect2(109, 65, 23, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4hwsr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_so6rc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtg0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5a2j")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8jwq")
+}],
+"loop": true,
+"name": &"flower1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fk41")
+}],
+"loop": true,
+"name": &"flower2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcfji")
+}],
+"loop": true,
+"name": &"flower3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dgk8")
+}],
+"loop": true,
+"name": &"stump",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rd1xn"]
+radius = 8.06226
+
+[node name="Decor" type="StaticBody2D"]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_j808x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4hwsr")
+animation = &"fire"
+frame_progress = 0.117192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_rd1xn")
