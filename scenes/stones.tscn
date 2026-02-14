@@ -1,7 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://1hnsjbsl4cii"]
+[gd_scene load_steps=12 format=3 uid="uid://1hnsjbsl4cii"]
 
 [ext_resource type="Script" path="res://scripts/stones.gd" id="1_h0l0j"]
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="1_o0y2y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3f6h"]
+atlas = ExtResource("1_o0y2y")
+region = Rect2(176, 31, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uh01"]
+atlas = ExtResource("1_o0y2y")
+region = Rect2(192, 16, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcfji"]
+atlas = ExtResource("1_o0y2y")
+region = Rect2(96, 160, 15, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_58tkv"]
 atlas = ExtResource("1_o0y2y")
@@ -21,6 +33,30 @@ region = Rect2(80, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hkfd5"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3f6h")
+}],
+"loop": false,
+"name": &"flower1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uh01")
+}],
+"loop": false,
+"name": &"flower2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcfji")
+}],
+"loop": true,
+"name": &"flower3",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_58tkv")
@@ -64,7 +100,7 @@ script = ExtResource("1_h0l0j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hkfd5")
-animation = &"stone1"
+animation = &"stone4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)

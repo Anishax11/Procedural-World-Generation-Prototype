@@ -8,16 +8,20 @@ const STONES = preload("res://scenes/stones.tscn")
 var width = 150
 var height = 100
 var altitude ={}
-
+var dream = "forest"
 var forest_grass
 var forest_shiny_grass
 
-#var forest = {
-	#"altitude_0.4" = {"forest_grass" = {tile_map_layer.get_cell(Vector2i(8,1))},
-	#"forest_shiny_grass"= {tile_map_layer.get_cell(Vector2i(8,1))
-	#}
-	#
-#}
+var worlds ={
+	"forest" = {
+	"layer0" : Vector2i(8,1),
+	"layer1" : Vector2i(8,1),
+	"layer2" : Vector2i(8,0),
+	"layer3" : Vector2i(8,0)
+	
+}
+	
+}
 
 var fast_noise = FastNoiseLite.new()
 
@@ -44,18 +48,22 @@ func set_tiles():
 	for y in range(height):
 		for x in range(width):
 			if altitude[Vector2i(x,y)]<0.4:
-				tile_map_layer.set_cell(Vector2(x,y),0,Vector2i(8,1))
+				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer0"])
 			elif altitude[Vector2i(x,y)]<0.5:
-				tile_map_layer.set_cell(Vector2(x,y),0,Vector2i(8,1))
-				spawn_stone(Vector2i(x,y))
+				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer1"])
+				if dream == "forest":
+					spawn_stone(Vector2i(x,y))
 			elif altitude[Vector2i(x,y)]<0.6:
-				tile_map_layer.set_cell(Vector2(x,y),0,Vector2i(8,0))
+				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer2"])
 				
 			elif altitude[Vector2i(x,y)]<0.7:
-				spawn_decor(Vector2i(x,y))
-				tile_map_layer.set_cell(Vector2(x,y),0,Vector2i(8,0))
+				if dream == "forest":
+					spawn_decor(Vector2i(x,y))
+				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer3"])
 			else:
-				spawn_tree(Vector2i(x,y))
+				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer0"])
+				if dream == "forest":
+					spawn_tree(Vector2i(x,y))
 				
 
 func spawn_tree(pos):
