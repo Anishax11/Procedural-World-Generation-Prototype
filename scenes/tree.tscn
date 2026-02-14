@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlnn13hqhgqrf"]
+
+[ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="1_uwm5n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tpyc"]
+atlas = ExtResource("1_uwm5n")
+region = Rect2(0, 80, 48, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eivtb"]
+atlas = ExtResource("1_uwm5n")
+region = Rect2(48, 78, 48, 67)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6wexw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tpyc")
+}],
+"loop": false,
+"name": &"green_tree",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eivtb")
+}],
+"loop": false,
+"name": &"red_tree",
+"speed": 5.0
+}]
+
+[node name="Tree" type="StaticBody2D"]
+z_index = 1
+y_sort_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6wexw")
+animation = &"red_tree"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-22, -1, -17, 14, -10, 17, -8, 22, -13, 24, -9, 28, 4, 29, 11, 24, 6, 21, 17, 15, 23, 0)
