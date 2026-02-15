@@ -20,7 +20,7 @@ func _ready():
 	state_machine = get_node("EnemyStateMachine")
 
 func patrol():
-	print("Patrol")
+	#print("Patrol")
 	if wait_time<=0:
 		
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
@@ -39,7 +39,7 @@ func patrol():
 
 
 func chase():
-	print("Chase")
+	#print("Chase")
 	prev_state = state_machine.States.chase
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
@@ -77,8 +77,8 @@ func attack():
 	animated_sprite_2d.play("attack")
 	if player_hitbox==null:
 		print("Player hibox null")
-	else:
-		print("Player caught, attack")
+	#else:
+		#print("Player caught, attack")
 	if attack_interval <=0:
 		player_hitbox.take_damage(5)
 		attack_interval = 5.0

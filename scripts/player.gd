@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-var turn = true
 var dream = "forest"
 enum States{combat,explore,move_to}
 var state = States.explore
@@ -15,7 +14,8 @@ var worldshade = {
 }
 
 var speed = 100
-var direction : Vector2
+var direction : Vector2 = Vector2.ZERO
+var last_dir = direction
 
 func _ready():
 	color_rect.color = worldshade[dream]["color"]
@@ -59,29 +59,35 @@ func _physics_process(delta: float) -> void:
 	
 		
 func _input(event: InputEvent) -> void:
-
-		if Input.is_action_pressed("Base Attack") and turn:
-			#navigation_agent_2d.target_position = enemy_under_attack.get_parent().global_position
-			#print("Target pos :",navigation_agent_2d.target_position)
-			#print("Player pos :",global_position)
-			print("Base attack selected")
-			base_attack()
-
-	
-		direction=Vector2.ZERO
+		direction = Vector2.ZERO
+		
 		if Input.is_action_pressed("Shift"):
 			speed=150
 		else:
 			speed=70	
 		if Input.is_action_pressed("Up"):
+			#direction.y = 0
 			direction.y-=1
+			last_dir = direction	
 		if Input.is_action_pressed("Down"):
+			#direction.y = 0
 			direction.y+=1
+			last_dir = direction	
 		if Input.is_action_pressed("Right"):
+			#direction.x = 0
 			direction.x+=1
+			last_dir = direction	
 		if Input.is_action_pressed("Left"):
+			#direction.x = 0
 			direction.x-=1
-			
+			last_dir = direction	
+		if Input.is_action_pressed("Base Attack"):
+			#navigation_agent_2d.target_position = enemy_under_attack.get_parent().global_position
+			#print("Target pos :",navigation_agent_2d.target_position)
+			#print("Player pos :",global_position)
+			#print("Base attack selected")
+			base_attack()
+		
 	
 	
 	
@@ -92,29 +98,36 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 
 func base_attack():
-	
-	animated_sprite_2d.play("base_attack")
+	var anim = str(animated_sprite_2d.animation)
+	if anim.contains("forward"):
+		animated_sprite_2d.play("forward_base_attack")
+	elif anim.contains("backward"):
+		animated_sprite_2d.play("backward_base_attack")
+	elif anim.contains("right"):
+		animated_sprite_2d.play("right_base_attack")
+	else:
+		animated_sprite_2d.play("left_base_attack")
+		
 	for enemy in enemies_in_range:
-		print("enemy : ",enemy.name)
-		enemy.take_damage(40)
+		print("Player dire : ",last_dir)
+		print("Enemy pos : ",enemy.global_position)
+		if (last_dir.x >=0 and enemy.global_position.x>=global_position.x) or (last_dir.x<0 and enemy.global_position.x<=global_position.x) or (last_dir.y<0 and enemy.global_position.y<=global_position.y) or (last_dir.y>0 and enemy.global_position.y>=global_position.y) :
+			print("enemy : ",enemy.name)
+			enemy.take_damage(40)
 	
 	
 func combat():
 	print("Player in combat mode")
-	if turn:
-		print("select an attack")
+
 
 func die():
 	queue_free()
 	get_tree().paused=true
 	
-
-
-
-
 func _on_range_area_entered(area: Area2D) -> void:
 	
-	if area is HitBoxComponent and !area.get_parent()==self:
+	if area is HitBoxComponent and !area.get_parent()==self  and !enemies_in_range.has(area):
+		print("Range enetered : ", area.get_parent().name)
 		enemies_in_range.append(area)
 	
 
