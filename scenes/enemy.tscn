@@ -38,6 +38,10 @@ region = Rect2(96, 0, 48, 48)
 atlas = ExtResource("1_md0e3")
 region = Rect2(144, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_otmr2"]
+atlas = ExtResource("1_md0e3")
+region = Rect2(96, 240, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_md484"]
 animations = [{
 "frames": [{
@@ -76,6 +80,14 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otmr2")
+}],
+"loop": true,
+"name": &"pushed",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ipns3"]
@@ -94,7 +106,7 @@ script = ExtResource("1_5uy6h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1371255864]
 sprite_frames = SubResource("SpriteFrames_md484")
-animation = &"attack"
+animation = &"pushed"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1434268243]

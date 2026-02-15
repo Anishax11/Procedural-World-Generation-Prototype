@@ -16,6 +16,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if get_parent().stunned:
+		return
 	distance_to_player=parent.position.distance_to(player.position)
 	if state == States.patrol:
 		parent.patrol()

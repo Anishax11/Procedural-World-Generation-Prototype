@@ -88,3 +88,12 @@ func attack():
 	
 func die():
 	queue_free()
+
+var stunned = false
+
+func stun_effect():
+	var stun_time  = 30
+	while(stun_time>=0):
+		stunned = true
+		stun_time-=0.1
+	stunned = false
