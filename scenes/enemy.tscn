@@ -81,7 +81,8 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ipns3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5uy6h"]
-height = 28.0
+radius = 24.0
+height = 48.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c4w8v"]
 radius = 143.01399
@@ -95,8 +96,6 @@ script = ExtResource("1_5uy6h")
 sprite_frames = SubResource("SpriteFrames_md484")
 animation = &"attack"
 autoplay = "default"
-frame = 4
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1434268243]
 shape = SubResource("CapsuleShape2D_ipns3")
@@ -110,14 +109,17 @@ offset_top = -47.0
 offset_right = 21.0
 offset_bottom = -24.0
 
-[node name="HitBoxComponent" parent="." unique_id=1270115252 instance=ExtResource("3_4ra3w")]
+[node name="HitBoxComponent" parent="." unique_id=1270115252 node_paths=PackedStringArray("healthbox") instance=ExtResource("3_4ra3w")]
+healthbox = NodePath("../HealthBoxComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1754243396]
 shape = SubResource("CapsuleShape2D_5uy6h")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=780972270]
 
-[node name="EnemyStateMachine2" parent="." unique_id=2067893902 instance=ExtResource("5_c4w8v")]
+[node name="EnemyStateMachine" parent="." unique_id=2067893902 instance=ExtResource("5_c4w8v")]
 
-[node name="Range" type="CollisionShape2D" parent="EnemyStateMachine2" unique_id=156491729]
+[node name="Range" type="CollisionShape2D" parent="EnemyStateMachine" unique_id=156491729]
 shape = SubResource("CircleShape2D_c4w8v")
+
+[connection signal="input_event" from="HitBoxComponent" to="." method="_on_hit_box_component_input_event"]

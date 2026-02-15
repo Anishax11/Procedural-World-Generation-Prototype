@@ -3,28 +3,33 @@ extends Area2D
 var player
 var distance_to_player
 var parent 
-var state 
+enum States {patrol,chase,combat}
+var state = States.patrol
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	while(parent == null):
 		parent = get_parent()
-	state = parent.States.patrol
+	
 	player = get_tree().current_scene.find_child("Player")
+	parent.player = player
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-	
-	if state == parent.States.patrol:
+	distance_to_player=parent.position.distance_to(player.position)
+	if state == States.patrol:
 		parent.patrol()
-	elif state == parent.States.chase:
+	elif state == States.chase:
 		parent.navigation_agent_2d.target_position = player.global_position
-		distance_to_player=position.distance_to(player.global_position)
+		if distance_to_player <=5:
+			print("Switch tocombat")
+			state = States.combat
 		parent.chase()
-	else:
+	elif state == States.combat:
+		#print("Go to combat mode")
 		parent.combat()
 		
+	parent.velocity = parent.speed*parent.direction
 	parent.move_and_slide()
 	parent.wait_time-=delta
 
@@ -32,20 +37,14 @@ func _process(delta: float) -> void:
 
 
 
-#func _on_range_body_exited(body: Node2D) -> void:
-	#if body.name =="Player":
-		#print("player out of sight")
-		#state = parent.States.patrol
+
 
 
 func _on_body_entered(body: CharacterBody2D) -> void:
-	print("Body detected")
 	if body.name =="Player":
-		print("player in sight")
-		state = parent.States.chase
+		state = States.chase
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.name =="Player":
-		print("player out of sight")
-		state = parent.States.patrol
+		state = States.patrol

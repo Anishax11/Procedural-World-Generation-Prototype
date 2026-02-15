@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlnn13hqhgqrf"]
+[gd_scene format=3 uid="uid://dlnn13hqhgqrf"]
 
-[ext_resource type="Script" path="res://scripts/tree.gd" id="1_ibgdo"]
+[ext_resource type="Script" uid="uid://d2kx02j6xuyg7" path="res://scripts/tree.gd" id="1_ibgdo"]
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="1_uwm5n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8tpyc"]
@@ -42,15 +42,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Tree" type="StaticBody2D"]
+[node name="Tree" type="StaticBody2D" unique_id=968078701]
 z_index = 3
 y_sort_enabled = true
 script = ExtResource("1_ibgdo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1368210662]
 sprite_frames = SubResource("SpriteFrames_6wexw")
-animation = &"tree3"
-frame_progress = 1.0
+animation = &"tree2"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-22, -1, -17, 14, -10, 17, -8, 22, -13, 24, -9, 28, 4, 29, 11, 24, 6, 21, 17, 15, 23, 0)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1248074134]
+polygon = PackedVector2Array(-17, 14, -10, 17, -8, 22, -13, 24, -9, 28, 4, 29, 11, 24, 6, 21, 17, 15)

@@ -3,18 +3,25 @@ extends CharacterBody2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+var turn = false
 var player
-var speed = 50
+var speed = 35
 var direction : Vector2 = Vector2.ZERO
-enum States {patrol,chase,combat}
-var state = States.patrol
+var prev_state
+var state_machine 
 var wait_time = 5.0
 var distance_to_player
+var combat_manager
+var player_hitbox
+var attack_interval = 0.0
+var resolve_collision_time = 50.0
 
-
+func _ready():
+	player_hitbox = player.get_node("HitBoxComponent")
+	state_machine = get_node("EnemyStateMachine")
 
 func patrol():
-	print("Patrolling")
+	print("Patrol")
 	if wait_time<=0:
 		
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
@@ -26,48 +33,54 @@ func patrol():
 		
 	direction = direction.normalized()	
 	velocity = direction * speed
+	
 
 
 func chase():
-	print("Chasing")
-
-	
-	var next_pos  = navigation_agent_2d.get_next_path_position()
-	direction  = (next_pos - global_position).normalized()
+	print("Chase")
 	if get_slide_collision_count() > 0:
-		
 		var collision = get_slide_collision(0)
 		if collision.get_collider().name =="Player":
-			print("Player caught, attack")
-			combat()
-			
+			attack()
 		else:	
 			var normal = collision.get_normal()
-			state = States.patrol
+			resolve_collision(normal)
+
+	var next_pos  = navigation_agent_2d.get_next_path_position()
+	direction  = (next_pos - global_position).normalized()
+	
 		
 	velocity = direction * speed
 	move_and_slide()
 	
 	
+func resolve_collision(normal):
+	direction = direction.bounce(normal)
+	while(resolve_collision_time>0):
+		velocity = direction * speed
+		move_and_slide()
+		resolve_collision_time-=1
+	resolve_collision_time = 25
 	
 
 func combat():
-	print("Combat mode")
+	print("CombatWD")
 	direction = Vector2.ZERO
 	velocity = Vector2.ZERO
 	attack()
-	#if distance_to_player>10 and distance_to_player<70:
-		#print("Switch to chase")
-		#state = States.chase
-		
-
-
-
-#func _on_range_body_entered(body: Node2D) -> void:
-	#if body.name =="Player":
-		#print("player in sight")
-		#state = States.chase
-
+	
 func attack():
 	animated_sprite_2d.play("attack")
+	if player_hitbox==null:
+		print("Player hibox null")
+	else:
+		print("Player caught, attack")
+	if attack_interval <=0:
+		player_hitbox.take_damage(5)
+		attack_interval = 5.0
+	else:
+		attack_interval-=0.1
 	
+	
+func die():
+	queue_free()
