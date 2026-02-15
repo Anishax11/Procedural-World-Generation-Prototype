@@ -1,5 +1,6 @@
 extends Area2D
 
+class_name HitBoxComponent
 @export var healthbox : Node2D
 var player
 var damage = 10 

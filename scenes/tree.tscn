@@ -52,4 +52,4 @@ sprite_frames = SubResource("SpriteFrames_6wexw")
 animation = &"tree2"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1248074134]
-polygon = PackedVector2Array(-17, 14, -10, 17, -8, 22, -13, 24, -9, 28, 4, 29, 11, 24, 6, 21, 17, 15)
+polygon = PackedVector2Array(-22, -1, -17, 14, -10, 17, -8, 22, -13, 24, -9, 28, 4, 29, 11, 24, 6, 21, 17, 15, 23, 0)

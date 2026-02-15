@@ -4,6 +4,7 @@ var turn = true
 var dream = "forest"
 enum States{combat,explore,move_to}
 var state = States.explore
+var enemies_in_range : Array = []
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var color_rect: ColorRect = $CanvasLayer/ColorRect
 
@@ -15,24 +16,12 @@ var worldshade = {
 
 var speed = 100
 var direction : Vector2
-var enemy_under_attack # pick an enemy(hitbox) to attack during combat
-@onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
-var selected_attack
-var combat_manager
+
 func _ready():
 	color_rect.color = worldshade[dream]["color"]
 	color_rect.color.a = worldshade[dream]["opacity"]
-	combat_manager = get_tree().current_scene.find_child("CombatManager")
 	
 func _physics_process(delta: float) -> void:
-	if state == States.combat:
-		return
-	elif state == States.move_to:
-		print("State is move to enemy")
-		move_to_enemy()
-		
-	elif state == States.explore:
-		
 		if direction==Vector2(0,1):
 			animated_sprite_2d.play("forward")
 		if direction==Vector2(0,-1):
@@ -105,29 +94,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func base_attack():
 	
 	animated_sprite_2d.play("base_attack")
-	enemy_under_attack.take_damage(40)
-	combat_manager.turn_queueu.append(enemy_under_attack.get_parent())
+	for enemy in enemies_in_range:
+		print("enemy : ",enemy.name)
+		enemy.take_damage(40)
 	
-func move_to_enemy():
-	print("Player moving")
-	var next_pos = navigation_agent_2d.get_next_path_position()
-	direction = (next_pos-global_position).normalized()
-	#if get_slide_collision_count() > 0:
-		#print("Player collsion")
-		#var collision = get_slide_collision(0)
-		#if collision.get_collider()!=null:
-			#print("Collision body :",collision.get_collider().name)
-			#collision.get_collider().queue_free()
-	if navigation_agent_2d.is_navigation_finished():
-		print("Target reached")
-		base_attack()
-		turn = false
-		state = States.combat
-
-	velocity = direction*speed	
-	move_and_slide()
-
-
+	
 func combat():
 	print("Player in combat mode")
 	if turn:
@@ -137,3 +108,16 @@ func die():
 	queue_free()
 	get_tree().paused=true
 	
+
+
+
+
+func _on_range_area_entered(area: Area2D) -> void:
+	
+	if area is HitBoxComponent and !area.get_parent()==self:
+		enemies_in_range.append(area)
+	
+
+func _on_range_area_exited(area: Area2D) -> void:
+	if area is HitBoxComponent and !area.get_parent()==self:
+		enemies_in_range.erase(area)

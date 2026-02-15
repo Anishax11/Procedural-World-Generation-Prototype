@@ -33,13 +33,6 @@ func _process(delta: float) -> void:
 	parent.move_and_slide()
 	parent.wait_time-=delta
 
-	
-
-
-
-
-
-
 func _on_body_entered(body: CharacterBody2D) -> void:
 	if body.name =="Player":
 		state = States.chase

@@ -3,7 +3,6 @@ extends CharacterBody2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-var turn = false
 var player
 var speed = 35
 var direction : Vector2 = Vector2.ZERO
@@ -25,7 +24,9 @@ func patrol():
 	if wait_time<=0:
 		
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
-		wait_time = 3.0
+		if prev_state == state_machine.States.chase:
+			state_machine.state = state_machine.States.chase
+		wait_time = 1.0
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		var normal = collision.get_normal()
@@ -34,17 +35,20 @@ func patrol():
 	direction = direction.normalized()	
 	velocity = direction * speed
 	
+	
 
 
 func chase():
 	print("Chase")
+	prev_state = state_machine.States.chase
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		if collision.get_collider().name =="Player":
 			attack()
 		else:	
-			var normal = collision.get_normal()
-			resolve_collision(normal)
+			state_machine.state = state_machine.States.patrol 
+			#var normal = collision.get_normal()
+			#resolve_collision(normal)
 
 	var next_pos  = navigation_agent_2d.get_next_path_position()
 	direction  = (next_pos - global_position).normalized()
