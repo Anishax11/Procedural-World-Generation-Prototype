@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgaqki7i5emon"]
+[gd_scene format=3 uid="uid://cgaqki7i5emon"]
 
-[ext_resource type="Script" path="res://scripts/world.gd" id="1_48nx0"]
+[ext_resource type="Script" uid="uid://c4axg0wfqkv2x" path="res://scripts/world.gd" id="1_48nx0"]
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="2_1jy0w"]
 [ext_resource type="Texture2D" uid="uid://d3fiwqf3bjiab" path="res://sprites/WaterTileMap.png" id="3_75ksv"]
 [ext_resource type="PackedScene" uid="uid://c0grk3q8mcath" path="res://scenes/player.tscn" id="3_ki41a"]
 [ext_resource type="Texture2D" uid="uid://crvw1klgp6bq1" path="res://sprites/Grass.png" id="4_wm4c0"]
 [ext_resource type="Texture2D" uid="uid://ddubghrmtpx0v" path="res://sprites/WaterTilesets.png" id="5_vcepr"]
-[ext_resource type="Script" path="res://scripts/greenery.gd" id="7_h1eua"]
+[ext_resource type="Script" uid="uid://bwdo01litjbmp" path="res://scripts/greenery.gd" id="7_h1eua"]
+[ext_resource type="PackedScene" uid="uid://ddjijj7jpne32" path="res://scenes/enemy.tscn" id="8_7r4gi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6mu14"]
 texture = ExtResource("2_1jy0w")
@@ -352,20 +353,30 @@ sources/2 = SubResource("TileSetAtlasSource_478qy")
 sources/3 = SubResource("TileSetAtlasSource_h0nr0")
 sources/4 = SubResource("TileSetAtlasSource_6r6vw")
 
-[node name="World" type="Node2D"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4mrxx"]
+vertices = PackedVector2Array(1552.7734, 728.8906, -55.953125, 713.09375, -53.039063, 12.96875, 1537.2109, 9.0234375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-63, 3, 1547, -1, 1563, 739, -66, 723)])
+
+[node name="World" type="Node2D" unique_id=1125928686]
 y_sort_enabled = true
 script = ExtResource("1_48nx0")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1130499976]
 y_sort_enabled = true
 tile_set = SubResource("TileSet_oh2ko")
 
-[node name="Player" parent="." instance=ExtResource("3_ki41a")]
-z_index = 1
+[node name="Player" parent="." unique_id=1303849976 instance=ExtResource("3_ki41a")]
 position = Vector2(57, 33)
 
-[node name="Greenery" type="Node2D" parent="."]
+[node name="Greenery" type="Node2D" parent="." unique_id=328419711]
 y_sort_enabled = true
 script = ExtResource("7_h1eua")
+
+[node name="Enemy" parent="." unique_id=713136746 instance=ExtResource("8_7r4gi")]
+position = Vector2(155, 124)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1912358369]
+navigation_polygon = SubResource("NavigationPolygon_4mrxx")
 
 [connection signal="child_entered_tree" from="Greenery" to="." method="_on_greenery_child_entered_tree"]

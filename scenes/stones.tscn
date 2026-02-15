@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://1hnsjbsl4cii"]
+[gd_scene format=3 uid="uid://1hnsjbsl4cii"]
 
-[ext_resource type="Script" path="res://scripts/stones.gd" id="1_h0l0j"]
+[ext_resource type="Script" uid="uid://c1pijw86ggs7t" path="res://scripts/stones.gd" id="1_h0l0j"]
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="1_o0y2y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x3f6h"]
@@ -93,15 +93,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_iblou"]
 radius = 6.08276
 
-[node name="Stones" type="StaticBody2D"]
+[node name="Stones" type="StaticBody2D" unique_id=348821568]
 z_index = 2
 y_sort_enabled = true
 script = ExtResource("1_h0l0j")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1176928989]
 sprite_frames = SubResource("SpriteFrames_hkfd5")
 animation = &"stone4"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=496804883]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_iblou")

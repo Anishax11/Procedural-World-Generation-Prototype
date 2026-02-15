@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 var dream = "forest"
+enum States{combat,explore}
+var state = States.explore
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var color_rect: ColorRect = $CanvasLayer/ColorRect
 var worldshade = {
@@ -16,7 +18,8 @@ func _ready():
 	color_rect.color.a = worldshade[dream]["opacity"]
 	
 func _physics_process(delta: float) -> void:
-	
+	#if state == States.combat:
+		#return
 	if direction==Vector2(0,1):
 		animated_sprite_2d.play("forward")
 	if direction==Vector2(0,-1):
@@ -52,20 +55,22 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func _input(event: InputEvent) -> void:
+	
 
-	direction=Vector2.ZERO
-	if Input.is_action_pressed("Shift"):
-		speed=150
-	else:
-		speed=70	
-	if Input.is_action_pressed("Up"):
-		direction.y-=1
-	if Input.is_action_pressed("Down"):
-		direction.y+=1
-	if Input.is_action_pressed("Right"):
-		direction.x+=1
-	if Input.is_action_pressed("Left"):
-		direction.x-=1
+		direction=Vector2.ZERO
+		if Input.is_action_pressed("Shift"):
+			speed=150
+		else:
+			speed=70	
+		if Input.is_action_pressed("Up"):
+			direction.y-=1
+		if Input.is_action_pressed("Down"):
+			direction.y+=1
+		if Input.is_action_pressed("Right"):
+			direction.x+=1
+		if Input.is_action_pressed("Left"):
+			direction.x-=1
+			
 	
 	
 	
