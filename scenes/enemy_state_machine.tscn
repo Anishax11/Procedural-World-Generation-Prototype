@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dh54by7jxsp4l"]
+
+[ext_resource type="Script" uid="uid://chwmwnqwsakd0" path="res://scripts/enemy_state_machine.gd" id="1_dt4mm"]
+
+[node name="EnemyStateMachine" type="Area2D" unique_id=2067893902]
+script = ExtResource("1_dt4mm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
