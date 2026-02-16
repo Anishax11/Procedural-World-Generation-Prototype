@@ -6,7 +6,9 @@ var state = States.explore
 var enemies_in_range : Array = []
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var color_rect: ColorRect = $CanvasLayer/ColorRect
-var base_attack_damage = 10
+var base_attack_damage 
+@onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
+
 @onready var time_scale_world: Node2D = $"../TimeScaleWorld"
 var special_ability_cooldown = 0.0
 var speed = 100
@@ -14,8 +16,10 @@ var direction : Vector2 = Vector2.ZERO
 var last_dir = direction
 var stunned = false
 
-
-	
+func _ready() -> void:
+	base_attack_damage = Global.base_attack_damage
+	health_box_component.maxHealth = Global.maxHealth
+	health_box_component.health = Global.maxHealth
 	
 func _physics_process(delta: float) -> void:
 	
@@ -75,6 +79,7 @@ func _input(event: InputEvent) -> void:
 			direction.x-=1
 			last_dir = direction	
 		if Input.is_action_pressed("Base Attack"):
+			
 			#navigation_agent_2d.target_position = enemy_under_attack.get_parent().global_position
 			#print("Target pos :",navigation_agent_2d.target_position)
 			#print("Player pos :",global_position)

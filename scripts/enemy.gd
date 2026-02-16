@@ -4,8 +4,9 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 const POWER_UP = preload("uid://c3mcerku8g657")
 const HEAL_POWER_UP = preload("uid://b42tu1ifegdgs")
+const MEMORY_FRAGMENT = preload("uid://c3hyvh3gm8dmr")
 
-
+@onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
 var player
 var speed = 35
 var direction : Vector2 = Vector2.ZERO
@@ -18,12 +19,14 @@ var player_hitbox
 var attack_interval = 0.0
 
 
+
 func _ready():
 	player_hitbox = player.get_node("HitBoxComponent")
 	state_machine = get_node("EnemyStateMachine")
 
+
 func patrol():
-	#print("Patrol")
+	animated_sprite_2d.play("walk")
 	if wait_time<=0:
 		
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
@@ -32,7 +35,7 @@ func patrol():
 		var collision = get_slide_collision(0)
 		var normal = collision.get_normal()
 		direction = direction.bounce(normal)
-		
+	update_animation()
 	direction = direction.normalized()	
 	velocity = direction * speed
 	
@@ -40,6 +43,10 @@ func patrol():
 
 
 func chase():
+	#print("chase")
+
+	#if animated_sprite_2d.animation!="walk" and animated_sprite_2d.animation!="die":
+	animated_sprite_2d.play("walk")
 	prev_state = state_machine.States.chase
 	
 	if get_slide_collision_count() > 0:
@@ -47,10 +54,9 @@ func chase():
 		if collision.get_collider().name =="Player":
 			attack()
 		else:	
-			#state_machine.state = state_machine.States.patrol 
 			var normal = collision.get_normal()
 			resolve_collision(normal)
-
+	update_animation()
 	var next_pos  = navigation_agent_2d.get_next_path_position()
 	direction  = (next_pos - global_position).normalized()
 	
@@ -70,7 +76,15 @@ func combat():
 	attack()
 	
 func attack():
-	animated_sprite_2d.play("attack")
+
+	if direction.x<0:
+		animated_sprite_2d.flip_h = false
+	else:
+		animated_sprite_2d.flip_h = true
+	#print("Atatck")
+	if animated_sprite_2d.animation!="attack" and animated_sprite_2d.animation!="die":
+		animated_sprite_2d.play("attack")
+		
 	if attack_interval <=0:
 		player_hitbox.take_damage(5)
 		attack_interval = 5.0
@@ -79,16 +93,29 @@ func attack():
 	
 	
 func die():
-	if randi_range(3,3) == 3:
-		if randi_range(1,1) == 0:
-			var power_up = POWER_UP.instantiate()
-			power_up.global_position = global_position
-			get_parent().add_child(power_up)
-		else:
-			var power_up = HEAL_POWER_UP.instantiate()
-			power_up.global_position = global_position
-			get_parent().add_child(power_up)
-			
+
+	update_animation()
+	print("DIe")
+	
+	animated_sprite_2d.play("die")
+
+	
+	if randi_range(1,Global.enemies_left) == 1:
+		var fragment = MEMORY_FRAGMENT.instantiate()
+		fragment.global_position = global_position
+		get_parent().add_child(fragment)
+	else:
+		if randi_range(1,5) == 3:
+			if randi_range(0,1) == 0:
+				var power_up = POWER_UP.instantiate()
+				power_up.global_position = global_position
+				get_parent().add_child(power_up)
+			else:
+				var power_up = HEAL_POWER_UP.instantiate()
+				power_up.global_position = global_position
+				get_parent().add_child(power_up)
+		
+	Global.enemies_left-=1		
 	queue_free()
 
 var stunned = false
@@ -99,3 +126,9 @@ func stun_effect():
 		stunned = true
 		stun_time-=0.1
 	stunned = false
+	
+func update_animation():
+	if direction.x<0:
+		animated_sprite_2d.flip_h = true
+	else:
+		animated_sprite_2d.flip_h = false

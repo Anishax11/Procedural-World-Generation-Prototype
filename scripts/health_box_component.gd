@@ -1,13 +1,14 @@
 extends Node2D
 
 class_name HealthBoxComponent
-var maxHealth = 100
-var health = maxHealth # health is set to max when entity spawns/re spawns
+@export var maxHealth : int
+var health # health is set to max when entity spawns/re spawns
 @export var healthbar : Label # replace with ui box later
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	healthbar.text = str(health)
+	health = maxHealth
+	healthbar.text = str(maxHealth)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalCanvasLayer="*uid://c7iqwq2gh2scc"
+Global="*uid://c0ialhag0ruo4"
 
 [input]
 

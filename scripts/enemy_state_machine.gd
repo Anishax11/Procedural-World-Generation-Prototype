@@ -16,6 +16,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+
 	if resolve_collision_time > 0:
 		parent.velocity = parent.direction * parent.speed
 		parent.move_and_slide()
