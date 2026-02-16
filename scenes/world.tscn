@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="2_1jy0w"]
 [ext_resource type="PackedScene" uid="uid://c0grk3q8mcath" path="res://scenes/player.tscn" id="3_ki41a"]
 [ext_resource type="Texture2D" uid="uid://uvfrg6tbch65" path="res://sprites/Ice World Sprites/Ice Effect 01/Ice Effect 01/Ice VFX 2/Ice VFX 2 Active.png" id="4_71j4m"]
+[ext_resource type="PackedScene" uid="uid://d24qhsr4uko0x" path="res://scenes/skeleton_wizard.tscn" id="6_qfnet"]
 [ext_resource type="Script" uid="uid://bwdo01litjbmp" path="res://scripts/greenery.gd" id="7_h1eua"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6mu14"]
@@ -386,3 +387,6 @@ script = ExtResource("7_h1eua")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1988562671]
 navigation_polygon = SubResource("NavigationPolygon_4mrxx")
+
+[node name="SkeletonWizard" parent="." unique_id=1325160055 instance=ExtResource("6_qfnet")]
+position = Vector2(614, 393)

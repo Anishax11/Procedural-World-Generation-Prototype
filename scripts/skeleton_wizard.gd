@@ -5,7 +5,7 @@ extends CharacterBody2D
 const POWER_UP = preload("uid://c3mcerku8g657")
 const HEAL_POWER_UP = preload("uid://b42tu1ifegdgs")
 const MEMORY_FRAGMENT = preload("uid://c3hyvh3gm8dmr")
-var base_damage = 5
+const SPELL = preload("uid://dwf1hndexyu7x")
 @onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
 var player
 var speed = 35
@@ -46,8 +46,8 @@ func chase():
 	#print("chase")
 
 	#if animated_sprite_2d.animation!="walk" and animated_sprite_2d.animation!="die":
-	animated_sprite_2d.play("walk")
-	
+
+	attack()
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		if collision.get_collider().name =="Player":
@@ -55,10 +55,9 @@ func chase():
 		else:	
 			var normal = collision.get_normal()
 			resolve_collision(normal)
+			
 	update_animation()
-	var next_pos  = navigation_agent_2d.get_next_path_position()
-	direction  = (next_pos - global_position).normalized()
-	
+
 	move_and_slide()
 	
 	
@@ -69,23 +68,30 @@ func resolve_collision(normal):
 	
 
 func combat():
-	#print("CombatWD :",self.name)
-	direction = Vector2.ZERO
-	velocity = Vector2.ZERO
-	attack()
+	
+	direction = direction.bounce(direction)
+	velocity = direction*speed
+	move_and_slide()
 	
 func attack():
 
-	if direction.x<0:
-		animated_sprite_2d.flip_h = false
-	else:
-		animated_sprite_2d.flip_h = true
-	#print("Atatck")
-	if animated_sprite_2d.animation!="attack" and animated_sprite_2d.animation!="die":
+	
+	if attack_interval <=0:
+		var spell = SPELL.instantiate()
+		
+		
+		if direction.x<0:
+			animated_sprite_2d.flip_h = false
+			spell.position = Vector2(position.x+10,position.y+10)
+		else:
+			animated_sprite_2d.flip_h = true
+			spell.position = Vector2(position.x-10,position.y-10)
+			
+		add_child(spell)	
+		spell.animated_sprite_2d.flip_h  = animated_sprite_2d.flip_h 
 		animated_sprite_2d.play("attack")
 		
-	if attack_interval <=0:
-		player_hitbox.take_damage(base_damage)
+		
 		attack_interval = 5.0
 	else:
 		attack_interval-=0.1

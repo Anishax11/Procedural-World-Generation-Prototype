@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://dwf1hndexyu7x"]
+
+[ext_resource type="Script" uid="uid://ceowxmsyc36bu" path="res://scripts/spell.gd" id="1_om5k2"]
+[ext_resource type="Texture2D" uid="uid://71a8ghfwshfx" path="res://sprites/Ice World Sprites/Ice Effect 01/Ice Effect 01/Ice VFX 1/Ice VFX 1 Start.png" id="2_ol3gn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nstc"]
+atlas = ExtResource("2_ol3gn")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkwhk"]
+atlas = ExtResource("2_ol3gn")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kvbf"]
+atlas = ExtResource("2_ol3gn")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uiofm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nstc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkwhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kvbf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dc6u6"]
+
+[node name="Spell" type="Area2D" unique_id=1971188816]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_om5k2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1953944539]
+sprite_frames = SubResource("SpriteFrames_uiofm")
+frame_progress = 0.5228628
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=516786952]
+position = Vector2(-6, 1)
+shape = SubResource("CircleShape2D_dc6u6")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1018589333]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
