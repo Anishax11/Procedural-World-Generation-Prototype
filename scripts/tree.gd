@@ -9,4 +9,3 @@ func _on_area_2d_body_entered(body: StaticBody2D) -> void:
 	
 	if body!=self:
 		body.queue_free()
-		print("Remove body from tree :",body.name)

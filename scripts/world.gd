@@ -2,9 +2,13 @@ extends Node2D
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var greenery: Node2D = $Greenery
+# FOREST :
 const DECOR = preload("res://scenes/decor.tscn")
 const TREE = preload("res://scenes/tree.tscn")
 const STONES = preload("res://scenes/stones.tscn")
+const ENEMY = preload("uid://ddjijj7jpne32")
+
+
 var width = 150
 var height = 100
 var altitude ={}
@@ -47,6 +51,7 @@ func _ready() -> void:
 	color_rect.color.a = worlds[dream]["opacity"]
 	altitude = world_generator(300,5)
 	set_tiles()
+	spawn_enemy()
 	
 func set_tiles():
 	for y in range(height):
@@ -84,3 +89,10 @@ func spawn_decor(pos):
 	var decor = DECOR.instantiate()
 	decor.global_position = tile_map_layer.map_to_local(pos)
 	greenery.add_child(decor)
+
+func spawn_enemy():
+	for i in range(15):
+		var enemy = ENEMY.instantiate()
+		enemy.global_position = Vector2(randi_range(0,width*15 ),randi_range(0,height*15))
+		#print("Spawn point enemy :",enemy.global_position)
+		add_child(enemy)
