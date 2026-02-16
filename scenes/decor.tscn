@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cj7orckcw0kiu"]
+[gd_scene format=3 uid="uid://cj7orckcw0kiu"]
 
-[ext_resource type="Script" path="res://scripts/decor.gd" id="1_j808x"]
+[ext_resource type="Script" uid="uid://bujui447abdn2" path="res://scripts/decor.gd" id="1_j808x"]
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="2_x335e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_so6rc"]
@@ -47,15 +47,24 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_rd1xn"]
 radius = 8.06226
 
-[node name="Decor" type="StaticBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ovbhi"]
+radius = 6.0827627
+
+[node name="Decor" type="StaticBody2D" unique_id=883402926]
 z_index = 2
 y_sort_enabled = true
 script = ExtResource("1_j808x")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1434319625]
 sprite_frames = SubResource("SpriteFrames_4hwsr")
 animation = &"stump"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1756901329]
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_rd1xn")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1733336501]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1309945494]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_ovbhi")

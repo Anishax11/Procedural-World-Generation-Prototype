@@ -53,8 +53,6 @@ func chase():
 	var next_pos  = navigation_agent_2d.get_next_path_position()
 	direction  = (next_pos - global_position).normalized()
 	
-		
-	velocity = direction * speed
 	move_and_slide()
 	
 	

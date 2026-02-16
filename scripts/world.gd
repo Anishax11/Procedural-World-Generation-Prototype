@@ -11,14 +11,15 @@ var altitude ={}
 var dream = "forest"
 var forest_grass
 var forest_shiny_grass
-
+var color_rect
 var worlds ={
 	"forest" = {
-	"layer0" : Vector2i(8,1),
-	"layer1" : Vector2i(8,1),
-	"layer2" : Vector2i(8,0),
-	"layer3" : Vector2i(8,0)
-	
+	"layer0" : {"source" : 0, "cord" : Vector2i(8,1)},
+	"layer1" : {"source" : 0, "cord" : Vector2i(8,1)},
+	"layer2" : {"source" : 0, "cord" : Vector2i(8,0)},
+	"layer3" : {"source" : 0, "cord" : Vector2i(8,0)},
+	"color" : "3e23663d",
+	"opacity" :0.2
 }
 	
 }
@@ -41,6 +42,9 @@ func world_generator(period,octave):
 	
 	
 func _ready() -> void:
+	color_rect = get_tree().current_scene.find_child("ColorRect")
+	color_rect.color = worlds[dream]["color"]
+	color_rect.color.a = worlds[dream]["opacity"]
 	altitude = world_generator(300,5)
 	set_tiles()
 	
@@ -48,20 +52,20 @@ func set_tiles():
 	for y in range(height):
 		for x in range(width):
 			if altitude[Vector2i(x,y)]<0.4:
-				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer0"])
+				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer0"]["source"],worlds[dream]["layer0"]["cord"])
 			elif altitude[Vector2i(x,y)]<0.5:
-				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer1"])
+				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer1"]["source"],worlds[dream]["layer1"]["cord"])
 				if dream == "forest":
 					spawn_stone(Vector2i(x,y))
 			elif altitude[Vector2i(x,y)]<0.6:
-				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer2"])
+				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer2"]["source"],worlds[dream]["layer2"]["cord"])
 				
 			elif altitude[Vector2i(x,y)]<0.7:
 				if dream == "forest":
 					spawn_decor(Vector2i(x,y))
-				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer3"])
+				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer3"]["source"],worlds[dream]["layer3"]["cord"])
 			else:
-				tile_map_layer.set_cell(Vector2(x,y),0,worlds[dream]["layer0"])
+				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer0"]["source"],worlds[dream]["layer0"]["cord"])
 				if dream == "forest":
 					spawn_tree(Vector2i(x,y))
 				

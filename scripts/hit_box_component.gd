@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 	if push_timer > 0:
 		push_timer -= delta
 		get_parent().velocity = push_velocity
+		get_parent().animated_sprite_2d.play("pushed")
 	else:
 		push_timer = 0
 		get_parent().velocity = Vector2.ZERO
@@ -44,8 +45,9 @@ func take_damage(damage):
 func push_effect(damage):
 	if get_parent() is StaticBody2D:
 		return
-	
-	push_velocity = -get_parent().direction.normalized() * 200  # push strength
+		
+	get_parent().animated_sprite_2d.play("pushed")
+	push_velocity = -get_parent().direction.normalized() * 100  # push strength
 	push_timer = 0.2  # seconds
 		
 		

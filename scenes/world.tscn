@@ -367,7 +367,7 @@ y_sort_enabled = true
 tile_set = SubResource("TileSet_oh2ko")
 
 [node name="Player" parent="." unique_id=1303849976 instance=ExtResource("3_ki41a")]
-position = Vector2(57, 33)
+position = Vector2(-1, -10)
 
 [node name="Greenery" type="Node2D" parent="." unique_id=328419711]
 y_sort_enabled = true

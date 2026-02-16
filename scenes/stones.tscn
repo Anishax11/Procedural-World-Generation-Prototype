@@ -93,6 +93,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_iblou"]
 radius = 6.08276
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gv6ye"]
+radius = 4.0
+
 [node name="Stones" type="StaticBody2D" unique_id=348821568]
 z_index = 2
 y_sort_enabled = true
@@ -105,3 +108,11 @@ animation = &"stone4"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=496804883]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_iblou")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1375459421]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=231867100]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_gv6ye")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
