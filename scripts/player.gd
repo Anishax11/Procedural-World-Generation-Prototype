@@ -91,10 +91,10 @@ func base_attack():
 		animated_sprite_2d.play("left_base_attack")
 		
 	for enemy in enemies_in_range:
-		print("Player dire : ",last_dir)
-		print("Enemy pos : ",enemy.global_position)
+		#print("Player dire : ",last_dir)
+		#print("Enemy pos : ",enemy.global_position)
 		if (last_dir.x >0 and enemy.global_position.x>=global_position.x) or (last_dir.x<0 and enemy.global_position.x<=global_position.x) or (last_dir.y<0 and enemy.global_position.y<=global_position.y) or (last_dir.y>0 and enemy.global_position.y>=global_position.y) :
-			print("enemy : ",enemy.name)
+			#print("enemy : ",enemy.name)
 			enemy.take_damage(base_attack_damage)
 	
 	
@@ -108,8 +108,8 @@ func die():
 	
 func _on_range_area_entered(area: Area2D) -> void:
 	
-	if area is HitBoxComponent and !area.get_parent()==self  and !enemies_in_range.has(area):
-		print("Range enetered : ", area.get_parent().name)
+	if area is HitBoxComponent and area.get_parent()!=self  and !enemies_in_range.has(area):
+		#print("Range enetered : ", area.get_parent().get_path())
 		enemies_in_range.append(area)
 	
 

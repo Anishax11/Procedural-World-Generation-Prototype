@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://crvw1klgp6bq1" path="res://sprites/Grass.png" id="4_wm4c0"]
 [ext_resource type="Texture2D" uid="uid://ddubghrmtpx0v" path="res://sprites/WaterTilesets.png" id="5_vcepr"]
 [ext_resource type="Script" uid="uid://bwdo01litjbmp" path="res://scripts/greenery.gd" id="7_h1eua"]
-[ext_resource type="PackedScene" uid="uid://ddjijj7jpne32" path="res://scenes/enemy.tscn" id="8_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://c3hyvh3gm8dmr" path="res://scenes/memory_fragment.tscn" id="9_7r4gi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6mu14"]
 texture = ExtResource("2_1jy0w")
@@ -367,16 +367,18 @@ y_sort_enabled = true
 tile_set = SubResource("TileSet_oh2ko")
 
 [node name="Player" parent="." unique_id=1303849976 instance=ExtResource("3_ki41a")]
-position = Vector2(-1, -10)
+position = Vector2(684, 353)
 
 [node name="Greenery" type="Node2D" parent="." unique_id=328419711]
 y_sort_enabled = true
 script = ExtResource("7_h1eua")
 
-[node name="Enemy" parent="." unique_id=713136746 instance=ExtResource("8_7r4gi")]
-position = Vector2(155, 124)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1912358369]
 navigation_polygon = SubResource("NavigationPolygon_4mrxx")
+
+[node name="MemoryFragment" parent="." unique_id=98576464 instance=ExtResource("9_7r4gi")]
+z_index = 4
+position = Vector2(32, 67)
+scale = Vector2(3, 3)
 
 [connection signal="child_entered_tree" from="Greenery" to="." method="_on_greenery_child_entered_tree"]

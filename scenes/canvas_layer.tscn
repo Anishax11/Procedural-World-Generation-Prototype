@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b2s007r14dj0j"]
+
+[ext_resource type="Script" uid="uid://c7iqwq2gh2scc" path="res://scripts/canvas_layer.gd" id="1_c4rma"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1141401495]
+script = ExtResource("1_c4rma")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=639344462]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.29523, 1.05288)
+mouse_filter = 2
+color = Color(0.278197, 0.164464, 0.453899, 0.243137)
+
+[node name="MemoryFragments" type="Control" parent="." unique_id=73411730]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -191.0
+offset_top = 7.0
+offset_bottom = 35.0
+grow_horizontal = 0
+
+[node name="MemoryLabel" type="Label" parent="MemoryFragments" unique_id=1290780572]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Memory Fragments : 0/5"

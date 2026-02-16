@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ddwnyhge1jsx3" path="res://scripts/player.gd" id="1_h6082"]
 [ext_resource type="Texture2D" uid="uid://b5mqdlrh2vga4" path="res://sprites/MemaoCharacterFantasySpritePack/001.png" id="1_xo3ly"]
 [ext_resource type="PackedScene" uid="uid://dqthdfcpxpow3" path="res://scenes/health_box_component.tscn" id="3_dqkch"]
+[ext_resource type="PackedScene" uid="uid://b2s007r14dj0j" path="res://scenes/canvas_layer.tscn" id="3_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://cr61hhetsnfdv" path="res://scenes/hit_box_component.tscn" id="4_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsal7"]
@@ -432,19 +433,9 @@ autoplay = "forward_idle"
 shape = SubResource("CapsuleShape2D_j8mtk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2128112591]
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971095028]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=530366787]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.29523, 1.05288)
-mouse_filter = 2
-color = Color(0.278197, 0.164464, 0.453899, 0.243137)
+[node name="CanvasLayer" parent="." unique_id=1141401495 instance=ExtResource("3_qlg0r")]
 
 [node name="HealthBoxComponent" parent="." unique_id=757536793 node_paths=PackedStringArray("healthbar") instance=ExtResource("3_dqkch")]
 healthbar = NodePath("Label")

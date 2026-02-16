@@ -106,7 +106,6 @@ script = ExtResource("1_5uy6h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1371255864]
 sprite_frames = SubResource("SpriteFrames_md484")
-animation = &"pushed"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1434268243]
@@ -133,5 +132,3 @@ shape = SubResource("CapsuleShape2D_5uy6h")
 
 [node name="Range" type="CollisionShape2D" parent="EnemyStateMachine" unique_id=156491729]
 shape = SubResource("CircleShape2D_c4w8v")
-
-[connection signal="input_event" from="HitBoxComponent" to="." method="_on_hit_box_component_input_event"]

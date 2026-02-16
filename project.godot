@@ -19,6 +19,10 @@ run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalCanvasLayer="*uid://c7iqwq2gh2scc"
+
 [input]
 
 Up={

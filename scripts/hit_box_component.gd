@@ -24,15 +24,9 @@ func _process(delta: float) -> void:
 		
 	get_parent().move_and_slide()
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if player.state == player.States.combat and healthbox!=null:
-			print("Enemy selected")
-			player.enemy_under_attack = self
+
 			
-#func _on_body_entered(body: Node2D) -> void:
-	#if healthbox!=null:
-		#take_damage(damage)
+
 
 func take_damage(damage):
 	

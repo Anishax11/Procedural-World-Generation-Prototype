@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c3hyvh3gm8dmr"]
+
+[ext_resource type="Script" uid="uid://b3d3k5puhwd30" path="res://scripts/memory_fragment.gd" id="1_id57q"]
+[ext_resource type="Texture2D" uid="uid://wvsc1bav70r4" path="res://sprites/RPG Maker MV and MZ/!$Fire and Water.png" id="2_qyr3t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82mqf"]
+atlas = ExtResource("2_qyr3t")
+region = Rect2(48, 96, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5162"]
+atlas = ExtResource("2_qyr3t")
+region = Rect2(192, 96, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7hr6"]
+atlas = ExtResource("2_qyr3t")
+region = Rect2(336, 96, 48, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_giu35"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82mqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5162")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7hr6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4jruc"]
+
+[node name="MemoryFragment" type="Area2D" unique_id=98576464]
+script = ExtResource("1_id57q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1580197563]
+sprite_frames = SubResource("SpriteFrames_giu35")
+autoplay = "default"
+frame_progress = 0.15092227
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=980952136]
+position = Vector2(0, 17)
+shape = SubResource("CapsuleShape2D_4jruc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

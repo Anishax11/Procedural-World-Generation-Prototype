@@ -5,7 +5,7 @@ var distance_to_player
 var parent 
 enum States {patrol,chase,combat}
 var state = States.patrol
-# Called when the node enters the scene tree for the first time.
+var resolve_collision_time = 0.0# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	while(parent == null):
 		parent = get_parent()
@@ -16,15 +16,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if get_parent().stunned:
+	if resolve_collision_time > 0:
+		parent.velocity = parent.direction * parent.speed
+		parent.move_and_slide()
+		resolve_collision_time-=delta
 		return
+		
 	distance_to_player=parent.position.distance_to(player.position)
 	if state == States.patrol:
 		parent.patrol()
 	elif state == States.chase:
 		parent.navigation_agent_2d.target_position = player.global_position
 		if distance_to_player <=5:
-			print("Switch tocombat")
+			print("Switch to combat")
 			state = States.combat
 		parent.chase()
 	elif state == States.combat:
@@ -40,6 +44,7 @@ func _on_body_entered(body: CharacterBody2D) -> void:
 		state = States.chase
 
 
-func _on_body_exited(body: Node2D) -> void:
+func _on_body_exited(body: CharacterBody2D) -> void:
 	if body.name =="Player":
+		print("Back to patrol :",parent.name)
 		state = States.patrol
