@@ -6,8 +6,9 @@ var state = States.explore
 var enemies_in_range : Array = []
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var color_rect: ColorRect = $CanvasLayer/ColorRect
-var base_attack_damage = 20
-
+var base_attack_damage = 10
+@onready var time_scale_world: Node2D = $"../TimeScaleWorld"
+var special_ability_cooldown = 0.0
 var speed = 100
 var direction : Vector2 = Vector2.ZERO
 var last_dir = direction
@@ -17,6 +18,11 @@ var stunned = false
 	
 	
 func _physics_process(delta: float) -> void:
+	
+	
+		delta = get_process_delta_time() / Engine.time_scale
+		if special_ability_cooldown>0:
+			special_ability_cooldown-=delta
 	
 		if direction==Vector2(0,1):
 			animated_sprite_2d.play("forward")
@@ -73,6 +79,9 @@ func _input(event: InputEvent) -> void:
 			#print("Target pos :",navigation_agent_2d.target_position)
 			#print("Player pos :",global_position)
 			base_attack()
+		if Input.is_action_pressed("Special Ability"):
+			if dream == "forest":
+				slow_mo()
 		
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
@@ -96,6 +105,7 @@ func base_attack():
 		if (last_dir.x >0 and enemy.global_position.x>=global_position.x) or (last_dir.x<0 and enemy.global_position.x<=global_position.x) or (last_dir.y<0 and enemy.global_position.y<=global_position.y) or (last_dir.y>0 and enemy.global_position.y>=global_position.y) :
 			#print("enemy : ",enemy.name)
 			enemy.take_damage(base_attack_damage)
+			break
 	
 	
 func combat():
@@ -117,9 +127,19 @@ func _on_range_area_exited(area: Area2D) -> void:
 	if area is HitBoxComponent and !area.get_parent()==self:
 		enemies_in_range.erase(area)
 
+func slow_mo():
+	if special_ability_cooldown>0:
+		print("Time remianing : ",special_ability_cooldown)
+		return
+	special_ability_cooldown = 35.0
+	var timer = Timer.new()
+	Engine.time_scale   = 0.2
+	speed = speed*100
+	animated_sprite_2d.speed_scale = animated_sprite_2d.speed_scale*3
+	await get_tree().create_timer(2).timeout
+	Engine.time_scale   = 1
+	speed = speed/100
+	animated_sprite_2d.speed_scale = animated_sprite_2d.speed_scale/3
+	
 func stun_effect():
-	var stun_time = 10
-	while(stun_time>0):
-		stunned = true
-		stun_time-=0.1
-	stunned = false
+	pass

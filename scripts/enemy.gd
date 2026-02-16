@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+const POWER_UP = preload("uid://c3mcerku8g657")
+const HEAL_POWER_UP = preload("uid://b42tu1ifegdgs")
+
 
 var player
 var speed = 35
@@ -20,7 +23,7 @@ func _ready():
 	state_machine = get_node("EnemyStateMachine")
 
 func patrol():
-	print("Patrol")
+	#print("Patrol")
 	if wait_time<=0:
 		
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
@@ -37,7 +40,6 @@ func patrol():
 
 
 func chase():
-	print("Chase :", self.name)
 	prev_state = state_machine.States.chase
 	
 	if get_slide_collision_count() > 0:
@@ -62,17 +64,13 @@ func resolve_collision(normal):
 	
 
 func combat():
-	print("CombatWD :",self.name)
+	#print("CombatWD :",self.name)
 	direction = Vector2.ZERO
 	velocity = Vector2.ZERO
 	attack()
 	
 func attack():
 	animated_sprite_2d.play("attack")
-	if player_hitbox==null:
-		print("Player hibox null")
-	#else:
-		#print("Player caught, attack")
 	if attack_interval <=0:
 		player_hitbox.take_damage(5)
 		attack_interval = 5.0
@@ -81,6 +79,16 @@ func attack():
 	
 	
 func die():
+	if randi_range(3,3) == 3:
+		if randi_range(1,1) == 0:
+			var power_up = POWER_UP.instantiate()
+			power_up.global_position = global_position
+			get_parent().add_child(power_up)
+		else:
+			var power_up = HEAL_POWER_UP.instantiate()
+			power_up.global_position = global_position
+			get_parent().add_child(power_up)
+			
 	queue_free()
 
 var stunned = false

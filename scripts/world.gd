@@ -1,7 +1,9 @@
 extends Node2D
 
-@onready var tile_map_layer: TileMapLayer = $TileMapLayer
-@onready var greenery: Node2D = $Greenery
+@onready var greenery: Node2D = $TimeScaleWorld/Greenery
+@onready var time_scale_world: Node2D = $TimeScaleWorld
+@onready var tile_map_layer: TileMapLayer = $TimeScaleWorld/TileMapLayer
+
 # FOREST :
 const DECOR = preload("res://scenes/decor.tscn")
 const TREE = preload("res://scenes/tree.tscn")
@@ -9,8 +11,8 @@ const STONES = preload("res://scenes/stones.tscn")
 const ENEMY = preload("uid://ddjijj7jpne32")
 
 
-var width = 150
-var height = 100
+var width = 70
+var height = 50
 var altitude ={}
 var dream = "forest"
 var forest_grass
@@ -92,8 +94,8 @@ func spawn_decor(pos):
 	greenery.add_child(decor)
 
 func spawn_enemy():
-	for i in range(15):
+	for i in range(30):
 		var enemy = ENEMY.instantiate()
 		enemy.global_position = Vector2(randi_range(0,width*15 ),randi_range(0,height*15))
 		#print("Spawn point enemy :",enemy.global_position)
-		add_child(enemy)
+		time_scale_world.add_child(enemy)

@@ -27,8 +27,7 @@ func _process(delta: float) -> void:
 		parent.patrol()
 	elif state == States.chase:
 		parent.navigation_agent_2d.target_position = player.global_position
-		if distance_to_player <=5:
-			print("Switch to combat")
+		if distance_to_player <=8:
 			state = States.combat
 		parent.chase()
 	elif state == States.combat:
@@ -46,5 +45,4 @@ func _on_body_entered(body: CharacterBody2D) -> void:
 
 func _on_body_exited(body: CharacterBody2D) -> void:
 	if body.name =="Player":
-		print("Back to patrol :",parent.name)
 		state = States.patrol

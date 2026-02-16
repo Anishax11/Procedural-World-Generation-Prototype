@@ -87,7 +87,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"pushed",
-"speed": 5.0
+"speed": 9.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ipns3"]
@@ -100,13 +100,15 @@ height = 48.0
 radius = 143.01399
 
 [node name="Enemy" type="CharacterBody2D" unique_id=713136746]
-z_index = 3
+z_index = 2
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_5uy6h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1371255864]
 sprite_frames = SubResource("SpriteFrames_md484")
+animation = &"pushed"
 autoplay = "default"
+frame_progress = 0.54762626
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1434268243]
 shape = SubResource("CapsuleShape2D_ipns3")

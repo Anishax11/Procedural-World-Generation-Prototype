@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b42tu1ifegdgs"]
+
+[ext_resource type="Script" uid="uid://v2qfma6tcvkj" path="res://scripts/heal_power_up.gd" id="1_ffsfd"]
+[ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="2_fq3hn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsof0"]
+atlas = ExtResource("2_fq3hn")
+region = Rect2(384, 19, 16, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3hebb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsof0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3t47"]
+
+[node name="HealPowerUp" type="Area2D" unique_id=1782041712]
+z_index = 2
+script = ExtResource("1_ffsfd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=178038641]
+sprite_frames = SubResource("SpriteFrames_3hebb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2092084822]
+shape = SubResource("RectangleShape2D_l3t47")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

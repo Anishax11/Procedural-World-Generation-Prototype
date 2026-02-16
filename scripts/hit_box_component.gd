@@ -35,6 +35,9 @@ func take_damage(damage):
 		
 	push_effect(damage)
 	get_parent().stun_effect()
+	
+	if healthbox.health<=0:
+		get_parent().die()
 
 func push_effect(damage):
 	if get_parent() is StaticBody2D or get_parent().name == "Player":

@@ -235,7 +235,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"backward_base_attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -292,7 +292,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"forward_base_attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -343,7 +343,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"left_base_attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -391,7 +391,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"right_base_attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -426,14 +426,17 @@ script = ExtResource("1_h6082")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=19499952]
 sprite_frames = SubResource("SpriteFrames_gtw56")
-animation = &"forward_idle"
+animation = &"forward"
 autoplay = "forward_idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1092469101]
 shape = SubResource("CapsuleShape2D_j8mtk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2128112591]
-zoom = Vector2(2, 2)
+position = Vector2(-2, 0)
+zoom = Vector2(4, 4)
 
 [node name="CanvasLayer" parent="." unique_id=1141401495 instance=ExtResource("3_qlg0r")]
 
@@ -441,8 +444,10 @@ zoom = Vector2(2, 2)
 healthbar = NodePath("Label")
 
 [node name="Label" type="Label" parent="HealthBoxComponent" unique_id=722274082]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -18.0
+offset_top = -48.0
+offset_right = 22.0
+offset_bottom = -25.0
 
 [node name="HitBoxComponent" parent="." unique_id=1270115252 node_paths=PackedStringArray("healthbox") instance=ExtResource("4_qlg0r")]
 healthbox = NodePath("../HealthBoxComponent")
