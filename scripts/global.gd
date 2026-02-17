@@ -1,5 +1,6 @@
 extends Node
 
+var dream = "graveyard"
 var enemies_left = 30
 var base_attack_damage = 10
 var maxHealth = 70

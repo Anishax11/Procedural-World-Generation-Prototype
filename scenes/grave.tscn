@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://bj43j4g6rj2ct"]
+
+[ext_resource type="Script" uid="uid://c3oivkttka5wn" path="res://scripts/grave.gd" id="1_mlivn"]
+[ext_resource type="Texture2D" uid="uid://dq4ta43737iwa" path="res://sprites/graveyard  tileset/Graveyard_Set.png" id="2_inmiy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhpym"]
+atlas = ExtResource("2_inmiy")
+region = Rect2(288, 180, 36, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe13i"]
+atlas = ExtResource("2_inmiy")
+region = Rect2(324, 192, 27, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7cip"]
+atlas = ExtResource("2_inmiy")
+region = Rect2(354, 192, 26, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aulm7"]
+atlas = ExtResource("2_inmiy")
+region = Rect2(325, 145, 25, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aaav7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhpym")
+}],
+"loop": false,
+"name": &"grave1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qe13i")
+}],
+"loop": false,
+"name": &"grave2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7cip")
+}],
+"loop": false,
+"name": &"grave3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aulm7")
+}],
+"loop": false,
+"name": &"grave4",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k2j88"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mlivn"]
+radius = 8.0
+height = 22.0
+
+[node name="Grave" type="StaticBody2D" unique_id=1028422913]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_mlivn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1444139411]
+sprite_frames = SubResource("SpriteFrames_aaav7")
+animation = &"grave1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=687726844]
+position = Vector2(-2, 11)
+shape = SubResource("CapsuleShape2D_k2j88")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=552891801]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1484194325]
+position = Vector2(-2, 11)
+shape = SubResource("CapsuleShape2D_mlivn")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

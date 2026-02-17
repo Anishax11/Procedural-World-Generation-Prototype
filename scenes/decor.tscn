@@ -1,7 +1,12 @@
 [gd_scene format=3 uid="uid://cj7orckcw0kiu"]
 
 [ext_resource type="Script" uid="uid://bujui447abdn2" path="res://scripts/decor.gd" id="1_j808x"]
+[ext_resource type="Texture2D" uid="uid://dq4ta43737iwa" path="res://sprites/graveyard  tileset/Graveyard_Set.png" id="2_gxjgo"]
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="2_x335e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqn4o"]
+atlas = ExtResource("2_gxjgo")
+region = Rect2(80, 351, 16, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_so6rc"]
 atlas = ExtResource("2_x335e")
@@ -15,12 +20,28 @@ region = Rect2(192, 53, 16, 26)
 atlas = ExtResource("2_x335e")
 region = Rect2(208, 53, 16, 26)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkmdi"]
+atlas = ExtResource("2_gxjgo")
+region = Rect2(64, 313, 16, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8i24"]
+atlas = ExtResource("2_gxjgo")
+region = Rect2(176, 334, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dgk8"]
 atlas = ExtResource("2_x335e")
 region = Rect2(109, 65, 23, 28)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4hwsr"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqn4o")
+}],
+"loop": false,
+"name": &"candle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_so6rc")
@@ -34,6 +55,22 @@ animations = [{
 "loop": true,
 "name": &"fire",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkmdi")
+}],
+"loop": false,
+"name": &"lantern",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8i24")
+}],
+"loop": false,
+"name": &"skeleton_hand",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -57,7 +94,7 @@ script = ExtResource("1_j808x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1434319625]
 sprite_frames = SubResource("SpriteFrames_4hwsr")
-animation = &"stump"
+animation = &"skeleton_hand"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1756901329]
 position = Vector2(0, 5)

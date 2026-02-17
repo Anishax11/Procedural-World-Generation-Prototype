@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d2kx02j6xuyg7" path="res://scripts/tree.gd" id="1_ibgdo"]
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="1_uwm5n"]
+[ext_resource type="Texture2D" uid="uid://dq4ta43737iwa" path="res://sprites/graveyard  tileset/Graveyard_Set.png" id="3_viusy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8tpyc"]
 atlas = ExtResource("1_uwm5n")
@@ -14,6 +15,22 @@ region = Rect2(48, 78, 48, 67)
 [sub_resource type="AtlasTexture" id="AtlasTexture_if0gj"]
 atlas = ExtResource("1_uwm5n")
 region = Rect2(0, 35, 46, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd6xs"]
+atlas = ExtResource("3_viusy")
+region = Rect2(244, 367, 61, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ake3r"]
+atlas = ExtResource("3_viusy")
+region = Rect2(301, 370, 43, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18mvg"]
+atlas = ExtResource("3_viusy")
+region = Rect2(347, 367, 47, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmmp0"]
+atlas = ExtResource("3_viusy")
+region = Rect2(405, 381, 27, 74)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6wexw"]
 animations = [{
@@ -40,6 +57,38 @@ animations = [{
 "loop": false,
 "name": &"tree3",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qd6xs")
+}],
+"loop": false,
+"name": &"tree4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ake3r")
+}],
+"loop": false,
+"name": &"tree5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18mvg")
+}],
+"loop": false,
+"name": &"tree6",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmmp0")
+}],
+"loop": false,
+"name": &"tree7",
+"speed": 5.0
 }]
 
 [node name="Tree" type="StaticBody2D" unique_id=968078701]
@@ -49,7 +98,7 @@ script = ExtResource("1_ibgdo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1368210662]
 sprite_frames = SubResource("SpriteFrames_6wexw")
-animation = &"tree2"
+animation = &"tree1"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1248074134]
 polygon = PackedVector2Array(-22, -1, -17, 14, -10, 17, -8, 22, -13, 24, -9, 28, 4, 29, 11, 24, 6, 21, 17, 15, 23, 0)

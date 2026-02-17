@@ -2,7 +2,10 @@ extends StaticBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready():
-	animated_sprite_2d.play("tree" + str(randi_range(1,3)))
+	if Global.dream == "forest":
+		animated_sprite_2d.play("tree" + str(randi_range(1,3)))
+	else:
+		animated_sprite_2d.play("tree" + str(randi_range(4,7)))
 
 
 func _on_area_2d_body_entered(body: StaticBody2D) -> void:

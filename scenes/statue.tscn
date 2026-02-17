@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cw7m1fl852p2o"]
+
+[ext_resource type="Script" uid="uid://cmifc2swy4k82" path="res://scripts/statue.gd" id="1_sxr8y"]
+[ext_resource type="Texture2D" uid="uid://dq4ta43737iwa" path="res://sprites/graveyard  tileset/Graveyard_Set.png" id="2_6wwjp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nm2d"]
+atlas = ExtResource("2_6wwjp")
+region = Rect2(0, 208, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as6t3"]
+atlas = ExtResource("2_6wwjp")
+region = Rect2(70, 210, 70, 97)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h8jna"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nm2d")
+}],
+"loop": false,
+"name": &"statue1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as6t3")
+}],
+"loop": false,
+"name": &"statue2",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hxsj5"]
+radius = 12.0
+height = 50.0
+
+[node name="Statue" type="StaticBody2D" unique_id=210238036]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_sxr8y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1520561859]
+position = Vector2(-7, 0)
+sprite_frames = SubResource("SpriteFrames_h8jna")
+animation = &"statue2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=142892053]
+position = Vector2(-3, 21)
+shape = SubResource("CapsuleShape2D_hxsj5")
