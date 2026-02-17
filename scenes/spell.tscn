@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ceowxmsyc36bu" path="res://scripts/spell.gd" id="1_om5k2"]
 [ext_resource type="Texture2D" uid="uid://71a8ghfwshfx" path="res://sprites/Ice World Sprites/Ice Effect 01/Ice Effect 01/Ice VFX 1/Ice VFX 1 Start.png" id="2_ol3gn"]
+[ext_resource type="Texture2D" uid="uid://difvx4j4cax61" path="res://sprites/Ice World Sprites/Ice Effect 01/Ice Effect 01/Ice VFX 1/Ice VFX 1 Hit.png" id="3_ol3gn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3nstc"]
 atlas = ExtResource("2_ol3gn")
@@ -14,6 +15,38 @@ region = Rect2(48, 0, 48, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7kvbf"]
 atlas = ExtResource("2_ol3gn")
 region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiofm"]
+atlas = ExtResource("3_ol3gn")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc6u6"]
+atlas = ExtResource("3_ol3gn")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tym5"]
+atlas = ExtResource("3_ol3gn")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdbgk"]
+atlas = ExtResource("3_ol3gn")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bo3g"]
+atlas = ExtResource("3_ol3gn")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_802a8"]
+atlas = ExtResource("3_ol3gn")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl01e"]
+atlas = ExtResource("3_ol3gn")
+region = Rect2(288, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q8qp"]
+atlas = ExtResource("3_ol3gn")
+region = Rect2(336, 0, 48, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uiofm"]
 animations = [{
@@ -30,19 +63,48 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uiofm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dc6u6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tym5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdbgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bo3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_802a8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yl01e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q8qp")
+}],
+"loop": false,
+"name": &"shatter",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dc6u6"]
 
 [node name="Spell" type="Area2D" unique_id=1971188816]
-z_index = 2
+z_index = 3
 y_sort_enabled = true
 script = ExtResource("1_om5k2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1953944539]
 sprite_frames = SubResource("SpriteFrames_uiofm")
+animation = &"shatter"
 autoplay = "default"
-frame_progress = 0.44089526
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=516786952]
 position = Vector2(-6, 1)
@@ -51,3 +113,4 @@ shape = SubResource("CircleShape2D_dc6u6")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1018589333]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

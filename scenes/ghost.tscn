@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://c0hcximd2oaht"]
+
+[ext_resource type="Script" uid="uid://bldvnkjhy1vdo" path="res://scripts/ghost.gd" id="1_seks5"]
+[ext_resource type="Texture2D" uid="uid://cduhpkvh7opga" path="res://sprites/Enemy/Mobs/Ghost/Ghost.png" id="2_4pqta"]
+[ext_resource type="Texture2D" uid="uid://dg4fnryajs07l" path="res://sprites/Enemy/Mobs/Ghost/GhostDown1.png" id="3_ok4sd"]
+[ext_resource type="Texture2D" uid="uid://1bqbwt158fio" path="res://sprites/Enemy/Mobs/Ghost/GhostDown2.png" id="4_o57ao"]
+[ext_resource type="Texture2D" uid="uid://d0gj3o4u7kd0u" path="res://sprites/Enemy/Mobs/Ghost/GhostSide1.png" id="5_8ky03"]
+[ext_resource type="Texture2D" uid="uid://jpbefc12i1w5" path="res://sprites/Enemy/Mobs/Ghost/GhostSide2.png" id="6_c10vd"]
+[ext_resource type="PackedScene" uid="uid://cr61hhetsnfdv" path="res://scenes/hit_box_component.tscn" id="7_uehw0"]
+[ext_resource type="PackedScene" uid="uid://dqthdfcpxpow3" path="res://scenes/health_box_component.tscn" id="8_pe3fk"]
+[ext_resource type="PackedScene" uid="uid://dh54by7jxsp4l" path="res://scenes/enemy_state_machine.tscn" id="9_p0uf5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj4ww"]
+atlas = ExtResource("2_4pqta")
+region = Rect2(0, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8b1n"]
+atlas = ExtResource("2_4pqta")
+region = Rect2(0, 40, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ittg"]
+atlas = ExtResource("3_ok4sd")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jpmw"]
+atlas = ExtResource("4_o57ao")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3330"]
+atlas = ExtResource("5_8ky03")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wev76"]
+atlas = ExtResource("6_c10vd")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68ei1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj4ww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8b1n")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ittg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jpmw")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3330")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wev76")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gpdgq"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yl51g"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vbenq"]
+radius = 26.774801
+
+[node name="Ghost" type="CharacterBody2D" unique_id=1886252798]
+z_index = 2
+y_sort_enabled = true
+scale = Vector2(3, 3)
+script = ExtResource("1_seks5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=43404531]
+sprite_frames = SubResource("SpriteFrames_68ei1")
+animation = &"front"
+frame_progress = 0.47093928
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=57136989]
+shape = SubResource("CapsuleShape2D_gpdgq")
+
+[node name="HitBoxComponent" parent="." unique_id=1270115252 node_paths=PackedStringArray("healthbox") instance=ExtResource("7_uehw0")]
+healthbox = NodePath("../HealthBoxComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1836996027]
+shape = SubResource("CapsuleShape2D_yl51g")
+
+[node name="HealthBoxComponent" parent="." unique_id=757536793 node_paths=PackedStringArray("healthbar") instance=ExtResource("8_pe3fk")]
+scale = Vector2(0.2, 0.2)
+maxHealth = 50
+healthbar = NodePath("Label")
+
+[node name="Label" type="Label" parent="HealthBoxComponent" unique_id=1596812621]
+offset_left = -11.666666
+offset_top = -48.333332
+offset_right = 13.666668
+offset_bottom = -25.333332
+
+[node name="EnemyStateMachine" parent="." unique_id=2067893902 instance=ExtResource("9_p0uf5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStateMachine" unique_id=1237869227]
+shape = SubResource("CircleShape2D_vbenq")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1373509037]

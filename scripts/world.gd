@@ -13,11 +13,14 @@ const ENEMY = preload("uid://ddjijj7jpne32")
 const GRAVE = preload("uid://bj43j4g6rj2ct")
 const STATUE = preload("uid://cw7m1fl852p2o")
 
+#Ice World
+const EXPLODING_SPIKES = preload("uid://do57pkya3iw6o")
+
 
 var width = 50
 var height = 30
 var altitude ={}
-var dream = "iceworld"
+var dream = "graveyard"
 var forest_grass
 var forest_shiny_grass
 var color_rect
@@ -90,6 +93,9 @@ func set_tiles():
 				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer2"]["source"],worlds[dream]["layer2"]["cord"])
 				if dream =="graveyard":
 					spawn_grave(Vector2i(x,y))	
+				elif dream == "iceworld":
+					print("Spawn ice spike at :",Vector2i(x,y))
+					spawn_ice_spikes(Vector2i(x,y))
 		
 			elif altitude[Vector2i(x,y)]<0.7:
 				
@@ -103,6 +109,7 @@ func set_tiles():
 					spawn_tree(Vector2i(x,y))
 				elif dream =="graveyard":
 					spawn_statue(Vector2i(x,y))		
+			
 				
 				
 
@@ -139,3 +146,11 @@ func spawn_statue(pos):
 	var decor = STATUE.instantiate()
 	decor.global_position = tile_map_layer.map_to_local(pos)
 	greenery.add_child(decor)
+
+func spawn_ice_spikes(pos):
+	var spike = EXPLODING_SPIKES.instantiate()
+	spike.global_position = tile_map_layer.map_to_local(pos)
+	greenery.add_child(spike)
+
+
+	

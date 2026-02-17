@@ -17,10 +17,12 @@ func _ready():
 			animated_sprite_2d.play("lantern")
 			
 	elif Global.dream == "iceworld":
-		if random<3:
+		if random==1:
 			animated_sprite_2d.play("ice_cone")
-		else:
+		elif random ==2:
 			animated_sprite_2d.play("ice_figure")
+		else:
+			animated_sprite_2d.play("ice_cave")
 		
 
 func _on_area_2d_body_entered(body: StaticBody2D) -> void:

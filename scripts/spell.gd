@@ -4,7 +4,7 @@ extends Area2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var spell_damage = 20
-var speed = 150
+var speed = 70
 var direction
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,4 +24,9 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitBoxComponent and area.get_parent()!=get_parent():
 		area.take_damage(spell_damage)
-		queue_free()
+		animated_sprite_2d.play("shatter")
+		
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	queue_free()

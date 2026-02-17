@@ -5,7 +5,7 @@ extends CharacterBody2D
 const POWER_UP = preload("uid://c3mcerku8g657")
 const HEAL_POWER_UP = preload("uid://b42tu1ifegdgs")
 const MEMORY_FRAGMENT = preload("uid://c3hyvh3gm8dmr")
-const SPELL = preload("uid://dwf1hndexyu7x")
+var base_damage = 5
 @onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
 var player
 var speed = 35
@@ -17,7 +17,6 @@ var distance_to_player
 var combat_manager
 var player_hitbox
 var attack_interval = 0.0
-var total_attack_interval = 30.0
 
 
 
@@ -27,11 +26,7 @@ func _ready():
 
 
 func patrol():
-	#print("Patorl")
-	
-	animated_sprite_2d.play("walk")
 	if wait_time<=0:
-		
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
 		wait_time = 3.0
 	if get_slide_collision_count() > 0:
@@ -46,13 +41,6 @@ func patrol():
 
 
 func chase():
-	#print("chase")
-	if player.global_position.x<global_position.x:
-		animated_sprite_2d.flip_h = true
-	else:
-		animated_sprite_2d.flip_h = false
-		
-	attack()
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		if collision.get_collider().name =="Player":
@@ -60,31 +48,30 @@ func chase():
 		else:	
 			var normal = collision.get_normal()
 			resolve_collision(normal)
-			
+	update_animation()
+	var next_pos  = navigation_agent_2d.get_next_path_position()
+	direction  = (next_pos - global_position).normalized()
 	move_and_slide()
 	
 	
 func resolve_collision(normal):
 	direction = direction.bounce(normal)
 	state_machine.resolve_collision_time = 2.0
-	
+	update_animation()
 	
 
 func combat():
-	#print("COmbat")
-	direction = direction.bounce(direction)
-	velocity = direction*speed
-	move_and_slide()
+	direction = Vector2.ZERO
+	velocity = Vector2.ZERO
+	attack()
 	
 func attack():
+
+	
+
 	if attack_interval <=0:
-		var spell = SPELL.instantiate()
-		#update_animation()
-		add_child(spell)	
-		spell.animated_sprite_2d.flip_h  = animated_sprite_2d.flip_h 
-		animated_sprite_2d.play("attack")
-		
-		attack_interval = total_attack_interval
+		player_hitbox.take_damage(base_damage)
+		attack_interval = 5.0
 	else:
 		attack_interval-=0.1
 	
@@ -93,10 +80,6 @@ func die():
 
 	update_animation()
 	print("DIe")
-	
-	animated_sprite_2d.play("die")
-
-	
 	if randi_range(1,Global.enemies_left) == 1:
 		var fragment = MEMORY_FRAGMENT.instantiate()
 		fragment.global_position = global_position
@@ -126,6 +109,14 @@ func stun_effect():
 	
 func update_animation():
 	if direction.x<0:
+		animated_sprite_2d.play("right")
 		animated_sprite_2d.flip_h = true
 	else:
-		animated_sprite_2d.flip_h = false
+		if direction.x == 0:
+			if direction.y > 0:
+				animated_sprite_2d.play("front")
+			else:
+				animated_sprite_2d.play("back")
+		else:
+			animated_sprite_2d.play("right")
+			animated_sprite_2d.flip_h = false
