@@ -21,10 +21,10 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3nstc")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_wkwhk")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_7kvbf")
 }],
 "loop": true,
@@ -41,7 +41,8 @@ script = ExtResource("1_om5k2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1953944539]
 sprite_frames = SubResource("SpriteFrames_uiofm")
-frame_progress = 0.5228628
+autoplay = "default"
+frame_progress = 0.44089526
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=516786952]
 position = Vector2(-6, 1)

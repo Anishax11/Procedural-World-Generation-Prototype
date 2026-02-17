@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.29523, 1.05288)
 mouse_filter = 2
-color = Color(0.278197, 0.164464, 0.453899, 0.243137)
+color = Color(0.34117648, 0.4509804, 0.6901961, 0.28627452)
 
 [node name="MemoryFragments" type="Control" parent="." unique_id=73411730]
 layout_mode = 3

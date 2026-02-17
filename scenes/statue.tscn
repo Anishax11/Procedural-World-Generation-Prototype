@@ -11,6 +11,18 @@ region = Rect2(0, 208, 64, 96)
 atlas = ExtResource("2_6wwjp")
 region = Rect2(70, 210, 70, 97)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxr8y"]
+atlas = ExtResource("2_6wwjp")
+region = Rect2(244, 364, 61, 91)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wwjp"]
+atlas = ExtResource("2_6wwjp")
+region = Rect2(301, 375, 43, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8jna"]
+atlas = ExtResource("2_6wwjp")
+region = Rect2(393, 375, 39, 75)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_h8jna"]
 animations = [{
 "frames": [{
@@ -28,6 +40,30 @@ animations = [{
 "loop": false,
 "name": &"statue2",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxr8y")
+}],
+"loop": true,
+"name": &"tree1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wwjp")
+}],
+"loop": true,
+"name": &"tree2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8jna")
+}],
+"loop": false,
+"name": &"tree3",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hxsj5"]
@@ -42,7 +78,7 @@ script = ExtResource("1_sxr8y")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1520561859]
 position = Vector2(-7, 0)
 sprite_frames = SubResource("SpriteFrames_h8jna")
-animation = &"statue2"
+animation = &"tree3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=142892053]
 position = Vector2(-3, 21)

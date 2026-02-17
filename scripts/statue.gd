@@ -4,4 +4,7 @@ extends StaticBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	animated_sprite_2d.play("statue"+str(randi_range(1,2)))
+	if randi_range(1,2)==1:
+		animated_sprite_2d.play("statue"+str(randi_range(1,2)))
+	else:
+		animated_sprite_2d.play("tree"+str(randi_range(1,3)))

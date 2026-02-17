@@ -105,9 +105,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_cpg4n")
 }, {
 "duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ej24n")
 }, {
 "duration": 1.0,
@@ -196,8 +193,7 @@ script = ExtResource("1_f72qh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1554334790]
 sprite_frames = SubResource("SpriteFrames_kxa87")
-animation = &"attack"
-autoplay = "walk"
+animation = &"pushed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041372295]
 position = Vector2(-3, 6)

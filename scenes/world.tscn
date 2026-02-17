@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/All Tileset/16x16.png" id="2_1jy0w"]
 [ext_resource type="PackedScene" uid="uid://c0grk3q8mcath" path="res://scenes/player.tscn" id="3_ki41a"]
 [ext_resource type="Texture2D" uid="uid://dq4ta43737iwa" path="res://sprites/graveyard  tileset/Graveyard_Set.png" id="4_qfnet"]
+[ext_resource type="Texture2D" uid="uid://c8oc5ex7kyys6" path="res://sprites/Ice World Sprites/Ice/Ice Free Sample_nnekart.png" id="5_i7141"]
 [ext_resource type="PackedScene" uid="uid://d24qhsr4uko0x" path="res://scenes/skeleton_wizard.tscn" id="6_qfnet"]
 [ext_resource type="Script" uid="uid://bwdo01litjbmp" path="res://scripts/greenery.gd" id="7_h1eua"]
 
@@ -952,10 +953,37 @@ texture = ExtResource("4_qfnet")
 24:29/0 = 0
 25:29/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mrxx"]
+texture = ExtResource("5_i7141")
+0:0/0 = 0
+1:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+6:1/0 = 0
+8:1/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+1:3/0 = 0
+1:4/0 = 0
+3:4/0 = 0
+1:5/0 = 0
+3:5/0 = 0
+5:5/0 = 0
+7:5/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_oh2ko"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_6mu14")
 sources/2 = SubResource("TileSetAtlasSource_i7141")
+sources/3 = SubResource("TileSetAtlasSource_4mrxx")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4mrxx"]
 vertices = PackedVector2Array(1479.9688, 668.03125, 10.921875, 672.96094, 6.0703125, 20, 1478.0313, 20)

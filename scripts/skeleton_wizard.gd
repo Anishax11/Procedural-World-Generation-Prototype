@@ -17,6 +17,7 @@ var distance_to_player
 var combat_manager
 var player_hitbox
 var attack_interval = 0.0
+var total_attack_interval = 30.0
 
 
 
@@ -26,6 +27,7 @@ func _ready():
 
 
 func patrol():
+	print("Patorl")
 	animated_sprite_2d.play("walk")
 	if wait_time<=0:
 		
@@ -44,9 +46,11 @@ func patrol():
 
 func chase():
 	#print("chase")
-
-	#if animated_sprite_2d.animation!="walk" and animated_sprite_2d.animation!="die":
-
+	if player.global_position.x<global_position.x:
+		animated_sprite_2d.flip_h = true
+	else:
+		animated_sprite_2d.flip_h = false
+		
 	attack()
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
@@ -56,8 +60,6 @@ func chase():
 			var normal = collision.get_normal()
 			resolve_collision(normal)
 			
-	update_animation()
-
 	move_and_slide()
 	
 	
@@ -68,31 +70,20 @@ func resolve_collision(normal):
 	
 
 func combat():
-	
+	#print("COmbat")
 	direction = direction.bounce(direction)
 	velocity = direction*speed
 	move_and_slide()
 	
 func attack():
-
-	
 	if attack_interval <=0:
 		var spell = SPELL.instantiate()
-		
-		
-		if direction.x<0:
-			animated_sprite_2d.flip_h = false
-			spell.position = Vector2(position.x+10,position.y+10)
-		else:
-			animated_sprite_2d.flip_h = true
-			spell.position = Vector2(position.x-10,position.y-10)
-			
+		#update_animation()
 		add_child(spell)	
 		spell.animated_sprite_2d.flip_h  = animated_sprite_2d.flip_h 
 		animated_sprite_2d.play("attack")
 		
-		
-		attack_interval = 5.0
+		attack_interval = total_attack_interval
 	else:
 		attack_interval-=0.1
 	

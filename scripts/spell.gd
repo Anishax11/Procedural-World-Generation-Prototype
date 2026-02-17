@@ -3,10 +3,12 @@ extends Area2D
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-var speed = 250
+var spell_damage = 20
+var speed = 150
 var direction
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	global_position = get_parent().global_position
 	navigation_agent_2d.target_position = get_tree().current_scene.find_child("Player").global_position
 
 
@@ -21,5 +23,5 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitBoxComponent and area.get_parent()!=get_parent():
-		area.take_damage(20)
+		area.take_damage(spell_damage)
 		queue_free()

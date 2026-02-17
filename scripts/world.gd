@@ -17,7 +17,7 @@ const STATUE = preload("uid://cw7m1fl852p2o")
 var width = 50
 var height = 30
 var altitude ={}
-var dream = "graveyard"
+var dream = "iceworld"
 var forest_grass
 var forest_shiny_grass
 var color_rect
@@ -37,6 +37,13 @@ var worlds ={
 	"layer2" : {"source" : 2, "cord" : Vector2i(12,26)},
 	"layer3" : {"source" : 2, "cord" : Vector2i(11,27)},
 	"color" : "3e23663d",
+	"opacity" :0.4},
+"iceworld" = {
+	"layer0" : {"source" : 3, "cord" : Vector2i(0,0)},
+	"layer1" : {"source" : 3, "cord" : Vector2i(6,0)},
+	"layer2" : {"source" : 3, "cord" : Vector2i(6,2)},
+	"layer3" : {"source" : 3, "cord" : Vector2i(0,1)},
+	"color" : "5773b049",
 	"opacity" :0.2}
 	
 }
@@ -65,13 +72,14 @@ func _ready() -> void:
 	color_rect.color.a = worlds[dream]["opacity"]
 	altitude = world_generator(300,5)
 	set_tiles()
-	spawn_enemy()
+	#spawn_enemy()
 	
 func set_tiles():
 	for y in range(height):
 		for x in range(width):
 			if altitude[Vector2i(x,y)]<0.4:
 				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer0"]["source"],worlds[dream]["layer0"]["cord"])
+			
 			elif altitude[Vector2i(x,y)]<0.5:
 				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer1"]["source"],worlds[dream]["layer1"]["cord"])
 				if dream == "forest" :
@@ -82,6 +90,7 @@ func set_tiles():
 				tile_map_layer.set_cell(Vector2(x,y),worlds[dream]["layer2"]["source"],worlds[dream]["layer2"]["cord"])
 				if dream =="graveyard":
 					spawn_grave(Vector2i(x,y))	
+		
 			elif altitude[Vector2i(x,y)]<0.7:
 				
 				spawn_decor(Vector2i(x,y))
