@@ -23,6 +23,8 @@ var attack_interval = 0.0
 func _ready():
 	player_hitbox = player.get_node("HitBoxComponent")
 	state_machine = get_node("EnemyStateMachine")
+	base_damage = base_damage*Global.level
+	health_box_component.maxHealth = health_box_component.maxHealth*Global.level
 
 
 func patrol():

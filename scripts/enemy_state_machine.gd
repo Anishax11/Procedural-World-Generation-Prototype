@@ -16,6 +16,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if parent.stunned:
+		return
+	
 
 	if resolve_collision_time > 0:
 		parent.velocity = parent.direction * parent.speed
@@ -27,6 +30,7 @@ func _process(delta: float) -> void:
 	if state == States.patrol:
 		parent.patrol()
 	elif state == States.chase:
+		parent.update_animation()
 		parent.navigation_agent_2d.target_position = player.global_position
 		if distance_to_player <=8:
 			state = States.combat

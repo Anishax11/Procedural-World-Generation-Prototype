@@ -443,7 +443,7 @@ limit_bottom = 480
 [node name="CanvasLayer" parent="." unique_id=1141401495 instance=ExtResource("3_qlg0r")]
 
 [node name="HealthBoxComponent" parent="." unique_id=757536793 node_paths=PackedStringArray("healthbar") instance=ExtResource("3_dqkch")]
-maxHealth = 70
+maxHealth = 100
 healthbar = NodePath("Label")
 
 [node name="Label" type="Label" parent="HealthBoxComponent" unique_id=722274082]

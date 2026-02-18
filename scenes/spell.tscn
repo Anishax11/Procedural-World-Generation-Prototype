@@ -61,7 +61,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_7kvbf")
 }],
 "loop": true,
-"name": &"default",
+"name": &"ice_attack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -90,7 +90,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_2q8qp")
 }],
 "loop": false,
-"name": &"shatter",
+"name": &"ice_shatter",
 "speed": 5.0
 }]
 
@@ -103,8 +103,8 @@ script = ExtResource("1_om5k2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1953944539]
 sprite_frames = SubResource("SpriteFrames_uiofm")
-animation = &"shatter"
-autoplay = "default"
+animation = &"ice_shatter"
+autoplay = "ice_attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=516786952]
 position = Vector2(-6, 1)

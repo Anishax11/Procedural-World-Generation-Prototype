@@ -6,9 +6,10 @@ var player
 var damage = 10 
 var push_timer = 0.0
 var push_velocity
-
+var parent
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	parent = get_parent()
 	player = get_tree().current_scene.find_child("Player")
 
 
@@ -38,12 +39,10 @@ func take_damage(damage):
 	
 	if healthbox.health<=0:
 		get_parent().die()
-		get_parent().animated_sprite_2d.play("die")
 
 func push_effect(damage):
-	if get_parent() is StaticBody2D or get_parent().name == "Player":
+	if parent is StaticBody2D or get_parent().name == "Player":
 		return
-		
 	get_parent().animated_sprite_2d.play("pushed")
 	push_velocity = -get_parent().direction.normalized() * 100  # push strength
 	push_timer = 0.2  # seconds
