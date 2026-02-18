@@ -3,4 +3,7 @@
 [ext_resource type="Script" uid="uid://dkcaqyr88ws2m" path="res://scripts/health_box_component.gd" id="1_rql01"]
 
 [node name="HealthBoxComponent" type="Node2D" unique_id=757536793]
+position = Vector2(3, -17)
+scale = Vector2(0.3, 0.3)
 script = ExtResource("1_rql01")
+maxHealth = null

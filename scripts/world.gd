@@ -75,7 +75,7 @@ func _ready() -> void:
 	color_rect.color.a = worlds[dream]["opacity"]
 	altitude = world_generator(300,5)
 	set_tiles()
-	#spawn_enemy()
+	spawn_enemy()
 	
 func set_tiles():
 	for y in range(height):
