@@ -8,8 +8,6 @@ var enemies_in_range : Array = []
 @onready var color_rect: ColorRect = $CanvasLayer/ColorRect
 var base_attack_damage 
 @onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
-
-@onready var time_scale_world: Node2D = $"../TimeScaleWorld"
 var special_ability_cooldown = 0.0
 var speed = 100
 var direction : Vector2 = Vector2.ZERO
@@ -18,6 +16,9 @@ var stunned = false
 
 func _ready() -> void:
 	base_attack_damage = Global.base_attack_damage*Global.level
+	print("Global base damage : ", Global.base_attack_damage)
+	print("level : ",Global.level)
+	print("New base damage : ",base_attack_damage)
 	health_box_component.maxHealth = Global.maxHealth
 	health_box_component.health = Global.maxHealth
 	
@@ -57,7 +58,6 @@ func _physics_process(delta: float) -> void:
 		
 func _input(event: InputEvent) -> void:
 		direction = Vector2.ZERO
-		
 		if Input.is_action_pressed("Shift"):
 			speed=150
 		else:
@@ -90,7 +90,8 @@ func _input(event: InputEvent) -> void:
 		
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
-	animated_sprite_2d.play(animated_sprite_2d.animation+"_idle")
+	if animated_sprite_2d.sprite_frames.has_animation(animated_sprite_2d.animation+"_idle"):
+		animated_sprite_2d.play(animated_sprite_2d.animation+"_idle")
 
 
 func base_attack():
@@ -137,7 +138,6 @@ func slow_mo():
 		print("Time remianing : ",special_ability_cooldown)
 		return
 	special_ability_cooldown = 35.0
-	var timer = Timer.new()
 	Engine.time_scale   = 0.2
 	speed = speed*100
 	animated_sprite_2d.speed_scale = animated_sprite_2d.speed_scale*3

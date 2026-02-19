@@ -21,8 +21,7 @@ func _process(delta: float) -> void:
 	direction  = (next_pos - global_position).normalized()
 	global_position+=direction*speed*delta
 	if navigation_agent_2d.is_navigation_finished():
-		
-		queue_free()
+		call_deferred("queue_free")
 	
 
 func _on_area_entered(area: Area2D) -> void:

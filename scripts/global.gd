@@ -1,16 +1,7 @@
 extends Node
 
-var dream = "graveyard"
+var dream = "forest"
 var enemies_left = 30
-var base_attack_damage = 10 # player
-var maxHealth = 100  # player
-var level = 1 # keep track of worlds traversed, scale enemy and player damage/health with it
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+var base_attack_damage = 10.0 # player
+var maxHealth = 100.0  # player
+var level = 1.0 # keep track of worlds traversed, scale enemy and player damage/health with it

@@ -18,13 +18,19 @@ var combat_manager
 var player_hitbox
 var attack_interval = 0.0
 var max_attack_interval = 30
-var max_stun_time = 20
+var max_stun_time = 0.2
+var dead = false
 var caster = false
 const SATYR_SPELL = preload("uid://bd3t01afhjuf6")
 var satyr_type = "white"
-
+var stun_time = 0.0
+var maxHealth = 200.0
 
 func _ready():
+	health_box_component.maxHealth = 200
+	base_damage = 15
+	health_box_component.maxHealth =200
+
 	var rand = randi_range(1,3)
 	if rand == 1:
 		satyr_type = "white"
@@ -34,9 +40,7 @@ func _ready():
 		satyr_type = "red"
 	player_hitbox = player.get_node("HitBoxComponent")
 	state_machine = get_node("EnemyStateMachine")
-	base_damage = base_damage*Global.level
-	health_box_component.maxHealth = health_box_component.maxHealth*Global.level
-
+	
 
 func patrol():
 	
@@ -97,9 +101,6 @@ func combat():
 	
 func attack():
 	#update_animation()
-	if stunned:
-		return
-
 	if animated_sprite_2d.animation!="attack" and animated_sprite_2d.animation!="die":
 		animated_sprite_2d.play(satyr_type+"_attack")
 		
@@ -113,19 +114,21 @@ func attack():
 		else:
 			player_hitbox.take_damage(base_damage)
 			attack_interval = max_attack_interval
-	else:
-		attack_interval-=0.1
+	
 		
 	
 	
 	
 func die():
+	if dead:
+		return
+	dead = true
 
 	update_animation()
 	print("DIe")
-	var power_up = HEAL_POWER_UP.instantiate()
-	power_up.global_position = global_position
-	get_parent().add_child(power_up)
+	var fragment = MEMORY_FRAGMENT.instantiate()
+	fragment.global_position = global_position
+	get_parent().call_deferred("add_child", fragment)
 	animated_sprite_2d.play(satyr_type+"_die")
 
 	#if randi_range(1,Global.enemies_left) == 1:
@@ -146,16 +149,13 @@ func die():
 	Global.enemies_left-=1		
 	queue_free()
 
-var stunned = false
+
 
 func stun_effect():
 	animated_sprite_2d.play(satyr_type+"_pushed")
 	update_animation()
-	var stun_time  = max_stun_time
-	while(stun_time>=0):		
-		stunned = true
-		stun_time-=0.1
-	stunned = false
+	stun_time  = max_stun_time
+
 	
 func update_animation():
 	if direction.x<0:

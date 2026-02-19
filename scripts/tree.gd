@@ -8,7 +8,6 @@ func _ready():
 		animated_sprite_2d.play("tree" + str(randi_range(4,6)))
 
 
-func _on_area_2d_body_entered(body: StaticBody2D) -> void:
-	
-	if body!=self:
+func _on_area_2d_body_entered(body) -> void:
+	if body!=self and body is StaticBody2D:
 		body.queue_free()

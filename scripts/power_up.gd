@@ -7,7 +7,7 @@ func _ready() -> void:
 	message_box = get_tree().current_scene.find_child("MessageBox")
 	damage_boost = damage_boost*Global.level
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body) -> void:
 	if body.name == "Player" and visible:
 		
 		body.base_attack_damage+=damage_boost

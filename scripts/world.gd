@@ -70,6 +70,7 @@ func world_generator(period,octave):
 	
 	
 func _ready() -> void:
+	dream = Global.dream
 	color_rect = get_tree().current_scene.find_child("ColorRect")
 	color_rect.color = worlds[dream]["color"]
 	color_rect.color.a = worlds[dream]["opacity"]

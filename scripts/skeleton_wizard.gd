@@ -18,8 +18,8 @@ var combat_manager
 var player_hitbox
 var attack_interval = 0.0
 var total_attack_interval = 30.0
-
-
+var max_stun_time = 0.5
+var stun_time = 0.0
 
 func _ready():
 	player_hitbox = player.get_node("HitBoxComponent")
@@ -95,9 +95,9 @@ func attack():
 func die():
 	update_animation()
 	animated_sprite_2d.play("die")
-	var power_up = HEAL_POWER_UP.instantiate()
-	power_up.global_position = global_position
-	get_parent().add_child(power_up)
+	var fragment = MEMORY_FRAGMENT.instantiate()
+	fragment.global_position = global_position
+	get_parent().call_deferred("add_child", fragment)
 
 	#if randi_range(1,Global.enemies_left) == 1:
 		#var fragment = MEMORY_FRAGMENT.instantiate()
@@ -117,14 +117,9 @@ func die():
 	Global.enemies_left-=1		
 	queue_free()
 
-var stunned = false
-
 func stun_effect():
-	var stun_time  = 30
-	while(stun_time>=0):
-		stunned = true
-		stun_time-=0.1
-	stunned = false
+	stun_time  = max_stun_time
+	
 	
 func update_animation():
 	if direction.x<0:

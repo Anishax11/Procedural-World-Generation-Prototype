@@ -17,8 +17,8 @@ var distance_to_player
 var combat_manager
 var player_hitbox
 var attack_interval = 0.0
-
-
+var stun_time = 0.0
+var max_stun_time = 0.5
 
 func _ready():
 	player_hitbox = player.get_node("HitBoxComponent")
@@ -106,11 +106,8 @@ func die():
 var stunned = false
 
 func stun_effect():
-	var stun_time  = 30
-	while(stun_time>=0):
-		stunned = true
-		stun_time-=0.1
-	stunned = false
+	stun_time  = max_stun_time
+	
 	
 func update_animation():
 	if direction.x<0:

@@ -8,8 +8,8 @@ func _ready() -> void:
 	heal_meter = heal_meter*Global.level
 
 
-func _on_body_entered(body: CharacterBody2D) -> void:
-	if !visible:
+func _on_body_entered(body) -> void:
+	if !visible or !body is CharacterBody2D:
 		return
 	body.get_node("HealthBoxComponent").heal(heal_meter)
 	message_box.get_node("Message").text="Healed by "+str(heal_meter)

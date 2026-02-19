@@ -256,6 +256,11 @@ animations = [{
 "name": &"backward_idle",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xwt60")
@@ -428,7 +433,7 @@ script = ExtResource("1_h6082")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=19499952]
 sprite_frames = SubResource("SpriteFrames_gtw56")
-animation = &"backward_base_attack"
+animation = &"die"
 autoplay = "forward_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1092469101]

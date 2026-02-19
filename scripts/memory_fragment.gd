@@ -11,11 +11,15 @@ func _ready() -> void:
 	#pass
 
 
-func _on_body_entered(body: CharacterBody2D) -> void:
+func _on_body_entered(body) -> void:
 	if body.name == "Player":
 		print("Memory acquired")
 		GlobalCanvasLayer.memory_fragments_acquired+=1
 		memory_label.text = "Memory Fragments : " + str(GlobalCanvasLayer.memory_fragments_acquired) +"/" +str(GlobalCanvasLayer.total_memory_fragments)
 		Global.base_attack_damage+=20
 		Global.maxHealth+=30
-		queue_free()
+		if GlobalCanvasLayer.memory_fragments_acquired == 3:
+			visible = false
+			GlobalCanvasLayer.switch_worlds()
+			
+		call_deferred("queue_free")
