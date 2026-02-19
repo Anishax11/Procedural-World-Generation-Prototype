@@ -17,7 +17,7 @@ var last_dir = direction
 var stunned = false
 
 func _ready() -> void:
-	base_attack_damage = Global.base_attack_damage
+	base_attack_damage = Global.base_attack_damage*Global.level
 	health_box_component.maxHealth = Global.maxHealth
 	health_box_component.health = Global.maxHealth
 	

@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dh54by7jxsp4l" path="res://scenes/enemy_state_machine.tscn" id="2_f72qh"]
 [ext_resource type="PackedScene" uid="uid://cr61hhetsnfdv" path="res://scenes/hit_box_component.tscn" id="4_rkaca"]
 [ext_resource type="PackedScene" uid="uid://dqthdfcpxpow3" path="res://scenes/health_box_component.tscn" id="5_v0ugr"]
+[ext_resource type="Texture2D" uid="uid://beka4c14ucjxh" path="res://sprites/Pixel Health Bar/Bar/empty health bar.png" id="6_lf5hm"]
+[ext_resource type="Texture2D" uid="uid://bri7y5xck3bbf" path="res://sprites/Pixel Health Bar/Health/health.png" id="7_cpg4n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r08s7"]
 atlas = ExtResource("1_q1ver")
@@ -212,13 +214,104 @@ position = Vector2(-3, 5)
 shape = SubResource("CapsuleShape2D_v0ugr")
 
 [node name="HealthBoxComponent" parent="." unique_id=757536793 node_paths=PackedStringArray("healthbar") instance=ExtResource("5_v0ugr")]
-maxHealth = 200
-healthbar = NodePath("Label")
+maxHealth = 100.0
+healthbar = NodePath("TextureRect")
 
-[node name="Label" type="Label" parent="HealthBoxComponent" unique_id=1660767408]
-offset_left = -24.0
-offset_top = -43.0
-offset_right = 19.0
-offset_bottom = -20.0
+[node name="TextureRect" type="TextureRect" parent="HealthBoxComponent" unique_id=732065862]
+offset_left = -74.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+texture = ExtResource("6_lf5hm")
+
+[node name="TextureRect1" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=223391788]
+layout_direction = 1
+layout_mode = 0
+offset_left = 4.0000024
+offset_right = 149.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect2" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=2032397270]
+layout_direction = 1
+layout_mode = 0
+offset_left = 17.000002
+offset_right = 162.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect3" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=600310801]
+layout_direction = 1
+layout_mode = 0
+offset_left = 30.000002
+offset_right = 175.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect4" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=1297318904]
+layout_direction = 1
+layout_mode = 0
+offset_left = 43.000004
+offset_right = 188.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect5" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=1077176369]
+layout_direction = 1
+layout_mode = 0
+offset_left = 56.000004
+offset_right = 201.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect6" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=1755462683]
+layout_direction = 1
+layout_mode = 0
+offset_left = 69.0
+offset_right = 214.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect7" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=994696582]
+layout_direction = 1
+layout_mode = 0
+offset_left = 82.0
+offset_right = 227.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect8" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=1591250784]
+layout_direction = 1
+layout_mode = 0
+offset_left = 95.0
+offset_right = 240.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect9" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=575988415]
+layout_direction = 1
+layout_mode = 0
+offset_left = 108.0
+offset_right = 253.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
+
+[node name="TextureRect10" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=577668699]
+layout_direction = 1
+layout_mode = 0
+offset_left = 121.0
+offset_right = 266.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_cpg4n")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=848627596]

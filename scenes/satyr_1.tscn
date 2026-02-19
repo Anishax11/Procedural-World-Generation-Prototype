@@ -482,7 +482,7 @@ height = 70.0
 radius = 155.32225
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2pq7o"]
-radius = 19.999998
+radius = 32.499996
 height = 75.0
 
 [node name="Satyr1" type="CharacterBody2D" unique_id=680075619]
@@ -513,7 +513,8 @@ position = Vector2(-2.5, 27.5)
 shape = SubResource("CapsuleShape2D_2pq7o")
 
 [node name="HealthBoxComponent" parent="." unique_id=757536793 node_paths=PackedStringArray("healthbar") instance=ExtResource("8_v5l6r")]
-position = Vector2(-6, 37)
+position = Vector2(-12.499999, 37.5)
+scale = Vector2(0.4, 0.3)
 maxHealth = 200.0
 healthbar = NodePath("TextureRect")
 
@@ -545,9 +546,10 @@ texture = ExtResource("18_5om8r")
 [node name="TextureRect3" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=471587692]
 layout_direction = 1
 layout_mode = 0
-offset_left = 30.000002
-offset_right = 175.0
-offset_bottom = 39.999996
+offset_left = 31.0
+offset_top = -1.0
+offset_right = 159.0
+offset_bottom = 40.666664
 scale = Vector2(0.1, 1)
 texture = ExtResource("18_5om8r")
 

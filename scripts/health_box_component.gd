@@ -14,8 +14,10 @@ var health_reference
 func _ready() -> void:
 	health = maxHealth
 	health_reference = get_node("TextureRect/TextureRect1")
-	print("Scale :",health_reference.scale)
 
+#func _process(delta: float) -> void:
+	#if get_parent().name=="Satyr1":
+		#print("Health 10 visible : ",healthbar.get_node("TextureRect10").visible)
 
 func take_damage(damage):
 	
@@ -33,19 +35,21 @@ func heal(additional_health):
 
 func update_health_bar():
 	var percent = health/maxHealth * 100
-	
 	if percent <= health_percent - 10: # remove one bar when health falls by 10 percent
-		
-		healthbar.get_node("TextureRect"+str(bar_no)).visible = false
-		health_percent-=10
-		bar_no -= 1
-		if get_parent().name == "Player":
-			print(percent)
-			print(health_percent)
+		var diff = health_percent - percent
+		while(diff>0):
+			healthbar.get_node("TextureRect"+str(bar_no)).visible = false
+			health_percent-=10
+			bar_no -= 1
+			diff-=10
+	
 	elif percent >= health_percent : # add one bar when health adds by 10 percent
-		bar_no += 1
-		print(bar_no)
-		healthbar.get_node("TextureRect"+str(bar_no)).visible = true
-		if get_parent().name == "Player":
-			print(percent)
-			print(health_percent)
+		var diff = percent - health_percent 
+		print("diff : ",diff)
+		while(diff>=10):
+			bar_no += 1
+			health_percent+=10
+			print("Heal : ","TextureRect"+str(bar_no))
+			healthbar.get_node("TextureRect"+str(bar_no)).visible = true
+			diff-=10
+		
