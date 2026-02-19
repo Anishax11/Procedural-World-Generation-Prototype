@@ -25,7 +25,7 @@ func switch_worlds():
 	color_rect = get_tree().current_scene.find_child("ColorRect")
 	var mat = color_rect.material as ShaderMaterial
 	var tween = create_tween()
-	tween.tween_method(func(v): mat.set_shader_parameter("blur_amount", v), 0.0, 8.0, 4.0)
+	tween.tween_method(func(v): mat.set_shader_parameter("blur_amount", v), 0.0, 8.0, 5.5)
 	await tween.finished
 	if worlds_left == 0:
 		print("You winn ")

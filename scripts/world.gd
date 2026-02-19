@@ -15,7 +15,8 @@ const STATUE = preload("uid://cw7m1fl852p2o")
 
 #Ice World
 const EXPLODING_SPIKES = preload("uid://do57pkya3iw6o")
-
+var center_message_box
+var center_message_label
 
 var width = 50
 var height = 30
@@ -70,6 +71,16 @@ func world_generator(period,octave):
 	
 	
 func _ready() -> void:
+	var color_rect = get_tree().current_scene.find_child("ColorRect")
+	var mat = color_rect.material as ShaderMaterial
+	mat.set_shader_parameter("blur_amount", 8.0)
+	var tween = create_tween()
+	tween.tween_method(func(v): mat.set_shader_parameter("blur_amount", v), 8.0, 0.0, 3.0)
+	center_message_box =  get_tree().current_scene.find_child("CenterMessageBox")
+	center_message_label =  get_tree().current_scene.find_child("CenterMessage")
+	
+	
+	GlobalCanvasLayer.memory_fragments_acquired = 0 #set to zero at the beginning of every world
 	dream = Global.dream
 	color_rect = get_tree().current_scene.find_child("ColorRect")
 	color_rect.color = worlds[dream]["color"]

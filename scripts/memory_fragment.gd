@@ -27,12 +27,14 @@ func _on_body_entered(body) -> void:
 		if GlobalCanvasLayer.memory_fragments_acquired == 1:
 			if GlobalCanvasLayer.worlds_left == 0:
 				center_message_label.text="YOU WIN"
+				center_message_label.visible_characters = 0
 				center_message_box.visible = true
 				center_message_box.get_node("PlayAgain").visible = true
 				center_message_box.get_node("Quit").visible = true
 				GlobalCanvasLayer.switch_worlds()
 				return
 			center_message_label.text="All Memory Fragments acquired. You will be moved to another world"
+			center_message_label.visible_characters = 0
 			center_message_box.visible = true
 			GlobalCanvasLayer.switch_worlds()
 		await get_tree().create_timer(3).timeout
