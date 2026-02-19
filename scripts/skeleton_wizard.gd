@@ -95,21 +95,24 @@ func attack():
 func die():
 	update_animation()
 	animated_sprite_2d.play("die")
+	var power_up = HEAL_POWER_UP.instantiate()
+	power_up.global_position = global_position
+	get_parent().add_child(power_up)
 
-	if randi_range(1,Global.enemies_left) == 1:
-		var fragment = MEMORY_FRAGMENT.instantiate()
-		fragment.global_position = global_position
-		get_parent().add_child(fragment)
-	else:
-		if randi_range(1,5) == 3:
-			if randi_range(0,1) == 0:
-				var power_up = POWER_UP.instantiate()
-				power_up.global_position = global_position
-				get_parent().add_child(power_up)
-			else:
-				var power_up = HEAL_POWER_UP.instantiate()
-				power_up.global_position = global_position
-				get_parent().add_child(power_up)
+	#if randi_range(1,Global.enemies_left) == 1:
+		#var fragment = MEMORY_FRAGMENT.instantiate()
+		#fragment.global_position = global_position
+		#get_parent().add_child(fragment)
+	#else:
+		#if randi_range(1,5) == 3:
+			#if randi_range(0,1) == 0:
+				#var power_up = POWER_UP.instantiate()
+				#power_up.global_position = global_position
+				#get_parent().add_child(power_up)
+			#else:
+				#var power_up = HEAL_POWER_UP.instantiate()
+				#power_up.global_position = global_position
+				#get_parent().add_child(power_up)
 		
 	Global.enemies_left-=1		
 	queue_free()

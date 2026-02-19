@@ -5,7 +5,7 @@ extends CharacterBody2D
 const POWER_UP = preload("uid://c3mcerku8g657")
 const HEAL_POWER_UP = preload("uid://b42tu1ifegdgs")
 const MEMORY_FRAGMENT = preload("uid://c3hyvh3gm8dmr")
-var base_damage = 5
+var base_damage = 10
 @onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
 var player
 var speed = 35

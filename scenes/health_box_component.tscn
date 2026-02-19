@@ -6,4 +6,3 @@
 position = Vector2(3, -17)
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_rql01")
-maxHealth = null

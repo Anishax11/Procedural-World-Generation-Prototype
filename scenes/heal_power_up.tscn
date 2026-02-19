@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://b42tu1ifegdgs"]
 
 [ext_resource type="Script" uid="uid://v2qfma6tcvkj" path="res://scripts/heal_power_up.gd" id="1_ffsfd"]
-[ext_resource type="Texture2D" uid="uid://dqpyfmyerhojb" path="res://sprites/Forest TileSet/16x16.png" id="2_fq3hn"]
+[ext_resource type="Texture2D" uid="uid://drbokjk8ikghf" path="res://sprites/BigWander_HighContrastSurvivalKit/BigWander_SurvivalKit/HighContrastSurvivalKit_ContentPreview.png" id="2_ffsfd"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hsof0"]
-atlas = ExtResource("2_fq3hn")
-region = Rect2(384, 19, 16, 20)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq3hn"]
+atlas = ExtResource("2_ffsfd")
+region = Rect2(384, 448, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3hebb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hsof0")
+"texture": SubResource("AtlasTexture_fq3hn")
 }],
 "loop": true,
 "name": &"default",
@@ -22,9 +22,11 @@ animations = [{
 
 [node name="HealPowerUp" type="Area2D" unique_id=1782041712]
 z_index = 2
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_ffsfd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=178038641]
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_3hebb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2092084822]

@@ -30,3 +30,29 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Memory Fragments : 0/5"
+
+[node name="MessageBox" type="Control" parent="." unique_id=398572895]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.5
+offset_right = 158.5
+offset_bottom = 88.0
+grow_horizontal = 2
+
+[node name="Message" type="RichTextLabel" parent="MessageBox" unique_id=1416470980]
+layout_mode = 0
+offset_left = -1.5
+offset_top = 3.0
+offset_right = 315.5
+offset_bottom = 91.0
+text = "hello"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MessageBox" unique_id=449870624]
+custom_minimum_size = Vector2(317, 88)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
