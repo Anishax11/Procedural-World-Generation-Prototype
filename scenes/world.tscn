@@ -995,7 +995,7 @@ y_sort_enabled = true
 script = ExtResource("1_48nx0")
 
 [node name="Player" parent="." unique_id=1303849976 instance=ExtResource("3_ki41a")]
-position = Vector2(753, 345)
+position = Vector2(456, 321)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1916224241]
 y_sort_enabled = true
@@ -1010,10 +1010,10 @@ script = ExtResource("7_h1eua")
 navigation_polygon = SubResource("NavigationPolygon_4mrxx")
 
 [node name="Satyr1" parent="." unique_id=680075619 instance=ExtResource("10_jhx03")]
-position = Vector2(624, 303)
+position = Vector2(392, 245)
 
 [node name="Satyr2" parent="." unique_id=1249621689 instance=ExtResource("10_jhx03")]
-position = Vector2(809, 259)
+position = Vector2(603, 282)
 
 [node name="Satyr3" parent="." unique_id=1544758163 instance=ExtResource("10_jhx03")]
-position = Vector2(682, 431)
+position = Vector2(456, 422)

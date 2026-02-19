@@ -515,6 +515,7 @@ shape = SubResource("CapsuleShape2D_2pq7o")
 [node name="HealthBoxComponent" parent="." unique_id=757536793 instance=ExtResource("8_v5l6r")]
 position = Vector2(-12.499999, 37.5)
 scale = Vector2(0.4, 0.3)
+maxHealth = 200.0
 
 [node name="TextureRect" type="TextureRect" parent="HealthBoxComponent" unique_id=1016983764]
 offset_left = -46.666664

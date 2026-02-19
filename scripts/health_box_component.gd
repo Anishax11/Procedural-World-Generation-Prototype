@@ -1,7 +1,7 @@
 extends Node2D
 
 class_name HealthBoxComponent
-var maxHealth : float
+@export var maxHealth : float
 var health 
 @export var healthbar : TextureRect
 var bar_no = 10
@@ -9,15 +9,9 @@ var health_percent = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("Health box ready")
 	healthbar = get_node("TextureRect")
-	if healthbar==null:
-		print("healthbar null")
-	maxHealth = 200
-	health = maxHealth # health is set to max when entity spawns/re spawns
-	print("Max health : ",maxHealth)
-	print(" health : ",health)
-
+	health = maxHealth
+	
 
 func take_damage(damage):
 	print("Take damage called : ",damage)

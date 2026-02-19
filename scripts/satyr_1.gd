@@ -27,9 +27,9 @@ var stun_time = 0.0
 var maxHealth = 200.0
 
 func _ready():
-	health_box_component.maxHealth = 200
-	base_damage = 15
-	health_box_component.maxHealth =200
+	
+	health_box_component.maxHealth =maxHealth*Global.level
+	base_damage = base_damage*Global.level
 
 	var rand = randi_range(1,3)
 	if rand == 1:

@@ -15,6 +15,15 @@ var last_dir = direction
 var stunned = false
 
 func _ready() -> void:
+	var mat = color_rect.material as ShaderMaterial
+	mat.set_shader_parameter("blur_amount", 8.0)
+	var tween = create_tween()
+	tween.tween_method(func(v): mat.set_shader_parameter("blur_amount", v), 8.0, 0.0, 3.0)
+	
+	
+	
+	
+	GlobalCanvasLayer.memory_fragments_acquired = 0 #set to zero at the beginning of every world
 	base_attack_damage = Global.base_attack_damage*Global.level
 	print("Global base damage : ", Global.base_attack_damage)
 	print("level : ",Global.level)
@@ -119,6 +128,8 @@ func combat():
 
 
 func die():
+	if GlobalCanvasLayer.memory_fragments_acquired == GlobalCanvasLayer.total_memory_fragments:
+		return
 	queue_free()
 	get_tree().paused=true
 	
