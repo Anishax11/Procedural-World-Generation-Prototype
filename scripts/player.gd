@@ -15,6 +15,8 @@ var last_dir = direction
 var stunned = false
 var center_message_box
 var center_message_label
+const SPELL = preload("uid://dwf1hndexyu7x")
+
 
 func _ready() -> void:
 	center_message_box =  get_tree().current_scene.find_child("CenterMessageBox")
@@ -72,6 +74,7 @@ func _input(event: InputEvent) -> void:
 			animated_sprite_2d.flip_h = false
 		else:
 			animated_sprite_2d.flip_h = true	
+			
 		if Input.is_action_pressed("Shift"):
 			speed=150
 		else:
@@ -82,8 +85,9 @@ func _input(event: InputEvent) -> void:
 			base_attack()
 			
 		if Input.is_action_pressed("Special Ability"):
-			if dream == "forest":
-				slow_mo()
+			ice_rain()
+			#if dream == "forest":
+				#slow_mo()
 				
 func _on_animated_sprite_2d_animation_finished() -> void:
 	animated_sprite_2d.play("idle")
@@ -141,6 +145,17 @@ func slow_mo():
 	Engine.time_scale   = 1
 	speed = speed/100
 	animated_sprite_2d.speed_scale = animated_sprite_2d.speed_scale/3
+
+func ice_rain():
+	print("ICe rain called")
+	var starting_pos = global_position.x-30
+	for i in range(5):
+		var ice	= SPELL.instantiate()
+		ice.ice_rain = true
+		add_child(ice)
+		ice.global_position.x = starting_pos
+		starting_pos+=10
+		print("Ice spike added")
 	
 func stun_effect():
 	pass

@@ -7,21 +7,33 @@ extends Area2D
 @export var speed : int = 70
 var direction
 var type
+var ice_rain = true
+var distance_travelled = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if type:
 		animated_sprite_2d.play(type+"_attack")
-	global_position = get_parent().global_position
-	navigation_agent_2d.target_position = get_tree().current_scene.find_child("Player").global_position
-
+		global_position = get_parent().global_position
+		navigation_agent_2d.target_position = get_tree().current_scene.find_child("Player").global_position
+	if ice_rain:
+		type = "ice"
+		rotation_degrees = 90
+		global_position.y-=100
+		direction = Vector2(0,1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var next_pos  = navigation_agent_2d.get_next_path_position()
-	direction  = (next_pos - global_position).normalized()
-	global_position+=direction*speed*delta
-	if navigation_agent_2d.is_navigation_finished():
-		call_deferred("queue_free")
+	if !ice_rain:
+		var next_pos  = navigation_agent_2d.get_next_path_position()
+		direction  = (next_pos - global_position).normalized()
+		global_position+=direction*speed*delta
+		if navigation_agent_2d.is_navigation_finished():
+			call_deferred("queue_free")
+	else:
+		global_position+=direction*speed*delta
+		distance_travelled+=speed*delta
+		if speed*delta >= 150:
+			queue_free()
 	
 
 func _on_area_entered(area: Area2D) -> void:

@@ -103,7 +103,7 @@ script = ExtResource("1_om5k2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1953944539]
 sprite_frames = SubResource("SpriteFrames_uiofm")
-animation = &"ice_shatter"
+animation = &"ice_attack"
 autoplay = "ice_attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=516786952]
