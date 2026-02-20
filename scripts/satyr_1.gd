@@ -5,6 +5,8 @@ extends CharacterBody2D
 const POWER_UP = preload("uid://c3mcerku8g657")
 const HEAL_POWER_UP = preload("uid://b42tu1ifegdgs")
 const MEMORY_FRAGMENT = preload("uid://c3hyvh3gm8dmr")
+const ABILITY = preload("uid://bwuqg3lx5cbaf")
+
 var base_damage = 15
 @onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
 var player
@@ -129,6 +131,7 @@ func die():
 	if dead:
 		return
 	dead = true
+	Global.Global.satyrs_to_kill-=1
 
 	update_animation()
 	print("DIe")
@@ -136,22 +139,23 @@ func die():
 	fragment.global_position = global_position
 	get_parent().call_deferred("add_child", fragment)
 	animated_sprite_2d.play(satyr_type+"_die")
+	if Global.satyrs_to_kill == 0 :
+		var ability = ABILITY.instantiate()
+		ability.ability = "ice_spell"
+		ability.global_position = global_position
+		get_parent().add_child(ability)
+	else:
+		if randi_range(1,5) == 3:
+			if randi_range(0,1) == 0:
+					var power_up = POWER_UP.instantiate()
+					power_up.global_position = global_position
+					get_parent().add_child(power_up)
+			else:
+					var power_up = HEAL_POWER_UP.instantiate()
+					power_up.global_position = global_position
+					get_parent().add_child(power_up)
 
-	#if randi_range(1,Global.enemies_left) == 1:
-		#var fragment = MEMORY_FRAGMENT.instantiate()
-		#fragment.global_position = global_position
-		#get_parent().add_child(fragment)
-	#else:
-		#if randi_range(1,5) == 3:
-			#if randi_range(0,1) == 0:
-				#var power_up = POWER_UP.instantiate()
-				#power_up.global_position = global_position
-				#get_parent().add_child(power_up)
-			#else:
-				#var power_up = HEAL_POWER_UP.instantiate()
-				#power_up.global_position = global_position
-				#get_parent().add_child(power_up)
-		
+	\
 	Global.enemies_left-=1		
 	queue_free()
 

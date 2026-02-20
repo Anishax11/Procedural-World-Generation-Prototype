@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bwuqg3lx5cbaf"]
+
+[ext_resource type="Script" uid="uid://cpoglamfirfsu" path="res://scripts/ability.gd" id="1_i60ff"]
+[ext_resource type="Texture2D" uid="uid://bepexrbr7u14p" path="res://sprites/BigWander_HighContrastSurvivalKit/GothicItems/Heart-1.png.png" id="2_7oc7a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svgmf"]
+atlas = ExtResource("2_7oc7a")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m4ryx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svgmf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q443b"]
+
+[node name="Ability" type="Area2D" unique_id=1917676304]
+script = ExtResource("1_i60ff")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=637390004]
+sprite_frames = SubResource("SpriteFrames_m4ryx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1261166501]
+shape = SubResource("CapsuleShape2D_q443b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

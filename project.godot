@@ -24,6 +24,11 @@ config/icon="res://icon.svg"
 GlobalCanvasLayer="*uid://c7iqwq2gh2scc"
 Global="*uid://c0ialhag0ruo4"
 
+[display]
+
+window/size/viewport_width=2404
+window/size/viewport_height=1296
+
 [input]
 
 Up={

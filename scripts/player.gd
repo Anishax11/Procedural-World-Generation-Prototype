@@ -10,13 +10,14 @@ var base_attack_damage
 @onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
 var special_ability_cooldown = 0.0
 var speed = 100
-var direction : Vector2 = Vector2.ZERO
+var direction : Vector2 = Vector2.RIGHT
 var last_dir = direction
 var stunned = false
 var center_message_box
 var center_message_label
 const SPELL = preload("uid://dwf1hndexyu7x")
 const SHOCK_WAVE = preload("uid://q8yib80wufjq")
+const SATYR_SPELL = preload("uid://bd3t01afhjuf6")
 
 
 
@@ -24,11 +25,8 @@ const SHOCK_WAVE = preload("uid://q8yib80wufjq")
 func _ready() -> void:
 	center_message_box =  get_tree().current_scene.find_child("CenterMessageBox")
 	center_message_label =  get_tree().current_scene.find_child("CenterMessage")
-	
-	
 	GlobalCanvasLayer.memory_fragments_acquired = 0 #set to zero at the beginning of every world
 	base_attack_damage = Global.base_attack_damage*Global.level
-
 	health_box_component.maxHealth = Global.maxHealth
 	health_box_component.health = Global.maxHealth
 	
@@ -77,12 +75,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 func _input(event: InputEvent) -> void:
-		
-		if direction.x >= 0:
-			animated_sprite_2d.flip_h = false
-		else:
-			animated_sprite_2d.flip_h = true	
-			
+		update_animation()
 		if Input.is_action_pressed("Shift"):
 			speed=100
 		else:
@@ -93,8 +86,9 @@ func _input(event: InputEvent) -> void:
 			base_attack()
 			
 		if Input.is_action_pressed("Special Ability"):
+			satyr_spell()
 			#shock_wave()
-			ice_rain()
+			#ice_rain() #if Global.player_abilities.has[ice_spell] 
 			#if dream == "forest":
 				#slow_mo()
 				
@@ -175,6 +169,24 @@ func ice_rain():
 func shock_wave():
 	var shockwave = SHOCK_WAVE.instantiate()
 	add_child(shockwave)
+	
+func satyr_spell():
+	var starting_pos = global_position.y-30
+	for i in range(5):
+		var satyr_spell	= SATYR_SPELL.instantiate()
+		satyr_spell.player_cast_satyr_spell = true
+		satyr_spell.type = "red"
+		satyr_spell.direction = Vector2(last_dir.x,0)
+		#satyr_spell.global_position = Vector2(global_position.x,starting_pos)
+		satyr_spell.global_position = global_position
+		satyr_spell.scale = Vector2(0.6,0.6)
+		add_child(satyr_spell)
+		satyr_spell.top_level = true
+		satyr_spell.get_node("AnimatedSprite2D").flip_h = animated_sprite_2d.flip_h
+		satyr_spell.global_position.y = starting_pos
+		starting_pos+=10
+		#print("Add spell")
+	
 	
 func stun_effect():
 	pass

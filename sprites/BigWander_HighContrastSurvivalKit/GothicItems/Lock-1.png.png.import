@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cenjgjcxmmkra"
-path="res://.godot/imported/shockwave2.png-57fa93dead6c5464039bb02b2f757725.ctex"
+uid="uid://mwv8n42fpib0"
+path="res://.godot/imported/Lock-1.png.png-087fcad296606cede53ef1c934bfd493.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/shockwave2.png"
-dest_files=["res://.godot/imported/shockwave2.png-57fa93dead6c5464039bb02b2f757725.ctex"]
+source_file="res://sprites/BigWander_HighContrastSurvivalKit/GothicItems/Lock-1.png.png"
+dest_files=["res://.godot/imported/Lock-1.png.png-087fcad296606cede53ef1c934bfd493.ctex"]
 
 [params]
 

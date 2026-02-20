@@ -157,7 +157,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gaw41")
 }],
-"loop": false,
+"loop": true,
 "name": &"red_attack",
 "speed": 5.0
 }, {
@@ -220,7 +220,7 @@ animations = [{
 radius = 20.09975
 
 [node name="SatyrSpell" type="Area2D" unique_id=1811746541]
-z_index = 2
+z_index = 3
 y_sort_enabled = true
 script = ExtResource("1_fwe7o")
 spell_damage = 25
@@ -229,7 +229,7 @@ speed = 75
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615582370]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_h0rbl")
-animation = &"red_shatter"
+animation = &"red_attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=723739958]
 position = Vector2(1, -1)

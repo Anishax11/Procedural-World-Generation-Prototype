@@ -9,7 +9,7 @@ func _ready() -> void:
 	var tween = create_tween()
 	tween.tween_property(self,"scale",Vector2(1.0,1.0),2)
 	parent  = get_parent()
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(2).timeout
 	queue_free()
 
 

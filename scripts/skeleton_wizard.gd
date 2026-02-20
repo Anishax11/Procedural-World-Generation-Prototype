@@ -21,6 +21,9 @@ var total_attack_interval = 30.0
 var max_stun_time = 0.5
 var stun_time = 0.0
 var dead = false
+const ABILITY = preload("uid://bwuqg3lx5cbaf")
+
+
 
 func _ready():
 	player_hitbox = player.get_node("HitBoxComponent")
@@ -97,24 +100,28 @@ func die():
 	dead = true
 	update_animation()
 	animated_sprite_2d.play("die")
-	var fragment = MEMORY_FRAGMENT.instantiate()
-	fragment.global_position = global_position
-	get_parent().call_deferred("add_child", fragment)
+	Global.skeleton_wizards_to_kill-=1
 
-	#if randi_range(1,Global.enemies_left) == 1:
-		#var fragment = MEMORY_FRAGMENT.instantiate()
-		#fragment.global_position = global_position
-		#get_parent().add_child(fragment)
-	#else:
-		#if randi_range(1,5) == 3:
-			#if randi_range(0,1) == 0:
-				#var power_up = POWER_UP.instantiate()
-				#power_up.global_position = global_position
-				#get_parent().add_child(power_up)
-			#else:
-				#var power_up = HEAL_POWER_UP.instantiate()
-				#power_up.global_position = global_position
-				#get_parent().add_child(power_up)
+	if randi_range(1,Global.enemies_left) == 1:
+		var fragment = MEMORY_FRAGMENT.instantiate()
+		fragment.global_position = global_position
+		get_parent().add_child(fragment)
+	else:
+		if Global.skeleton_wizards_to_kill == 0 :
+			var ability = ABILITY.instantiate()
+			ability.ability = "ice_spell"
+			ability.global_position = global_position
+			get_parent().add_child(ability)
+		else:
+			if randi_range(1,5) == 3:
+				if randi_range(0,1) == 0:
+					var power_up = POWER_UP.instantiate()
+					power_up.global_position = global_position
+					get_parent().add_child(power_up)
+				else:
+					var power_up = HEAL_POWER_UP.instantiate()
+					power_up.global_position = global_position
+					get_parent().add_child(power_up)
 		
 	Global.enemies_left-=1		
 	queue_free()

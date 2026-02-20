@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2qpm7jknircm"
-path="res://.godot/imported/shock_wave.png-af5fdfff05bcc9e19b9b9f0d6375e586.ctex"
+uid="uid://de0jkvd344x4f"
+path="res://.godot/imported/Hourglass-1.png.png-e4f0b32a531a6eb3d80b64b935c1d18c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/shock_wave.png"
-dest_files=["res://.godot/imported/shock_wave.png-af5fdfff05bcc9e19b9b9f0d6375e586.ctex"]
+source_file="res://sprites/BigWander_HighContrastSurvivalKit/GothicItems/Hourglass-1.png.png"
+dest_files=["res://.godot/imported/Hourglass-1.png.png-e4f0b32a531a6eb3d80b64b935c1d18c.ctex"]
 
 [params]
 
