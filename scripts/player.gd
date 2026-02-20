@@ -84,9 +84,12 @@ func _input(event: InputEvent) -> void:
 		#last_dir = direction	
 		if Input.is_action_pressed("Base Attack"):
 			base_attack()
-			
 		if Input.is_action_pressed("Special Ability"):
-			satyr_spell()
+			sound_wave()
+		if Input.is_action_pressed("sound_wave") and Global.player_abilities.has("sound_wave"):
+			sound_wave()
+			
+			#satyr_spell()
 			#shock_wave()
 			#ice_rain() #if Global.player_abilities.has[ice_spell] 
 			#if dream == "forest":
@@ -117,7 +120,7 @@ func die():
 		return
 	
 	center_message_label.text="GAME OVER"
-	center_message_label.visible_characters = 0
+	#center_message_label.visible_characters = 0
 	center_message_box.visible = true
 	center_message_box.get_node("PlayAgain").visible = true
 	center_message_box.get_node("Quit").visible = true
@@ -169,6 +172,13 @@ func ice_rain():
 func shock_wave():
 	var shockwave = SHOCK_WAVE.instantiate()
 	add_child(shockwave)
+	
+func sound_wave():
+		print("Call sound wave ")
+		var shockwave = SHOCK_WAVE.instantiate()
+		shockwave.type = "shockwave"
+		shockwave.total_time = 1
+		add_child(shockwave)
 	
 func satyr_spell():
 	var starting_pos = global_position.y-30

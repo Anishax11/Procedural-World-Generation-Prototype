@@ -1,0 +1,171 @@
+[gd_scene format=3 uid="uid://cvl48wlfmicu0"]
+
+[ext_resource type="Script" uid="uid://bxsu8qbsouisw" path="res://scripts/bat.gd" id="1_5fn3r"]
+[ext_resource type="Texture2D" uid="uid://bdca3x254fn3k" path="res://sprites/Enemy/Mobs/Bat/Bat1.png" id="2_8qtcx"]
+[ext_resource type="Texture2D" uid="uid://ciasy1566dktq" path="res://sprites/Enemy/Mobs/Bat/Bat2.png" id="3_x4bhu"]
+[ext_resource type="PackedScene" uid="uid://dh54by7jxsp4l" path="res://scenes/enemy_state_machine.tscn" id="4_k0o7o"]
+[ext_resource type="PackedScene" uid="uid://dqthdfcpxpow3" path="res://scenes/health_box_component.tscn" id="5_67y1s"]
+[ext_resource type="PackedScene" uid="uid://cr61hhetsnfdv" path="res://scenes/hit_box_component.tscn" id="6_p5otw"]
+[ext_resource type="Texture2D" uid="uid://beka4c14ucjxh" path="res://sprites/Pixel Health Bar/Bar/empty health bar.png" id="6_x4bhu"]
+[ext_resource type="Texture2D" uid="uid://bri7y5xck3bbf" path="res://sprites/Pixel Health Bar/Health/health.png" id="7_k0o7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjjhm"]
+atlas = ExtResource("2_8qtcx")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8eff"]
+atlas = ExtResource("3_x4bhu")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrah6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjjhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8eff")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drkvk"]
+size = Vector2(8, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y1j7x"]
+radius = 42.0119
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dk2sj"]
+size = Vector2(10, 8)
+
+[node name="Bat" type="CharacterBody2D" unique_id=1598482095]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_5fn3r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=657311606]
+sprite_frames = SubResource("SpriteFrames_rrah6")
+autoplay = "default"
+frame_progress = 0.32765868
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1251272129]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_drkvk")
+
+[node name="EnemyStateMachine" parent="." unique_id=2067893902 instance=ExtResource("4_k0o7o")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyStateMachine" unique_id=1431663721]
+shape = SubResource("CircleShape2D_y1j7x")
+
+[node name="HealthBoxComponent" parent="." unique_id=757536793 node_paths=PackedStringArray("healthbar") instance=ExtResource("5_67y1s")]
+maxHealth = 50.0
+healthbar = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="HealthBoxComponent" unique_id=493296568]
+offset_left = -36.666664
+offset_top = 20.000002
+offset_right = 101.333336
+offset_bottom = 60.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_x4bhu")
+
+[node name="TextureRect1" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=1486847871]
+layout_direction = 1
+layout_mode = 0
+offset_left = 4.0000024
+offset_right = 149.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect2" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=2076862698]
+layout_direction = 1
+layout_mode = 0
+offset_left = 17.000002
+offset_right = 162.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect3" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=263401330]
+layout_direction = 1
+layout_mode = 0
+offset_left = 30.000002
+offset_right = 175.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect4" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=2044464683]
+layout_direction = 1
+layout_mode = 0
+offset_left = 43.000004
+offset_right = 188.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect5" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=112250571]
+layout_direction = 1
+layout_mode = 0
+offset_left = 56.000004
+offset_right = 201.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect6" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=775746254]
+layout_direction = 1
+layout_mode = 0
+offset_left = 69.0
+offset_right = 214.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect7" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=1436030789]
+layout_direction = 1
+layout_mode = 0
+offset_left = 82.0
+offset_right = 227.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect8" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=1747704131]
+layout_direction = 1
+layout_mode = 0
+offset_left = 95.0
+offset_right = 240.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect9" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=331877142]
+layout_direction = 1
+layout_mode = 0
+offset_left = 108.0
+offset_right = 253.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="TextureRect10" type="TextureRect" parent="HealthBoxComponent/TextureRect" unique_id=1033176097]
+layout_direction = 1
+layout_mode = 0
+offset_left = 121.0
+offset_right = 266.0
+offset_bottom = 39.999996
+scale = Vector2(0.1, 1)
+texture = ExtResource("7_k0o7o")
+
+[node name="HitBoxComponent" parent="." unique_id=1270115252 node_paths=PackedStringArray("healthbox") instance=ExtResource("6_p5otw")]
+healthbox = NodePath("../HealthBoxComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent" unique_id=1335199835]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_dk2sj")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=83101249]
