@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cnos311c40862" path="res://scripts/poison_cloak.gd" id="1_302nv"]
 [ext_resource type="Texture2D" uid="uid://b32tdyd20uw3k" path="res://sprites/1762.png" id="2_gfkrs"]
-[ext_resource type="Texture2D" uid="uid://bt4rgan2qyisf" path="res://sprites/Ice World Sprites/Ice/1712.png" id="3_wru3k"]
+[ext_resource type="Texture2D" uid="uid://bt4rgan2qyisf" path="res://sprites/1712.png" id="3_wru3k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfkrs"]
 atlas = ExtResource("2_gfkrs")

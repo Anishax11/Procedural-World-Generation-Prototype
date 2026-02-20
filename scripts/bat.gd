@@ -87,7 +87,7 @@ func die():
 	Global.bats_to_kill-=1
 	if Global.bats_to_kill == 0 :
 			var ability = ABILITY.instantiate()
-			ability.ability = "ice_spell"
+			ability.ability = "sound_wave"
 			ability.global_position = global_position
 			get_parent().add_child(ability)
 	if randi_range(1,5) == 3:

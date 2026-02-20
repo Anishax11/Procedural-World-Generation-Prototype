@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cftj62m0nk64r"]
+
+[ext_resource type="Script" uid="uid://buwd4x5508xgs" path="res://scripts/opening_scene.gd" id="1_61xuo"]
+[ext_resource type="Texture2D" uid="uid://cggirim7bix0y" path="res://sprites/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_CrouchTransition.png" id="2_j2imu"]
+[ext_resource type="FontFile" uid="uid://bghye6a50kd0f" path="res://sprites/Ice World Sprites/Ice/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="3_6xt31"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o1uly"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 0)
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, -45, 0)
+scale_max = 3.0
+color = Color(1, 1, 1, 0.8039216)
+
+[node name="OpeningScene" type="Node2D" unique_id=2146634123]
+script = ExtResource("1_61xuo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=773782758]
+
+[node name="BG" type="ColorRect" parent="CanvasLayer" unique_id=1691616658]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.04861982, 3.169109e-06, 0.04861919, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer" unique_id=2134208405]
+position = Vector2(610, 281)
+amount = 80
+lifetime = 6.0
+visibility_rect = Rect2(-700, -400, 1500, 800)
+process_material = SubResource("ParticleProcessMaterial_o1uly")
+
+[node name="Silhouette" type="Sprite2D" parent="CanvasLayer" unique_id=1927014772]
+modulate = Color(4.2165008, 4.2165008, 4.2165008, 1)
+self_modulate = Color(1.4190066, 1.4190066, 1.4190066, 0)
+z_index = 1
+position = Vector2(611, 285)
+texture = ExtResource("2_j2imu")
+
+[node name="WorldOverlay" type="ColorRect" parent="CanvasLayer" unique_id=833237566]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer" unique_id=1962615612]
+modulate = Color(1, 1, 1, 0.78431374)
+offset_left = 40.0
+offset_top = 43.0
+offset_right = 1167.0
+offset_bottom = 554.0
+theme_override_fonts/normal_font = ExtResource("3_6xt31")
+theme_override_font_sizes/normal_font_size = 28
+text = "sacsfcs"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioAmbient" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=1723834428]
+
+[node name="AudioSFX" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=717894200]

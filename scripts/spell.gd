@@ -6,30 +6,33 @@ extends Area2D
 @export var spell_damage : int  = 20
 @export var speed : int = 1
 
-var direction
+var direction : Vector2 = Vector2(0,1)
 var type
 var ice_rain = false
-var player_cast_satyr_spell = true
+var player_cast_satyr_spell = false
 var distance_travelled = 0
+var total_time = 2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-
 	if ice_rain:
 		type = "ice"
-		await get_tree().create_timer(2).timeout
+		animated_sprite_2d.play(type+"_attack")
+		await get_tree().create_timer(total_time).timeout
 		queue_free()
 		#rotation_degrees = 90
 		#global_position.y-=randi_range(10,100)
 	elif player_cast_satyr_spell:
-		await get_tree().create_timer(2).timeout
+		animated_sprite_2d.play(type+"_attack")
+		await get_tree().create_timer(total_time).timeout
 		queue_free()
 		
 	elif type:
+		animated_sprite_2d.play(type+"_attack")
 		global_position = get_parent().global_position
 		navigation_agent_2d.target_position = get_tree().current_scene.find_child("Player").global_position		
 		
-	animated_sprite_2d.play(type+"_attack")
+	
 	#print("SPell ready at :",global_position)
 	
 func _process(delta: float) -> void:
@@ -39,19 +42,20 @@ func _process(delta: float) -> void:
 		global_position+=direction*speed*delta
 		if navigation_agent_2d.is_navigation_finished():
 			call_deferred("queue_free")
-			#print("nav finihsed Freed")
-			
+			await get_tree().create_timer(0.1).timeout #wait to checkwdaw if area enetred is triggered
+			print("nav finihsed Freed")
 		
 	else:
 		global_position+=direction*speed*delta
 		distance_travelled+=speed*delta
 		if distance_travelled >= 150:
-			#print("150 dist travelled Freed")
+			print("150 dist travelled Freed")
 			queue_free()
 	
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitBoxComponent and area.get_parent()!=get_parent():
+		print("Area detected, take damage callded")
 		area.take_damage(spell_damage)
 		animated_sprite_2d.play(type+"_shatter")
 		
@@ -59,4 +63,4 @@ func _on_area_entered(area: Area2D) -> void:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	queue_free()
-	#print("Freed")
+	print("Freed")

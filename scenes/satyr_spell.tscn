@@ -1,9 +1,31 @@
 [gd_scene format=3 uid="uid://bd3t01afhjuf6"]
 
 [ext_resource type="Script" uid="uid://ceowxmsyc36bu" path="res://scripts/spell.gd" id="1_fwe7o"]
+[ext_resource type="Texture2D" uid="uid://6w4xdaf26vc7" path="res://sprites/Ice World Sprites/Ice/Ball of ice.png" id="2_1kjp4"]
 [ext_resource type="Texture2D" uid="uid://c20cj6fq8g2jm" path="res://sprites/Enemy/Satyr_2/Charge.png" id="2_08h7j"]
 [ext_resource type="Texture2D" uid="uid://t7gemqsqwug5" path="res://sprites/Enemy/Satyr_1/Charge.png" id="2_blgkg"]
+[ext_resource type="Texture2D" uid="uid://bdr1evvty4gux" path="res://sprites/Ice World Sprites/Ice/Burst of ice.png" id="3_lbeb0"]
 [ext_resource type="Texture2D" uid="uid://d2x2lad26ix0l" path="res://sprites/Enemy/Satyr_3/Charge.png" id="4_08h7j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm6np"]
+atlas = ExtResource("2_1kjp4")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh6rs"]
+atlas = ExtResource("2_1kjp4")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87a1g"]
+atlas = ExtResource("2_1kjp4")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp6n8"]
+atlas = ExtResource("2_1kjp4")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xihi"]
+atlas = ExtResource("3_lbeb0")
+region = Rect2(0, 640, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1kjp4"]
 atlas = ExtResource("2_08h7j")
@@ -107,6 +129,34 @@ region = Rect2(640, 0, 53, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h0rbl"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm6np")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh6rs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87a1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp6n8")
+}],
+"loop": true,
+"name": &"dark_attack",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xihi")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"dark_shatter",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1kjp4")
@@ -229,7 +279,7 @@ speed = 75
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=615582370]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_h0rbl")
-animation = &"red_attack"
+animation = &"dark_attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=723739958]
 position = Vector2(1, -1)

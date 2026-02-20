@@ -51,6 +51,7 @@ offset_bottom = 99.0
 grow_horizontal = 2
 
 [node name="Message" type="RichTextLabel" parent="MessageBox" unique_id=1416470980]
+z_index = 1
 layout_mode = 0
 offset_left = 94.5
 offset_top = 12.0

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dq4ta43737iwa" path="res://sprites/graveyard  tileset/Graveyard_Set.png" id="4_qfnet"]
 [ext_resource type="Texture2D" uid="uid://c8oc5ex7kyys6" path="res://sprites/Ice World Sprites/Ice/Ice Free Sample_nnekart.png" id="5_i7141"]
 [ext_resource type="Script" uid="uid://bwdo01litjbmp" path="res://scripts/greenery.gd" id="7_h1eua"]
-[ext_resource type="PackedScene" uid="uid://cvl48wlfmicu0" path="res://scenes/bat.tscn" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://bwf8krqqw2223" path="res://scenes/dark_enemy.tscn" id="7_i7141"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6mu14"]
 texture = ExtResource("2_1jy0w")
@@ -1009,5 +1009,5 @@ script = ExtResource("7_h1eua")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1988562671]
 navigation_polygon = SubResource("NavigationPolygon_4mrxx")
 
-[node name="Bat" parent="." unique_id=1598482095 instance=ExtResource("7_i7141")]
-position = Vector2(506, 283)
+[node name="DarkEnemy" parent="." unique_id=1540649991 instance=ExtResource("7_i7141")]
+position = Vector2(556, 285)
