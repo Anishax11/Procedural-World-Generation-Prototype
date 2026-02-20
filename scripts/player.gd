@@ -16,6 +16,9 @@ var stunned = false
 var center_message_box
 var center_message_label
 const SPELL = preload("uid://dwf1hndexyu7x")
+const SHOCK_WAVE = preload("uid://q8yib80wufjq")
+
+
 
 
 func _ready() -> void:
@@ -30,8 +33,11 @@ func _ready() -> void:
 	health_box_component.health = Global.maxHealth
 	
 func _physics_process(delta: float) -> void:
+		#print(direction)
 		velocity = Vector2.ZERO
+		direction.y = 0
 		#direction = Vector2.ZERO
+		
 		if Input.is_action_pressed("Up"):
 			direction.y = 0
 			direction.y-=1
@@ -63,7 +69,9 @@ func _physics_process(delta: float) -> void:
 		delta = get_process_delta_time() / Engine.time_scale
 		if special_ability_cooldown>0:
 			special_ability_cooldown-=delta
-		
+			
+		if direction ==Vector2(0,0):
+			direction = Vector2(1,0)
 		update_animation()
 		move_and_slide()
 		
@@ -76,15 +84,16 @@ func _input(event: InputEvent) -> void:
 			animated_sprite_2d.flip_h = true	
 			
 		if Input.is_action_pressed("Shift"):
-			speed=150
+			speed=100
 		else:
 			speed=70	
 		
-		last_dir = direction	
+		#last_dir = direction	
 		if Input.is_action_pressed("Base Attack"):
 			base_attack()
 			
 		if Input.is_action_pressed("Special Ability"):
+			#shock_wave()
 			ice_rain()
 			#if dream == "forest":
 				#slow_mo()
@@ -112,6 +121,7 @@ func combat():
 func die():
 	if GlobalCanvasLayer.memory_fragments_acquired == GlobalCanvasLayer.total_memory_fragments:
 		return
+	
 	center_message_label.text="GAME OVER"
 	center_message_label.visible_characters = 0
 	center_message_box.visible = true
@@ -147,24 +157,32 @@ func slow_mo():
 	animated_sprite_2d.speed_scale = animated_sprite_2d.speed_scale/3
 
 func ice_rain():
-	print("ICe rain called")
+	#print("ICe rain called")
 	var starting_pos = global_position.x-30
 	for i in range(5):
 		var ice	= SPELL.instantiate()
 		ice.ice_rain = true
+		ice.direction = Vector2(last_dir.x,0)
+		ice.global_position = global_position
+		ice.scale = Vector2(0.8,0.8)
+		ice.top_level = true
 		add_child(ice)
+		ice.get_node("AnimatedSprite2D").flip_h = animated_sprite_2d.flip_h
 		ice.global_position.x = starting_pos
 		starting_pos+=10
-		print("Ice spike added")
+		#print("Ice spike added")
+	
+func shock_wave():
+	var shockwave = SHOCK_WAVE.instantiate()
+	add_child(shockwave)
 	
 func stun_effect():
 	pass
 
 func update_animation():
-
-	if direction.x >= 0:
+	if last_dir.x > 0:
 		animated_sprite_2d.flip_h = false
 	else:
 		animated_sprite_2d.flip_h = true
 	
-	#direction = Vector2.ZERO
+	

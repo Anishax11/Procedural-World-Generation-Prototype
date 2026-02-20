@@ -27,12 +27,12 @@ func heal(additional_health):
 		update_health_bar()
 		
 func update_health_bar():
-	print("Updating health bar")
+	#print("Updating health bar")
 	var percent = health/maxHealth * 100
 	if percent <= health_percent - 10: # remove one bar when health falls by 10 percent
 		var diff = health_percent - percent
 
-		while(diff>0):
+		while(diff>=10):
 			if healthbar.has_node("TextureRect"+str(bar_no)): 
 				healthbar.get_node("TextureRect"+str(bar_no)).visible = false
 				health_percent-=10

@@ -7,7 +7,7 @@ extends Area2D
 @export var speed : int = 70
 var direction
 var type
-var ice_rain = true
+var ice_rain = false
 var distance_travelled = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,9 +17,11 @@ func _ready() -> void:
 		navigation_agent_2d.target_position = get_tree().current_scene.find_child("Player").global_position
 	if ice_rain:
 		type = "ice"
-		rotation_degrees = 90
-		global_position.y-=100
-		direction = Vector2(0,1)
+		await get_tree().create_timer(2).timeout
+		queue_free()
+		#rotation_degrees = 90
+		#global_position.y-=randi_range(10,100)
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -17,19 +17,23 @@ var distance_to_player
 var combat_manager
 var player_hitbox
 var attack_interval = 0.0
-var max_attack_interval = 30
+var max_attack_interval = 3
 var max_stun_time = 0.2
 var dead = false
-var caster = false
+var caster = true
 const SATYR_SPELL = preload("uid://bd3t01afhjuf6")
 var satyr_type = "white"
 var stun_time = 0.0
 var maxHealth = 200.0
+var spell_damage = 20
 
 func _ready():
 	
 	health_box_component.maxHealth =maxHealth*Global.level
 	base_damage = base_damage*Global.level
+	spell_damage = spell_damage*Global.level
+	max_attack_interval = max_attack_interval/Global.level
+	
 
 	var rand = randi_range(1,3)
 	if rand == 1:
@@ -106,11 +110,13 @@ func attack():
 		
 	if attack_interval <=0:
 		if caster :
+			
 			var spell = SATYR_SPELL.instantiate()
 			spell.type = satyr_type
 			add_child(spell)	
 			spell.animated_sprite_2d.flip_h  = animated_sprite_2d.flip_h 
 			attack_interval = max_attack_interval
+			print("Print cast spell")
 		else:
 			player_hitbox.take_damage(base_damage)
 			attack_interval = max_attack_interval

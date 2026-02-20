@@ -20,6 +20,7 @@ var attack_interval = 0.0
 var total_attack_interval = 30.0
 var max_stun_time = 0.5
 var stun_time = 0.0
+var dead = false
 
 func _ready():
 	player_hitbox = player.get_node("HitBoxComponent")
@@ -93,6 +94,7 @@ func attack():
 	
 	
 func die():
+	dead = true
 	update_animation()
 	animated_sprite_2d.play("die")
 	var fragment = MEMORY_FRAGMENT.instantiate()
