@@ -22,10 +22,6 @@ region = Rect2(192, 53, 16, 26)
 atlas = ExtResource("2_x335e")
 region = Rect2(208, 53, 16, 26)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w12fg"]
-atlas = ExtResource("4_gqn4o")
-region = Rect2(47, 56, 19, 56)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ffoes"]
 atlas = ExtResource("4_gqn4o")
 region = Rect2(80, 80, 16, 16)
@@ -69,14 +65,6 @@ animations = [{
 "loop": true,
 "name": &"fire",
 "speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w12fg")
-}],
-"loop": true,
-"name": &"ice_cave",
-"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -132,7 +120,7 @@ script = ExtResource("1_j808x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1434319625]
 sprite_frames = SubResource("SpriteFrames_4hwsr")
-animation = &"ice_cave"
+animation = &"candle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1756901329]
 position = Vector2(0, 5)

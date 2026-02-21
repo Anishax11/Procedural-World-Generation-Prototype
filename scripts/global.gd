@@ -1,6 +1,6 @@
 extends Node
 
-var dream 
+var dream = "graveyard"
 var dreams = ["forest","iceworld","graveyard"]
 var enemies_left = 30
 var base_attack_damage = 10.0 # player
@@ -21,8 +21,8 @@ var ability_desc = {
 	"dark_spell" = ""
 }
 
-func _ready() -> void:
-	start_game()
+#func _ready() -> void:
+	#start_game()
 
 func start_game():
 	dream = dreams[randi_range(0,2)]

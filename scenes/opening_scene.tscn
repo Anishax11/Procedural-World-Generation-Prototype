@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://buwd4x5508xgs" path="res://scripts/opening_scene.gd" id="1_61xuo"]
 [ext_resource type="Texture2D" uid="uid://cggirim7bix0y" path="res://sprites/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_CrouchTransition.png" id="2_j2imu"]
 [ext_resource type="FontFile" uid="uid://bghye6a50kd0f" path="res://sprites/Ice World Sprites/Ice/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="3_6xt31"]
+[ext_resource type="AudioStream" uid="uid://cyyar8wbfs0te" path="res://audio/838167__expiredsoda__until-midnight-looping-tune.wav" id="4_j2imu"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o1uly"]
 particle_flag_disable_z = true
@@ -39,17 +40,10 @@ process_material = SubResource("ParticleProcessMaterial_o1uly")
 [node name="Silhouette" type="Sprite2D" parent="CanvasLayer" unique_id=1927014772]
 modulate = Color(4.2165008, 4.2165008, 4.2165008, 1)
 self_modulate = Color(1.4190066, 1.4190066, 1.4190066, 0)
-z_index = 1
-position = Vector2(611, 285)
+z_index = 2
+position = Vector2(611, 265)
+scale = Vector2(2, 2)
 texture = ExtResource("2_j2imu")
-
-[node name="WorldOverlay" type="ColorRect" parent="CanvasLayer" unique_id=833237566]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0)
 
 [node name="Text" type="RichTextLabel" parent="CanvasLayer" unique_id=1962615612]
 modulate = Color(1, 1, 1, 0.78431374)
@@ -59,10 +53,15 @@ offset_right = 1167.0
 offset_bottom = 554.0
 theme_override_fonts/normal_font = ExtResource("3_6xt31")
 theme_override_font_sizes/normal_font_size = 28
-text = "sacsfcs"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AudioAmbient" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=1723834428]
+stream = ExtResource("4_j2imu")
+autoplay = true
 
 [node name="AudioSFX" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=717894200]
+
+[node name="WorldOverlay" type="TextureRect" parent="CanvasLayer" unique_id=775081838]
+offset_right = 1204.0
+offset_bottom = 596.0

@@ -2,10 +2,16 @@ extends Node2D
 
 @onready var silhouette: Sprite2D = $CanvasLayer/Silhouette
 @onready var text: RichTextLabel = $CanvasLayer/Text
-@onready var world_overlay: ColorRect = $CanvasLayer/WorldOverlay
+@onready var world_overlay: TextureRect = $CanvasLayer/WorldOverlay
 @onready var audio_ambient = $CanvasLayer/AudioAmbient
 @onready var audio_sfx = $CanvasLayer/AudioSFX
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
+#sfx:
+const memory_snap = preload("uid://dkf1ogy7w7gnq") 
+const heartbeat = preload("uid://cwv8v7ca1q48j")
+#world scene
+const WORLD = preload("uid://cgaqki7i5emon")
+
 
 var lines = [
 	["Where does a journey begin…", 1, 2.5, ""],
@@ -38,16 +44,15 @@ var viewport_size
 
 
 func _ready() -> void:
+
 	viewport_size = get_viewport().get_visible_rect().size
+	#show_silhouette()
 	text.modulate.a = 0
 	world_overlay.modulate.a = 0
-	silhouette.modulate.a = 0
-	#audio_ambient.play()
 	play_next_line()
 	
 	
 func play_next_line():
-	print("PLay line called")
 	if current_line >= lines.size():
 		finish()
 		return
@@ -56,7 +61,8 @@ func play_next_line():
 	var pos_preset = entry[1]
 	var delay = entry[2]
 	var sfx = entry[3]
-	print(screen_text)
+	
+		
 	if screen_text == "":
 		handle_sfx(sfx)
 		current_line+=1
@@ -80,14 +86,52 @@ func play_next_line():
 
    
 func show_silhouette():
+	silhouette.global_position = Vector2(viewport_size.x / 2, viewport_size.y / 2 )
 	var tween = create_tween()
-	tween.tween_property(silhouette, "modulate:a", 0.85, 2.0)
+	tween.tween_property(silhouette, "self_modulate:a", 0.85, 3.0)
 	await get_tree().create_timer(3.0).timeout
 	tween = create_tween()
-	tween.tween_property(silhouette, "modulate:a", 0.0, 1.5) 
+	tween.tween_property(silhouette, "self_modulate:a", 0.0, 1.5) 
+	print("FInish")
 	
 func finish():
-	pass	
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 1.5)
+	await tween.finished
+	get_tree().change_scene_to_packed(WORLD)
 	
+func show_world_glimpses():
+	var worlds = [
+		preload("uid://dqe5ksyacjfb1"),
+		preload("uid://c2exfmtpiei4a"),   # ice blue
+		preload("uid://mntkionfkg2d")]  # graveyard grey-purple
+	for tex in worlds:
+		
+			world_overlay.texture = tex
+			var tween = create_tween()
+			tween.tween_property(world_overlay, "modulate:a", 1.0, 0.2)
+			await get_tree().create_timer(0.5).timeout
+			tween = create_tween()
+			tween.tween_property(world_overlay, "modulate:a", 0.0, 0.3)
+			await tween.finished
+			await get_tree().create_timer(0.15).timeout	
+  
+   
 func handle_sfx(sfx):
-	pass	
+	match sfx:
+		"memory_snap" :
+			
+			
+			audio_sfx.stream = memory_snap
+			audio_sfx.play()
+		"heartbeat" :
+			audio_sfx.volume_db = 12
+			print("heartbeat")
+			audio_sfx.stream = heartbeat
+			audio_sfx.play()
+			
+		"show_silhouette":
+			show_silhouette()
+			
+		"show_worlds":
+			show_world_glimpses()
