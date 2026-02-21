@@ -2,13 +2,19 @@ extends Node2D
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var greenery: Node2D = $Greenery
-
+#Enemies
+const ENEMY = preload("uid://ddjijj7jpne32")
+const BAT = preload("uid://cvl48wlfmicu0")
+const DARK_ENEMY = preload("uid://bwf8krqqw2223")
+const GHOST = preload("uid://c0hcximd2oaht")
+const SATYR_1 = preload("uid://hyjxhxxsmncx")
+const SKELETON_WIZARD = preload("uid://d24qhsr4uko0x")
 
 # FOREST :
 const DECOR = preload("res://scenes/decor.tscn")
 const TREE = preload("res://scenes/tree.tscn")
 const STONES = preload("res://scenes/stones.tscn")
-const ENEMY = preload("uid://ddjijj7jpne32")
+
 #GraveYard :
 const GRAVE = preload("uid://bj43j4g6rj2ct")
 const STATUE = preload("uid://cw7m1fl852p2o")
@@ -71,6 +77,7 @@ func world_generator(period,octave):
 	
 	
 func _ready() -> void:
+	GlobalCanvasLayer.switching_worlds = false
 	var color_rect = get_tree().current_scene.find_child("ColorRect")
 	var mat = color_rect.material as ShaderMaterial
 	mat.set_shader_parameter("blur_amount", 8.0)
@@ -78,8 +85,6 @@ func _ready() -> void:
 	tween.tween_method(func(v): mat.set_shader_parameter("blur_amount", v), 8.0, 0.0, 3.0)
 	center_message_box =  get_tree().current_scene.find_child("CenterMessageBox")
 	center_message_label =  get_tree().current_scene.find_child("CenterMessage")
-	
-	
 	GlobalCanvasLayer.memory_fragments_acquired = 0 #set to zero at the beginning of every world
 	dream = Global.dream
 	color_rect = get_tree().current_scene.find_child("ColorRect")
@@ -87,7 +92,28 @@ func _ready() -> void:
 	color_rect.color.a = worlds[dream]["opacity"]
 	altitude = world_generator(300,5)
 	set_tiles()
-	#spawn_enemy()
+	#GlobalCanvasLayer._on_play_again_button_down()
+	if dream == "forest":
+		spawn_enemy()
+		bats()
+		bats()
+		skeleton_wizard()
+		satyrs()
+		spawn_enemy()
+	elif dream == "iceworld":
+		skeleton_wizard()
+		skeleton_wizard()
+		satyrs()
+		spawn_enemy()
+		spawn_enemy()
+		spawn_enemy()
+	else:
+		spawn_enemy()
+		spawn_enemy()
+		bats()
+		bats()
+		ghosts()
+		satyrs()
 	
 func set_tiles():
 	for y in range(height):
@@ -123,8 +149,41 @@ func set_tiles():
 					spawn_statue(Vector2i(x,y))		
 			
 				
-				
-
+func spawn_enemy(): # skeletons
+	for i in range(5):
+		var enemy = ENEMY.instantiate()
+		enemy.global_position = Vector2(randi_range(0,width*15 ),randi_range(0,height*15))
+		#print("Spawn point enemy :",enemy.global_position)
+		add_child(enemy)	
+		
+func skeleton_wizard(): 
+	for i in range(5):
+		var enemy = SKELETON_WIZARD.instantiate()
+		enemy.global_position = Vector2(randi_range(0,width*15 ),randi_range(0,height*15))
+		#print("Spawn point enemy :",enemy.global_position)
+		add_child(enemy)			
+			
+func satyrs(): 
+	for i in range(5):
+		var enemy = SATYR_1.instantiate()
+		enemy.global_position = Vector2(randi_range(0,width*15 ),randi_range(0,height*15))
+		#print("Spawn point enemy :",enemy.global_position)
+		add_child(enemy)
+		
+func bats(): 
+	for i in range(5):
+		var enemy = BAT.instantiate()
+		enemy.global_position = Vector2(randi_range(0,width*15 ),randi_range(0,height*15))
+		#print("Spawn point enemy :",enemy.global_position)
+		add_child(enemy)	
+		
+func ghosts(): 
+	for i in range(5):
+		var enemy = GHOST.instantiate()
+		enemy.global_position = Vector2(randi_range(0,width*15 ),randi_range(0,height*15))
+		#print("Spawn point enemy :",enemy.global_position)
+		add_child(enemy)		
+		
 func spawn_tree(pos):
 	var tree = TREE.instantiate()
 	tree.global_position = tile_map_layer.map_to_local(pos)
@@ -147,12 +206,7 @@ func spawn_decor(pos):
 	decor.global_position = tile_map_layer.map_to_local(pos)
 	greenery.add_child(decor)
 
-func spawn_enemy():
-	for i in range(30):
-		var enemy = ENEMY.instantiate()
-		enemy.global_position = Vector2(randi_range(0,width*15 ),randi_range(0,height*15))
-		#print("Spawn point enemy :",enemy.global_position)
-		add_child(enemy)
+
 
 func spawn_statue(pos):
 	var decor = STATUE.instantiate()

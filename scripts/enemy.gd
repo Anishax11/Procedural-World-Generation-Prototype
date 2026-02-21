@@ -49,8 +49,8 @@ func patrol():
 func chase():
 	#print("chase")
 
-	#if animated_sprite_2d.animation!="walk" and animated_sprite_2d.animation!="die":
-	animated_sprite_2d.play("walk")
+	if animated_sprite_2d.animation!="walk" and animated_sprite_2d.animation!="die":
+		animated_sprite_2d.play("walk")
 	
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
@@ -98,27 +98,16 @@ func attack():
 func die():
 	dead = true
 	update_animation()
-	print("DIe")
-	
 	animated_sprite_2d.play("die")
-
-	var power_up = HEAL_POWER_UP.instantiate()
-	power_up.global_position = global_position
-	get_parent().add_child(power_up)
-	#if randi_range(1,Global.enemies_left) == 1:
-		#var fragment = MEMORY_FRAGMENT.instantiate()
-		#fragment.global_position = global_position
-		#get_parent().add_child(fragment)
-	#else:
-		#if randi_range(1,5) == 3:
-			#if randi_range(0,1) == 0:
-				#var power_up = POWER_UP.instantiate()
-				#power_up.global_position = global_position
-				#get_parent().add_child(power_up)
-			#else:
-				#var power_up = HEAL_POWER_UP.instantiate()
-				#power_up.global_position = global_position
-				#get_parent().add_child(power_up)
+	if randi_range(1,5) == 3:
+			if randi_range(0,1) == 0:
+				var power_up = POWER_UP.instantiate()
+				power_up.global_position = global_position
+				get_parent().add_child(power_up)
+			else:
+				var power_up = HEAL_POWER_UP.instantiate()
+				power_up.global_position = global_position
+				get_parent().add_child(power_up)
 		
 	Global.enemies_left-=1		
 	queue_free()
@@ -133,3 +122,7 @@ func update_animation():
 		animated_sprite_2d.flip_h = true
 	else:
 		animated_sprite_2d.flip_h = false
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	queue_free()

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var dream = "forest"
+var dream
 enum States{combat,explore,move_to}
 var state = States.explore
 var enemies_in_range : Array = []
@@ -18,20 +18,26 @@ var center_message_label
 const SPELL = preload("uid://dwf1hndexyu7x")
 const SHOCK_WAVE = preload("uid://q8yib80wufjq")
 const SATYR_SPELL = preload("uid://bd3t01afhjuf6")
-
-
-
+#SFX:
+@onready var sfx: AudioStreamPlayer2D = $Sfx
+const slow_time = preload("uid://dscw71iwv6sjr")
+const sword_swing = preload("uid://bkpdtf3kjjjsh")
+var dead = false
 
 func _ready() -> void:
+	print("World ready")
 	center_message_box =  get_tree().current_scene.find_child("CenterMessageBox")
 	center_message_label =  get_tree().current_scene.find_child("CenterMessage")
 	GlobalCanvasLayer.memory_fragments_acquired = 0 #set to zero at the beginning of every world
 	base_attack_damage = Global.base_attack_damage*Global.level
 	health_box_component.maxHealth = Global.maxHealth
 	health_box_component.health = Global.maxHealth
+	print("Blur removed")
 	
 func _physics_process(delta: float) -> void:
 		#print(direction)
+		if dead:
+			return
 		velocity = Vector2.ZERO
 		direction.y = 0
 		#direction = Vector2.ZERO
@@ -75,6 +81,8 @@ func _physics_process(delta: float) -> void:
 		
 		
 func _input(event: InputEvent) -> void:
+	if dead:
+		return
 		update_animation()
 		if Input.is_action_pressed("Shift"):
 			speed=100
@@ -85,15 +93,15 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_pressed("Base Attack"):
 			base_attack()
 		if Input.is_action_pressed("Special Ability"):
-			sound_wave()
+			slow_mo()
 		if Input.is_action_pressed("sound_wave") and Global.player_abilities.has("sound_wave"):
 			sound_wave()
-			
-			#satyr_spell()
-			#shock_wave()
-			#ice_rain() #if Global.player_abilities.has[ice_spell] 
-			#if dream == "forest":
-				#slow_mo()
+		if Input.is_action_pressed("ice_spell") and Global.player_abilities.has("ice_spell"):
+			ice_rain()
+		if Input.is_action_pressed("shock_wave") and Global.player_abilities.has("shock_wave"):
+			shock_wave()
+		if Input.is_action_pressed("satyr_spell") and Global.player_abilities.has("satyr_spell"):
+			satyr_spell()
 				
 func _on_animated_sprite_2d_animation_finished() -> void:
 	animated_sprite_2d.play("idle")
@@ -101,6 +109,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 
 func base_attack():
+	sfx.stream = sword_swing
+	sfx.play()
 	animated_sprite_2d.play("base_attack")
 	update_animation()
 	for enemy in enemies_in_range:
@@ -114,20 +124,21 @@ func base_attack():
 func combat():
 	print("Player in combat mode")
 
-
 func die():
+	if GlobalCanvasLayer.switching_worlds:
+		print("Death stalled")
+		return
 	if GlobalCanvasLayer.memory_fragments_acquired == GlobalCanvasLayer.total_memory_fragments:
 		return
-	
+	dead = true
+	update_animation()
+	animated_sprite_2d.play("die")
+	GlobalCanvasLayer.switching_worlds = true
 	center_message_label.text="GAME OVER"
-	#center_message_label.visible_characters = 0
 	center_message_box.visible = true
 	center_message_box.get_node("PlayAgain").visible = true
 	center_message_box.get_node("Quit").visible = true
-	GlobalCanvasLayer.worlds_left = 0
-	GlobalCanvasLayer.switch_worlds()
-	#queue_free()
-	#get_tree().paused=true
+	print(animated_sprite_2d.animation)
 	
 func _on_range_area_entered(area: Area2D) -> void:
 	
@@ -144,6 +155,8 @@ func slow_mo():
 	if special_ability_cooldown>0:
 		print("Time remianing : ",special_ability_cooldown)
 		return
+	sfx.stream = slow_time
+	sfx.play()
 	special_ability_cooldown = 35.0
 	Engine.time_scale   = 0.2
 	speed = speed*100
@@ -152,6 +165,7 @@ func slow_mo():
 	Engine.time_scale   = 1
 	speed = speed/100
 	animated_sprite_2d.speed_scale = animated_sprite_2d.speed_scale/3
+	sfx.stop()
 
 func ice_rain():
 	#print("ICe rain called")

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cr61hhetsnfdv" path="res://scenes/hit_box_component.tscn" id="6_p5otw"]
 [ext_resource type="Texture2D" uid="uid://beka4c14ucjxh" path="res://sprites/Pixel Health Bar/Bar/empty health bar.png" id="6_x4bhu"]
 [ext_resource type="Texture2D" uid="uid://bri7y5xck3bbf" path="res://sprites/Pixel Health Bar/Health/health.png" id="7_k0o7o"]
+[ext_resource type="AudioStream" uid="uid://dqgmsolo0rgjv" path="res://audio/DSGNMisc_MOVEMENT-Bats Flying_HY_PC-004.wav" id="9_k0o7o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vjjhm"]
 atlas = ExtResource("2_8qtcx")
@@ -169,3 +170,7 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_dk2sj")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=83101249]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1754511572]
+stream = ExtResource("9_k0o7o")
+volume_db = 3.0

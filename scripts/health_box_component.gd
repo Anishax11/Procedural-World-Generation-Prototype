@@ -29,9 +29,9 @@ func heal(additional_health):
 func update_health_bar():
 	#print("Updating health bar")
 	var percent = health/maxHealth * 100
-	if get_parent().name=="Player":
-		print("Health :",health)
-		print("Percent : ",percent)
+	#if get_parent().name=="Player":
+		#print("Health :",health)
+		#print("Percent : ",percent)
 	if percent <= health_percent - 10: # remove one bar when health falls by 10 percent
 		var diff = health_percent - percent
 

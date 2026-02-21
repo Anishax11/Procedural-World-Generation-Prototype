@@ -9,6 +9,10 @@ extends Node2D
 #sfx:
 const memory_snap = preload("uid://dkf1ogy7w7gnq") 
 const heartbeat = preload("uid://cwv8v7ca1q48j")
+const ice_shatter = preload("uid://cunhysyo3uoqb")
+const rustling_leaves = preload("uid://bnf0p3ts67cep")
+const bell = preload("uid://di5nyvb8sn1q5")
+
 #world scene
 const WORLD = preload("uid://cgaqki7i5emon")
 
@@ -44,9 +48,11 @@ var viewport_size
 
 
 func _ready() -> void:
-
+	var tween = create_tween()
+	tween.tween_property(audio_ambient,"volume_db",0,3)
+	await tween.finished
+	print("FINISHED")
 	viewport_size = get_viewport().get_visible_rect().size
-	#show_silhouette()
 	text.modulate.a = 0
 	world_overlay.modulate.a = 0
 	play_next_line()
@@ -92,21 +98,26 @@ func show_silhouette():
 	await get_tree().create_timer(3.0).timeout
 	tween = create_tween()
 	tween.tween_property(silhouette, "self_modulate:a", 0.0, 1.5) 
-	print("FInish")
 	
 func finish():
 	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, 1.5)
+	tween.tween_property(self, "modulate:a", 0.0, 3)
 	await tween.finished
 	get_tree().change_scene_to_packed(WORLD)
 	
 func show_world_glimpses():
+	audio_sfx.volume_db = 1
 	var worlds = [
 		preload("uid://dqe5ksyacjfb1"),
 		preload("uid://c2exfmtpiei4a"),   # ice blue
 		preload("uid://mntkionfkg2d")]  # graveyard grey-purple
-	for tex in worlds:
 		
+	var sounds = [rustling_leaves,bell,ice_shatter]
+	var sound_index = 0
+	for tex in worlds:
+			audio_sfx.stream = sounds[sound_index]
+			audio_sfx.play()
+			sound_index+=1
 			world_overlay.texture = tex
 			var tween = create_tween()
 			tween.tween_property(world_overlay, "modulate:a", 1.0, 0.2)

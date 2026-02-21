@@ -4,6 +4,7 @@ var speed = 0
 var damage = 5
 var direction
 var parent
+@onready var exploding_ice: AudioStreamPlayer2D = $ExplodingIce
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
@@ -20,6 +21,7 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitBoxComponent and area.get_parent()!=parent:
+		exploding_ice.play()
 		animated_sprite_2d.play("shatter")
 		area.take_damage(damage)
 		

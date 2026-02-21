@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://v2qfma6tcvkj" path="res://scripts/heal_power_up.gd" id="1_ffsfd"]
 [ext_resource type="Texture2D" uid="uid://drbokjk8ikghf" path="res://sprites/BigWander_HighContrastSurvivalKit/BigWander_SurvivalKit/HighContrastSurvivalKit_ContentPreview.png" id="2_ffsfd"]
+[ext_resource type="AudioStream" uid="uid://cigwsdu7ntiyl" path="res://audio/DSGNSynth_BUFF-Mecha Level Up_HY_PC-004.wav" id="3_fq3hn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fq3hn"]
 atlas = ExtResource("2_ffsfd")
@@ -31,5 +32,8 @@ sprite_frames = SubResource("SpriteFrames_3hebb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2092084822]
 shape = SubResource("RectangleShape2D_l3t47")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=501564642]
+stream = ExtResource("3_fq3hn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

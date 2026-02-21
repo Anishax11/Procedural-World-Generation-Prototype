@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://6tmbpavhpbcf"
+path="res://.godot/imported/23. The Last Watch.ogg-7bef39cb822eeaeffe0cdc70fdff1f0c.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/23. The Last Watch.ogg"
+dest_files=["res://.godot/imported/23. The Last Watch.ogg-7bef39cb822eeaeffe0cdc70fdff1f0c.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -11,10 +11,10 @@ var base_damage = 15
 @onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
 var player
 var speed = 35
-var direction : Vector2 = Vector2(1,0)
+var direction : Vector2 = Vector2(0,0)
 var prev_state
 var state_machine 
-var wait_time = 3.0
+var wait_time = 5.0
 var distance_to_player
 var combat_manager
 var player_hitbox
@@ -50,13 +50,13 @@ func _ready():
 
 func patrol():
 	
-	if animated_sprite_2d.animation!="walk" and animated_sprite_2d.animation!="die":
-		animated_sprite_2d.play(satyr_type+"_walk")
+	
 	if wait_time<=0:
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
 		wait_time = 3.0
-	
 		
+	if animated_sprite_2d.animation!="walk" and animated_sprite_2d.animation!="die":
+		animated_sprite_2d.play(satyr_type+"_walk")
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		var normal = collision.get_normal()
@@ -123,25 +123,20 @@ func attack():
 			player_hitbox.take_damage(base_damage)
 			attack_interval = max_attack_interval
 	
-		
-	
-	
-	
+
 func die():
 	if dead:
 		return
 	dead = true
-	Global.Global.satyrs_to_kill-=1
-
+	Global.satyrs_to_kill-=1
 	update_animation()
-	print("DIe")
 	var fragment = MEMORY_FRAGMENT.instantiate()
 	fragment.global_position = global_position
 	get_parent().call_deferred("add_child", fragment)
 	animated_sprite_2d.play(satyr_type+"_die")
 	if Global.satyrs_to_kill == 0 :
 		var ability = ABILITY.instantiate()
-		ability.ability = "ice_spell"
+		ability.ability = "satyr_spell"
 		ability.global_position = global_position
 		get_parent().add_child(ability)
 	else:
@@ -162,8 +157,8 @@ func die():
 
 
 func stun_effect():
-	animated_sprite_2d.play(satyr_type+"_pushed")
 	update_animation()
+	animated_sprite_2d.play(satyr_type+"_pushed")
 	stun_time  = max_stun_time
 
 	

@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://c7mjvsj61ohr0"]
+
+[ext_resource type="Script" uid="uid://brdh6h6rm8pmu" path="res://scripts/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://cggirim7bix0y" path="res://sprites/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_CrouchTransition.png" id="2_wu84c"]
+[ext_resource type="AudioStream" uid="uid://cds4vymd4ulvm" path="res://audio/26. Echoes of Eternity.ogg" id="3_wu84c"]
+[ext_resource type="FontFile" uid="uid://bghye6a50kd0f" path="res://sprites/Ice World Sprites/Ice/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="4_8ln24"]
+[ext_resource type="Shader" uid="uid://b20yyy3hoge7s" path="res://scripts/main_menu.gdshader" id="5_8ln24"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rtw2f"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 0)
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, -45, 0)
+scale_max = 3.0
+color = Color(1, 1, 1, 0.8039216)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtw2f"]
+shader = ExtResource("5_8ln24")
+shader_parameter/time_scale = 1.0
+shader_parameter/glow_color = Color(0.40578878, 0.151401, 0.42357814, 0.9882353)
+shader_parameter/glow_strength = 2.0
+shader_parameter/flicker_speed = 3.0
+shader_parameter/flicker_intensity = 0.15
+
+[node name="MainMenu" type="Node2D" unique_id=1675035805]
+script = ExtResource("1_bqqt6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1668359169]
+
+[node name="BG" type="ColorRect" parent="CanvasLayer" unique_id=1971710825]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer" unique_id=340790490]
+position = Vector2(610, 281)
+amount = 80
+lifetime = 6.0
+visibility_rect = Rect2(-700, -400, 1500, 800)
+process_material = SubResource("ParticleProcessMaterial_rtw2f")
+
+[node name="Silhouette" type="Sprite2D" parent="CanvasLayer" unique_id=23460401]
+modulate = Color(4.2165008, 4.2165008, 4.2165008, 1)
+self_modulate = Color(1.4190066, 1.4190066, 1.4190066, 0)
+z_index = 2
+position = Vector2(611, 265)
+scale = Vector2(2, 2)
+texture = ExtResource("2_wu84c")
+
+[node name="AudioAmbient" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=160935598]
+stream = ExtResource("3_wu84c")
+volume_db = -20.0
+autoplay = true
+
+[node name="StartGame" type="Button" parent="CanvasLayer" unique_id=633549568]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -81.0
+offset_right = 1.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("4_8ln24")
+text = "Start Game"
+
+[node name="Quit" type="Button" parent="CanvasLayer" unique_id=107332302]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = 12.0
+offset_right = -3.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("4_8ln24")
+text = "Quit"
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer" unique_id=343045216]
+material = SubResource("ShaderMaterial_rtw2f")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -279.5
+offset_right = 279.5
+offset_bottom = 174.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("4_8ln24")
+theme_override_font_sizes/normal_font_size = 64
+text = "WRAITHBORN"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="CanvasLayer/StartGame" to="." method="_on_start_game_button_down"]
+[connection signal="button_down" from="CanvasLayer/Quit" to="." method="_on_quit_button_down"]

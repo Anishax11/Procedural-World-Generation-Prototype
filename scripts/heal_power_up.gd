@@ -2,6 +2,7 @@ extends Area2D
 
 var heal_meter = 10
 var message_box
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _ready() -> void:
 	message_box = get_tree().current_scene.find_child("MessageBox")
@@ -9,8 +10,9 @@ func _ready() -> void:
 
 
 func _on_body_entered(body) -> void:
-	if !visible or !body is CharacterBody2D:
+	if !visible or body.name!="Player":
 		return
+	audio_stream_player_2d.play()
 	body.get_node("HealthBoxComponent").heal(heal_meter)
 	message_box.get_node("Message").text="Healed by "+str(heal_meter)
 	visible = false

@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://beka4c14ucjxh" path="res://sprites/Pixel Health Bar/Bar/empty health bar.png" id="9_ok4sd"]
 [ext_resource type="PackedScene" uid="uid://dh54by7jxsp4l" path="res://scenes/enemy_state_machine.tscn" id="9_p0uf5"]
 [ext_resource type="Texture2D" uid="uid://bri7y5xck3bbf" path="res://sprites/Pixel Health Bar/Health/health.png" id="10_o57ao"]
+[ext_resource type="AudioStream" uid="uid://ddpclcimg4vfx" path="res://audio/516445__moogsy__sad-ghost.wav" id="12_o57ao"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bj4ww"]
 atlas = ExtResource("2_4pqta")
@@ -211,3 +212,7 @@ texture = ExtResource("10_o57ao")
 shape = SubResource("CircleShape2D_vbenq")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1373509037]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=295787761]
+stream = ExtResource("12_o57ao")
+volume_db = 3.0

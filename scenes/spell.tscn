@@ -112,5 +112,8 @@ shape = SubResource("CircleShape2D_dc6u6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1018589333]
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1054014439]
+volume_db = 3.0
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

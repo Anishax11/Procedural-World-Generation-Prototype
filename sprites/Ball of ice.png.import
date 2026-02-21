@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6w4xdaf26vc7"
-path="res://.godot/imported/Ball of ice.png-ee70723e0bf93abdc9066d52911faa4d.ctex"
+path="res://.godot/imported/Ball of ice.png-389134bf20b5f355c7128097dfa2eec2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Ice World Sprites/Ice/Ball of ice.png"
-dest_files=["res://.godot/imported/Ball of ice.png-ee70723e0bf93abdc9066d52911faa4d.ctex"]
+source_file="res://sprites/Ball of ice.png"
+dest_files=["res://.godot/imported/Ball of ice.png-389134bf20b5f355c7128097dfa2eec2.ctex"]
 
 [params]
 

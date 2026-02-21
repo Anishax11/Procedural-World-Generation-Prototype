@@ -22,6 +22,7 @@ var dead = false
 var shock_wave_delay = 0
 const SHOCK_WAVE = preload("uid://q8yib80wufjq")
 const ABILITY = preload("uid://bwuqg3lx5cbaf")
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
 
@@ -72,6 +73,7 @@ func combat():
 	attack()
 	
 func attack():
+	audio_stream_player_2d.play()
 	if health_box_component.health <= health_box_component.maxHealth/2 :
 		shock_wave()
 		return

@@ -2,9 +2,9 @@ extends Area2D
 
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
 @export var spell_damage : int  = 20
-@export var speed : int = 1
+@export var speed : int = 70
+
 
 var direction : Vector2 = Vector2(0,1)
 var type
@@ -12,9 +12,14 @@ var ice_rain = false
 var player_cast_satyr_spell = false
 var distance_travelled = 0
 var total_time = 2
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+const single_spell = preload("uid://dtaxxdfx777dk")
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	audio_stream_player_2d.stream = single_spell
+	audio_stream_player_2d.play()
 	if ice_rain:
 		type = "ice"
 		animated_sprite_2d.play(type+"_attack")
@@ -23,6 +28,7 @@ func _ready() -> void:
 		#rotation_degrees = 90
 		#global_position.y-=randi_range(10,100)
 	elif player_cast_satyr_spell:
+		
 		animated_sprite_2d.play(type+"_attack")
 		await get_tree().create_timer(total_time).timeout
 		queue_free()
@@ -55,7 +61,7 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitBoxComponent and area.get_parent()!=get_parent():
-		print("Area detected, take damage callded")
+		
 		area.take_damage(spell_damage)
 		animated_sprite_2d.play(type+"_shatter")
 		

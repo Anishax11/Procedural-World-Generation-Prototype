@@ -20,6 +20,8 @@ var attack_interval = 0.0
 var stun_time = 0.0
 var max_stun_time = 0.5
 var dead = false
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
 
 func _ready():
 	player_hitbox = player.get_node("HitBoxComponent")
@@ -69,10 +71,8 @@ func combat():
 	attack()
 	
 func attack():
-
-	
-
 	if attack_interval <=0:
+		audio_stream_player_2d.play()
 		player_hitbox.take_damage(base_damage)
 		attack_interval = 5.0
 	else:

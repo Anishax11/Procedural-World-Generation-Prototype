@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cds4vymd4ulvm"
+path="res://.godot/imported/26. Echoes of Eternity.ogg-d95278d89fe4f347f7a8a5cf707bf5a6.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/26. Echoes of Eternity.ogg"
+dest_files=["res://.godot/imported/26. Echoes of Eternity.ogg-d95278d89fe4f347f7a8a5cf707bf5a6.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
