@@ -7,10 +7,14 @@ var distance_to_memory_fragment
 var switching_worlds = false
 var worlds_left# one world loaded by default throughh global script at start of game
 var color_rect
+@onready var center_message: RichTextLabel = $CenterMessageBox/CenterMessage
+
+
 const ENDING_SCENE = preload("uid://0t6axhpt64ou")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	worlds_left = Global.dreams.size() - 1 
+
 
 func switch_worlds():
 	switching_worlds = true
@@ -34,7 +38,6 @@ func switch_worlds():
 	
 	
 func _on_play_again_button_down() -> void:
-	print("PLay AGAIN")
 	switching_worlds = false
 	Global.player_abilities = []
 	Global.dreams = ["forest","iceworld","graveyard"]

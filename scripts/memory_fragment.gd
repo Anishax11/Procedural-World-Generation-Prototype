@@ -21,9 +21,11 @@ func _ready() -> void:
 		
 	memory_label = get_tree().current_scene.find_child("MemoryLabel")
 	message_label = get_tree().current_scene.find_child("Message")
-	center_message_label = get_tree().current_scene.find_child("CenterMessage")
+	#center_message_label = get_tree().current_scene.find_child("CenterMessage")
 	center_message_box =  get_tree().current_scene.find_child("CenterMessageBox")
+	center_message_label = center_message_box.get_node("CenterMessage")
 	color_rect = get_tree().current_scene.find_child("ColorRect")
+	#
 
 
 
@@ -34,7 +36,7 @@ func _on_body_entered(body) -> void:
 		memory_label.text = "Memory Fragments : " + str(GlobalCanvasLayer.memory_fragments_acquired) +"/" +str(GlobalCanvasLayer.total_memory_fragments)
 		message_label.text="Memory Fragment acquired"
 		visible = false
-		if GlobalCanvasLayer.memory_fragments_acquired == GlobalCanvasLayer.total_memory_fragments:
+		if GlobalCanvasLayer.memory_fragments_acquired == 1:#GlobalCanvasLayer.total_memory_fragments:
 			if GlobalCanvasLayer.worlds_left == 0:
 				GlobalCanvasLayer.switching_worlds = true
 				GlobalCanvasLayer.switch_worlds()
