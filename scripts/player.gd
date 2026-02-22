@@ -90,8 +90,7 @@ func _input(event: InputEvent) -> void:
 			speed=100
 		else:
 			speed=70	
-		
-		#last_dir = direction	
+
 		if Input.is_action_pressed("Base Attack"):
 			base_attack()
 		if Input.is_action_pressed("Special Ability"):
@@ -107,8 +106,6 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_pressed("dark_spell") and Global.player_abilities.has("dark_spell"):
 			dark_spell()		
 			
-func _on_animated_sprite_2d_animation_finished() -> void:
-	print("Dead animation complete")
 
 
 func base_attack():
@@ -235,13 +232,7 @@ func update_animation():
 	
 	
 
-
-
-	
-
-
 func _on_play_again_button_down() -> void:
-	print("PLay AGAIN")
 	GlobalCanvasLayer.switching_worlds = false
 	Global.player_abilities = []
 	Global.dreams = ["forest","iceworld","graveyard"]

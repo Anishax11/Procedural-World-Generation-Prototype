@@ -21,9 +21,11 @@ var stun_time = 0.0
 var max_stun_time = 0.5
 var dead = false
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
+var start_moving = false
 
 func _ready():
+	await get_tree().create_timer(5).timeout
+	start_moving = true
 	player_hitbox = player.get_node("HitBoxComponent")
 	state_machine = get_node("EnemyStateMachine")
 	base_damage = base_damage*Global.level
@@ -31,6 +33,8 @@ func _ready():
 
 
 func patrol():
+	if !start_moving:
+		return
 	if wait_time<=0:
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
 		wait_time = 3.0
@@ -42,10 +46,10 @@ func patrol():
 	direction = direction.normalized()	
 	velocity = direction * speed
 	
-	
-
 
 func chase():
+	if !start_moving:
+		return
 	if get_slide_collision_count() > 0:
 		var collision = get_slide_collision(0)
 		if collision.get_collider().name =="Player":
@@ -66,6 +70,8 @@ func resolve_collision(normal):
 	
 
 func combat():
+	if !start_moving:
+		return
 	direction = Vector2.ZERO
 	velocity = Vector2.ZERO
 	attack()

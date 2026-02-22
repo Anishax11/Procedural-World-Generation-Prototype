@@ -20,8 +20,11 @@ var attack_interval = 0.0
 var max_stun_time = 0.5 #secs
 var stun_time = 0.0
 var dead = false
+var start_moving = false
 
 func _ready():
+	await get_tree().create_timer(5).timeout
+	start_moving = true
 	player_hitbox = player.get_node("HitBoxComponent")
 	state_machine = get_node("EnemyStateMachine")
 	base_damage = base_damage*Global.level
@@ -29,7 +32,8 @@ func _ready():
 
 
 func patrol():
-	
+	if !start_moving:
+		return
 	animated_sprite_2d.play("walk")
 	if wait_time<=0:
 		
@@ -47,7 +51,8 @@ func patrol():
 
 
 func chase():
-	#print("chase")
+	if !start_moving:
+		return
 
 	if animated_sprite_2d.animation!="walk" and animated_sprite_2d.animation!="die":
 		animated_sprite_2d.play("walk")
@@ -73,18 +78,17 @@ func resolve_collision(normal):
 	
 
 func combat():
-	#print("CombatWD :",self.name)
+	if !start_moving:
+		return
 	direction = Vector2.ZERO
 	velocity = Vector2.ZERO
 	attack()
 	
 func attack():
-
 	if direction.x<0:
 		animated_sprite_2d.flip_h = false
 	else:
 		animated_sprite_2d.flip_h = true
-	#print("Atatck")
 	if animated_sprite_2d.animation!="attack" and animated_sprite_2d.animation!="die":
 		animated_sprite_2d.play("attack")
 		

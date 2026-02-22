@@ -28,9 +28,11 @@ var satyr_type = "white"
 var stun_time = 0.0
 var maxHealth = 200.0
 var spell_damage = 20
+var start_moving = false
 
 func _ready():
-	
+	await get_tree().create_timer(5).timeout
+	start_moving = true
 	health_box_component.maxHealth =maxHealth*Global.level
 	base_damage = base_damage*Global.level
 	spell_damage = spell_damage*Global.level
@@ -46,11 +48,12 @@ func _ready():
 		satyr_type = "red"
 	player_hitbox = player.get_node("HitBoxComponent")
 	state_machine = get_node("EnemyStateMachine")
-	
+	update_animation()
 
 func patrol():
 	
-	
+	if !start_moving:
+		return
 	if wait_time<=0:
 		direction = Vector2(randi_range(-1,1),randi_range(-1,1))
 		wait_time = 3.0
@@ -67,7 +70,8 @@ func patrol():
 	
 
 func chase():
-	#print("chase")
+	if !start_moving:
+		return
 	if player.global_position.x<global_position.x:
 		animated_sprite_2d.flip_h = true
 	else:
@@ -99,17 +103,19 @@ func resolve_collision(normal):
 	
 
 func combat():
-	#print("CombatWD :",self.name)
-	#update_animation()
+	if !start_moving:
+		return
 	direction = Vector2.ZERO
 	velocity = Vector2.ZERO
 	attack()
 	
 func attack():
-	#update_animation()
 	if animated_sprite_2d.animation!="attack" and animated_sprite_2d.animation!="die":
 		animated_sprite_2d.play(satyr_type+"_attack")
-		
+	if player.global_position.x<global_position.x:
+		animated_sprite_2d.flip_h = true
+	else:
+		animated_sprite_2d.flip_h = false	
 	if attack_interval <=0:
 		if caster :
 			

@@ -5,8 +5,6 @@
 [ext_resource type="FontFile" uid="uid://bghye6a50kd0f" path="res://sprites/Ice World Sprites/Ice/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="3_g6s7q"]
 [ext_resource type="Texture2D" uid="uid://vkf14w34pen8" path="res://sprites/Full_fantasy_textbox_a01-1_package/Fantasy_TextBox_A01-1_Blue.png" id="3_mg525"]
 [ext_resource type="Texture2D" uid="uid://rrccqerd4tm2" path="res://sprites/Full_fantasy_textbox_a01-1_package/Fantasy_TextBox_A01-1_Purple.png" id="4_jtalx"]
-[ext_resource type="Texture2D" uid="uid://c805pj6xluq23" path="res://sprites/Full_fantasy_textbox_a01-1_package/Fantasy_TextBox_A01-1_Red.png" id="4_kfwc7"]
-[ext_resource type="Script" uid="uid://cb1iw3k50h21v" path="res://scripts/center_message.gd" id="5_kfwc7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ek3oe"]
 shader = ExtResource("2_ghj5q")
@@ -93,79 +91,3 @@ offset_bottom = 373.66666
 scale = Vector2(0.3, 0.3)
 mouse_filter = 2
 texture = ExtResource("3_mg525")
-
-[node name="CenterMessageBox" type="Control" parent="." unique_id=944446494]
-process_mode = 3
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -307.0
-offset_top = -141.0
-offset_right = 265.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="TextureRect" type="TextureRect" parent="CenterMessageBox" unique_id=89921287]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.45900002
-anchor_right = 0.5
-anchor_bottom = 0.45900002
-offset_left = -601.5
-offset_top = -181.51501
-offset_right = 1824.5
-offset_bottom = 680.485
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-mouse_filter = 2
-texture = ExtResource("4_kfwc7")
-
-[node name="CenterMessage" type="RichTextLabel" parent="CenterMessageBox/TextureRect" unique_id=293002138]
-layout_mode = 0
-offset_left = 532.0
-offset_top = 162.0
-offset_right = 2206.0
-offset_bottom = 650.0
-mouse_filter = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("3_g6s7q")
-theme_override_font_sizes/normal_font_size = 100
-text = "GAME OVER"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("5_kfwc7")
-
-[node name="PlayAgain" type="Button" parent="CenterMessageBox" unique_id=1769176020]
-z_index = 1
-layout_mode = 0
-offset_left = -64.0
-offset_top = 311.0
-offset_right = 311.0
-offset_bottom = 415.0
-scale = Vector2(1, 0.8)
-theme_override_fonts/font = ExtResource("3_g6s7q")
-theme_override_font_sizes/font_size = 70
-text = "Play Again"
-
-[node name="Quit" type="Button" parent="CenterMessageBox" unique_id=1633626728]
-z_index = 1
-layout_mode = 0
-offset_left = 124.0
-offset_top = 160.0
-offset_right = 478.0
-offset_bottom = 264.0
-scale = Vector2(1, 0.8)
-theme_override_fonts/font = ExtResource("3_g6s7q")
-theme_override_font_sizes/font_size = 70
-text = "Quit"
-
-[connection signal="button_down" from="CenterMessageBox/PlayAgain" to="." method="_on_play_again_button_down"]
-[connection signal="button_down" from="CenterMessageBox/Quit" to="." method="_on_quit_button_down"]
