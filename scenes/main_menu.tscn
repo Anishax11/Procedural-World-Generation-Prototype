@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://brdh6h6rm8pmu" path="res://scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://cggirim7bix0y" path="res://sprites/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_CrouchTransition.png" id="2_wu84c"]
-[ext_resource type="AudioStream" uid="uid://cds4vymd4ulvm" path="res://audio/26. Echoes of Eternity.ogg" id="3_wu84c"]
+[ext_resource type="AudioStream" uid="uid://6tmbpavhpbcf" path="res://audio/23. The Last Watch.ogg" id="3_a8gd2"]
 [ext_resource type="FontFile" uid="uid://bghye6a50kd0f" path="res://sprites/Ice World Sprites/Ice/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="4_8ln24"]
 [ext_resource type="Shader" uid="uid://b20yyy3hoge7s" path="res://scripts/main_menu.gdshader" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://i40vnkndgug7" path="res://sprites/FreeKnight_v1/Colour2/Outline/120x80_PNGSheets/_Idle.png" id="6_a8gd2"]
@@ -785,7 +785,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_wu84c")
 
 [node name="AudioAmbient" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=160935598]
-stream = ExtResource("3_wu84c")
+stream = ExtResource("3_a8gd2")
 volume_db = -20.0
 autoplay = true
 

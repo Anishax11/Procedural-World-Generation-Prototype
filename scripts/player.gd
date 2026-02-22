@@ -6,6 +6,7 @@ var state = States.explore
 var enemies_in_range : Array = []
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var color_rect: ColorRect = $CanvasLayer/ColorRect
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 var base_attack_damage 
 @onready var health_box_component: HealthBoxComponent = $HealthBoxComponent
 var special_ability_cooldown = 0.0
@@ -23,6 +24,9 @@ const SATYR_SPELL = preload("uid://bd3t01afhjuf6")
 const slow_time = preload("uid://dscw71iwv6sjr")
 const sword_swing = preload("uid://bkpdtf3kjjjsh")
 var dead = false
+const game_over = preload("uid://k6j6vrrai4ps")
+var MAIN_MENU = load("uid://c7mjvsj61ohr0")
+
 
 func _ready() -> void:
 	center_message_box =  get_tree().current_scene.find_child("CenterMessageBox")
@@ -104,8 +108,7 @@ func _input(event: InputEvent) -> void:
 			dark_spell()		
 			
 func _on_animated_sprite_2d_animation_finished() -> void:
-	animated_sprite_2d.play("idle")
-	update_animation()
+	print("Dead animation complete")
 
 
 func base_attack():
@@ -124,21 +127,17 @@ func combat():
 
 func die():
 	if GlobalCanvasLayer.switching_worlds:
-		print("Death stalled")
+		#print("Death stalled")
 		return
 	if GlobalCanvasLayer.memory_fragments_acquired == GlobalCanvasLayer.total_memory_fragments:
 		return
 	dead = true
+	sfx.stream = game_over
+	sfx.play()
 	update_animation()
 	animated_sprite_2d.play("die")
-	GlobalCanvasLayer.switching_worlds = true
-	center_message_label.add_theme_font_size_override("normal_font_size", 200)
-	center_message_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	center_message_label.text="GAME OVER"
-	center_message_box.visible = true
-	center_message_box.get_node("PlayAgain").visible = true
-	center_message_box.get_node("Quit").visible = true
-	print(animated_sprite_2d.animation)
+	GlobalCanvasLayer.switching_worlds = true 
+	canvas_layer.get_node("Control").visible = true
 	
 func _on_range_area_entered(area: Area2D) -> void:
 	
@@ -235,3 +234,35 @@ func update_animation():
 		animated_sprite_2d.flip_h = true
 	
 	
+
+
+
+	
+
+
+func _on_play_again_button_down() -> void:
+	print("PLay AGAIN")
+	GlobalCanvasLayer.switching_worlds = false
+	Global.player_abilities = []
+	Global.dreams = ["forest","iceworld","graveyard"]
+	Global.enemies_left = 31
+	Global.base_attack_damage = 10.0 # player
+	Global.maxHealth = 100.0  # player
+	Global.level = 1.0 
+	Global.skeleton_wizards_to_kill = 3 
+	Global.watchers_to_kill = 5
+	Global.satyrs_to_kill = 3
+	Global.bats_to_kill = 7
+	Global.dark_enemy_to_kill = 1
+	GlobalCanvasLayer.worlds_left = Global.dreams.size() - 1
+	GlobalCanvasLayer.memory_fragments_acquired = 0
+	Global.start_game() #randomly selects a dream
+	print("Start game called")
+	get_tree().reload_current_scene()
+
+
+func _on_quit_button_down() -> void:
+	var tween = create_tween()
+	tween.tween_property(color_rect,"color",Color(0,0,0,1),2.0)
+	await tween.finished
+	get_tree().call_deferred("change_scene_to_packed", MAIN_MENU)

@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://c4xepxacl6bk4"]
+
+[ext_resource type="Script" uid="uid://c7iqwq2gh2scc" path="res://scripts/canvas_layer.gd" id="1_wtsjf"]
+[ext_resource type="Shader" uid="uid://dd8xmt3t1bc3n" path="res://scripts/canvas_layer.gdshader" id="2_qjeyg"]
+[ext_resource type="FontFile" uid="uid://bghye6a50kd0f" path="res://sprites/Ice World Sprites/Ice/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="3_3qnke"]
+[ext_resource type="Texture2D" uid="uid://rrccqerd4tm2" path="res://sprites/Full_fantasy_textbox_a01-1_package/Fantasy_TextBox_A01-1_Purple.png" id="4_wtsjf"]
+[ext_resource type="Texture2D" uid="uid://vkf14w34pen8" path="res://sprites/Full_fantasy_textbox_a01-1_package/Fantasy_TextBox_A01-1_Blue.png" id="5_rnaij"]
+[ext_resource type="Texture2D" uid="uid://c805pj6xluq23" path="res://sprites/Full_fantasy_textbox_a01-1_package/Fantasy_TextBox_A01-1_Red.png" id="6_wtsjf"]
+[ext_resource type="Script" uid="uid://cb1iw3k50h21v" path="res://scripts/center_message.gd" id="7_rnaij"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3xc6"]
+shader = ExtResource("2_qjeyg")
+shader_parameter/blur_amount = 0.0
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=2105854959]
+script = ExtResource("1_wtsjf")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1758231863]
+material = SubResource("ShaderMaterial_h3xc6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.29523, 1.05288)
+mouse_filter = 2
+color = Color(17.0929, 17.368338, 15.095955, 0.3019608)
+
+[node name="MemoryFragments" type="Control" parent="." unique_id=1888785545]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -191.0
+offset_top = 7.0
+offset_bottom = 35.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="MemoryLabel" type="Label" parent="MemoryFragments" unique_id=1583053898]
+z_index = 1
+layout_mode = 0
+offset_right = 189.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_3qnke")
+text = "Memory Fragments : 0/5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MemoryFragments" unique_id=389863685]
+layout_mode = 0
+offset_left = -62.0
+offset_top = -8.999999
+offset_right = 2728.0
+offset_bottom = 580.99994
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_wtsjf")
+
+[node name="MessageBox" type="Control" parent="." unique_id=553600777]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -237.5
+offset_right = 237.5
+offset_bottom = 99.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Message" type="RichTextLabel" parent="MessageBox" unique_id=704168017]
+z_index = 1
+layout_mode = 0
+offset_left = 95.5
+offset_top = 12.0
+offset_right = 426.5
+offset_bottom = 74.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_3qnke")
+text = "Press [F] to attack. Press [Q] to bend time itself — the world slows, and you alone move freely. Once every 30 seconds."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MessageBox" unique_id=7214138]
+custom_minimum_size = Vector2(317, 88)
+layout_mode = 0
+offset_left = -12.5
+offset_top = -13.0
+offset_right = 1600.8333
+offset_bottom = 373.66666
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_rnaij")
+
+[node name="CenterMessageBox" type="Control" parent="." unique_id=1987231327]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -307.0
+offset_top = -141.0
+offset_right = 265.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterMessageBox" unique_id=1636679996]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.45900002
+anchor_right = 0.5
+anchor_bottom = 0.45900002
+offset_left = -585.0
+offset_top = -90.145004
+offset_right = 1841.0
+offset_bottom = 589.115
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_wtsjf")
+
+[node name="CenterMessage" type="RichTextLabel" parent="CenterMessageBox/TextureRect" unique_id=1638191713]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 162.0
+offset_right = 2165.0
+offset_bottom = 526.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_3qnke")
+theme_override_font_sizes/normal_font_size = 100
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_rnaij")
+
+[node name="Quit" type="Button" parent="CenterMessageBox" unique_id=762480539]
+visible = false
+layout_mode = 0
+offset_left = 47.0
+offset_top = 310.0
+offset_right = 339.0
+offset_bottom = 390.0
+
+[node name="PlayAgain" type="Button" parent="CenterMessageBox" unique_id=221978728]
+visible = false
+layout_mode = 0
+offset_left = 439.0
+offset_top = 310.0
+offset_right = 740.0
+offset_bottom = 388.0

@@ -4,12 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://chhvcdy86whn6" path="res://sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Attack.png" id="2_ur7pv"]
 [ext_resource type="Texture2D" uid="uid://d1y6s8y5ywa67" path="res://sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Idle.png" id="3_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://dqthdfcpxpow3" path="res://scenes/health_box_component.tscn" id="3_dqkch"]
-[ext_resource type="PackedScene" uid="uid://b2s007r14dj0j" path="res://scenes/canvas_layer.tscn" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://c6s2w5bgkkem5" path="res://sprites/FreeKnight_v1/Colour1/NoOutline/120x80_PNGSheets/_DeathNoMovement.png" id="3_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://bb3gmwep5rwrd" path="res://sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Run.png" id="4_d2wvv"]
 [ext_resource type="PackedScene" uid="uid://cr61hhetsnfdv" path="res://scenes/hit_box_component.tscn" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://beka4c14ucjxh" path="res://sprites/Pixel Health Bar/Bar/empty health bar.png" id="5_fjrip"]
 [ext_resource type="Texture2D" uid="uid://bri7y5xck3bbf" path="res://sprites/Pixel Health Bar/Health/health.png" id="6_smehm"]
+[ext_resource type="Texture2D" uid="uid://vkf14w34pen8" path="res://sprites/Full_fantasy_textbox_a01-1_package/Fantasy_TextBox_A01-1_Blue.png" id="11_3v2ag"]
+[ext_resource type="PackedScene" uid="uid://c4xepxacl6bk4" path="res://scenes/test_scene.tscn" id="11_d2wvv"]
+[ext_resource type="FontFile" uid="uid://bghye6a50kd0f" path="res://sprites/Ice World Sprites/Ice/Pixelify_Sans/PixelifySans-VariableFont_wght.ttf" id="12_3v2ag"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
 atlas = ExtResource("2_ur7pv")
@@ -313,8 +315,6 @@ limit_top = 0
 limit_right = 800
 limit_bottom = 480
 
-[node name="CanvasLayer" parent="." unique_id=1141401495 instance=ExtResource("3_qlg0r")]
-
 [node name="HealthBoxComponent" parent="." unique_id=757536793 node_paths=PackedStringArray("healthbar") instance=ExtResource("3_dqkch")]
 maxHealth = 100.0
 healthbar = NodePath("TextureRect")
@@ -430,8 +430,69 @@ shape = SubResource("CircleShape2D_dqkch")
 [node name="Sfx" type="AudioStreamPlayer2D" parent="." unique_id=1071964501]
 volume_db = 6.0
 
+[node name="CanvasLayer" parent="." unique_id=2105854959 instance=ExtResource("11_d2wvv")]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1079060043]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control" unique_id=1378449135]
+layout_mode = 0
+offset_left = -457.0
+offset_top = -81.000015
+offset_right = 823.0
+offset_bottom = 197.99998
+scale = Vector2(0.7, 0.7)
+mouse_filter = 2
+texture = ExtResource("11_3v2ag")
+
+[node name="Quit" type="Button" parent="CanvasLayer/Control" unique_id=740531633]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 18.0
+offset_right = 317.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("12_3v2ag")
+text = "QUIT"
+
+[node name="PlayAgain" type="Button" parent="CanvasLayer/Control" unique_id=80049536]
+layout_mode = 0
+offset_left = -219.0
+offset_top = 16.0
+offset_right = -23.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("12_3v2ag")
+text = "PLAY AGAIN"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=287254077]
+layout_mode = 0
+offset_left = -251.0
+offset_top = -34.0
+offset_right = 348.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("12_3v2ag")
+theme_override_font_sizes/font_size = 32
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Range" to="." method="_on_range_area_entered"]
 [connection signal="area_exited" from="Range" to="." method="_on_range_area_exited"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="button_down" from="CanvasLayer/Control/Quit" to="." method="_on_quit_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/PlayAgain" to="." method="_on_play_again_button_down"]

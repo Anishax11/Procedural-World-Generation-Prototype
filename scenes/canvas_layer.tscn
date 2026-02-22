@@ -17,7 +17,6 @@ process_mode = 3
 script = ExtResource("1_c4rma")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=639344462]
-z_index = 1
 material = SubResource("ShaderMaterial_ek3oe")
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,6 +36,7 @@ offset_left = -191.0
 offset_top = 7.0
 offset_bottom = 35.0
 grow_horizontal = 0
+mouse_filter = 2
 
 [node name="MemoryLabel" type="Label" parent="MemoryFragments" unique_id=1290780572]
 z_index = 1
@@ -67,6 +67,7 @@ offset_left = -237.5
 offset_right = 237.5
 offset_bottom = 99.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="Message" type="RichTextLabel" parent="MessageBox" unique_id=1416470980]
 z_index = 1
@@ -75,6 +76,7 @@ offset_left = 95.5
 offset_top = 12.0
 offset_right = 426.5
 offset_bottom = 74.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_g6s7q")
 text = "Press [F] to attack. Press [Q] to bend time itself — the world slows, and you alone move freely. Once every 30 seconds."
@@ -89,6 +91,7 @@ offset_top = -13.0
 offset_right = 1600.8333
 offset_bottom = 373.66666
 scale = Vector2(0.3, 0.3)
+mouse_filter = 2
 texture = ExtResource("3_mg525")
 
 [node name="CenterMessageBox" type="Control" parent="." unique_id=944446494]
@@ -100,12 +103,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -614.0
-offset_top = -301.0
-offset_right = 597.0
-offset_bottom = 284.0
+offset_left = -307.0
+offset_top = -141.0
+offset_right = 265.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="CenterMessageBox" unique_id=89921287]
 layout_mode = 1
@@ -121,6 +125,7 @@ offset_bottom = 680.485
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
+mouse_filter = 2
 texture = ExtResource("4_kfwc7")
 
 [node name="CenterMessage" type="RichTextLabel" parent="CenterMessageBox/TextureRect" unique_id=293002138]
@@ -129,6 +134,7 @@ offset_left = 532.0
 offset_top = 162.0
 offset_right = 2206.0
 offset_bottom = 650.0
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("3_g6s7q")
 theme_override_font_sizes/normal_font_size = 100
@@ -138,24 +144,24 @@ vertical_alignment = 1
 script = ExtResource("5_kfwc7")
 
 [node name="PlayAgain" type="Button" parent="CenterMessageBox" unique_id=1769176020]
-visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 301.0
-offset_top = 315.0
-offset_right = 676.0
-offset_bottom = 419.0
+offset_left = -64.0
+offset_top = 311.0
+offset_right = 311.0
+offset_bottom = 415.0
 scale = Vector2(1, 0.8)
 theme_override_fonts/font = ExtResource("3_g6s7q")
 theme_override_font_sizes/font_size = 70
 text = "Play Again"
 
 [node name="Quit" type="Button" parent="CenterMessageBox" unique_id=1633626728]
-visible = false
+z_index = 1
 layout_mode = 0
-offset_left = 734.0
-offset_top = 313.0
-offset_right = 1088.0
-offset_bottom = 417.0
+offset_left = 124.0
+offset_top = 160.0
+offset_right = 478.0
+offset_bottom = 264.0
 scale = Vector2(1, 0.8)
 theme_override_fonts/font = ExtResource("3_g6s7q")
 theme_override_font_sizes/font_size = 70

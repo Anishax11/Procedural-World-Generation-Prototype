@@ -34,15 +34,29 @@ func switch_worlds():
 	
 	
 func _on_play_again_button_down() -> void:
+	print("PLay AGAIN")
+	switching_worlds = false
 	Global.player_abilities = []
 	Global.dreams = ["forest","iceworld","graveyard"]
-	Global.level = 1
+	Global.enemies_left = 31
+	Global.base_attack_damage = 10.0 # player
+	Global.maxHealth = 100.0  # player
+	Global.level = 1.0 
+	Global.skeleton_wizards_to_kill = 3 
+	Global.watchers_to_kill = 5
+	Global.satyrs_to_kill = 3
+	Global.bats_to_kill = 7
+	Global.dark_enemy_to_kill = 1
 	worlds_left = Global.dreams.size() - 1
 	memory_fragments_acquired = 0
 	Global.start_game() #randomly selects a dream
-	#print("Start game called")
+	print("Start game called")
 	get_tree().reload_current_scene()
 
 func _on_quit_button_down() -> void:
-	
+	print("QUit")
 	get_tree().quit()
+
+
+func _on_button_button_down() -> void:
+	print("ButtonDown")

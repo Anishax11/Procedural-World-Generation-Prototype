@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://k6j6vrrai4ps"
+path="res://.godot/imported/703542__yoshicakes77__dead.ogg-50ecb2917d5a2d89f876ed9adf8e87e6.oggvorbisstr"
+
+[deps]
+
+source_file="res://sprites/Ice World Sprites/Ice/703542__yoshicakes77__dead.ogg"
+dest_files=["res://.godot/imported/703542__yoshicakes77__dead.ogg-50ecb2917d5a2d89f876ed9adf8e87e6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
