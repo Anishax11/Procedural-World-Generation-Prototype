@@ -241,7 +241,7 @@ func _on_play_again_button_down() -> void:
 	Global.maxHealth = 100.0  # player
 	Global.level = 1.0 
 	Global.skeleton_wizards_to_kill = 3 
-	Global.watchers_to_kill = 5
+	Global.ghosts_to_kill = 5
 	Global.satyrs_to_kill = 3
 	Global.bats_to_kill = 7
 	Global.dark_enemy_to_kill = 1

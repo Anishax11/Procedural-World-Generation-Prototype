@@ -88,7 +88,9 @@ func attack():
 func die():
 	dead = true
 	update_animation()
-	print("DIe")
+	Global.ghosts_to_kill-=1
+	if Global.ghosts_to_kill==0:
+		Global.add_ability("shock_wave")
 	if randi_range(1,5) == 3:
 			if randi_range(0,1) == 0:
 				var power_up = POWER_UP.instantiate()
@@ -98,7 +100,6 @@ func die():
 				var power_up = HEAL_POWER_UP.instantiate()
 				power_up.global_position = global_position
 				get_parent().add_child(power_up)
-		
 	Global.enemies_left-=1		
 	queue_free()
 

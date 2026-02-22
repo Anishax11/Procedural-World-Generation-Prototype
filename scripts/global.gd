@@ -8,11 +8,12 @@ var maxHealth = 100.0  # player
 var level = 1.0 # keep track of worlds traversed, scale enemy and player damage/health with it
 var player_abilities : Array = []
 var skeleton_wizards_to_kill = 3 #killing 3 gives ice spell
-var watchers_to_kill = 5 #killing 5 gives shockwave/explosion spell
+var ghosts_to_kill = 5 #killing 5 gives shockwave/explosion spell
 var satyrs_to_kill = 3
 var bats_to_kill = 7
 var dark_enemy_to_kill = 1
 var message_label
+
 var ability_desc = {
 	"sound_wave" = "Echoburst unlocked. Press [0] to unleash a wave of pure sound that stuns enemies.",
 	"ice_spell" = "Glacial Grasp unlocked. Press [9] to surge frozen energy outward.",

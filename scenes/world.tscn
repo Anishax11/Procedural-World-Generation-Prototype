@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bwdo01litjbmp" path="res://scripts/greenery.gd" id="7_h1eua"]
 [ext_resource type="AudioStream" uid="uid://25pirop51vj1" path="res://audio/596524__bloodpixelhero__in-the-void.wav" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://bwf8krqqw2223" path="res://scenes/dark_enemy.tscn" id="8_4mrxx"]
-[ext_resource type="PackedScene" uid="uid://c0hcximd2oaht" path="res://scenes/ghost.tscn" id="9_7r4gi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6mu14"]
 texture = ExtResource("2_1jy0w")
@@ -1019,6 +1018,3 @@ autoplay = true
 
 [node name="DarkEnemy" parent="." unique_id=1540649991 instance=ExtResource("8_4mrxx")]
 position = Vector2(158, 144)
-
-[node name="Ghost" parent="." unique_id=1886252798 instance=ExtResource("9_7r4gi")]
-position = Vector2(533, 323)

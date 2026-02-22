@@ -110,6 +110,8 @@ maxHealth = 100.0
 healthbar = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="HealthBoxComponent" unique_id=239646903]
+z_index = 1
+y_sort_enabled = true
 offset_left = -83.33333
 offset_top = 76.666664
 offset_right = 54.66667
