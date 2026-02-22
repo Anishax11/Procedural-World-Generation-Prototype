@@ -14,7 +14,7 @@ func _on_body_entered(body) -> void:
 		return
 	audio_stream_player_2d.play()
 	body.get_node("HealthBoxComponent").heal(heal_meter)
-	message_box.get_node("Message").text="Healed by "+str(heal_meter)
+	message_box.get_node("Message").text="HP restored by "+str(heal_meter)
 	visible = false
 	await get_tree().create_timer(3).timeout
 	if message_box.get_node("Message").text=="Healed by "+str(heal_meter): # remove after 3 secs if another message isnt being displayed

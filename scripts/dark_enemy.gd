@@ -15,7 +15,7 @@ var speed = 45
 var direction : Vector2 = Vector2(1,0)
 var prev_state
 var state_machine 
-var wait_time = 3.0
+var wait_time = 5.0
 var distance_to_player
 var combat_manager
 var player_hitbox
@@ -119,7 +119,7 @@ func die():
 		get_parent().add_child(ability)
 
 	Global.enemies_left-=1		
-	#queue_free()
+	queue_free()
 
 
 

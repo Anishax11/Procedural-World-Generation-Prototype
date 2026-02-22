@@ -92,7 +92,6 @@ func _ready() -> void:
 	color_rect.color.a = worlds[dream]["opacity"]
 	altitude = world_generator(300,5)
 	set_tiles()
-	#GlobalCanvasLayer._on_play_again_button_down()
 	if dream == "forest":
 		spawn_enemy()
 		bats()

@@ -83,7 +83,6 @@ func play_next_line():
 	tween.tween_property(text, "modulate:a", 1.0, 1.0)
 	await tween.finished
 	await get_tree().create_timer(delay).timeout
-	
 	tween = create_tween()
 	tween.tween_property(text, "modulate:a", 0.0, 0.7)
 	await tween.finished

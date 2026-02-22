@@ -15,6 +15,6 @@ func _on_body_entered(body) -> void:
 		message_box.get_node("Message").text="Strength icremented by "+str(damage_boost)
 		visible = false
 		await get_tree().create_timer(3).timeout
-		if message_box.get_node("Message").text=="Strength icremented by "+str(damage_boost): # remove after 3 secs if another message isnt being displayed
+		if message_box.get_node("Message").text=="Strength increased by "+str(damage_boost): # remove after 3 secs if another message isnt being displayed
 			message_box.get_node("Message").text=""
 		queue_free()

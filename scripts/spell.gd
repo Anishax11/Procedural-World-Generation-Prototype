@@ -4,8 +4,6 @@ extends Area2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @export var spell_damage : int  = 20
 @export var speed : int = 70
-
-
 var direction : Vector2 = Vector2(0,1)
 var type
 var ice_rain = false

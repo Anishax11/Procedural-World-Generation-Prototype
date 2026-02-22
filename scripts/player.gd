@@ -25,14 +25,12 @@ const sword_swing = preload("uid://bkpdtf3kjjjsh")
 var dead = false
 
 func _ready() -> void:
-	print("World ready")
 	center_message_box =  get_tree().current_scene.find_child("CenterMessageBox")
 	center_message_label =  get_tree().current_scene.find_child("CenterMessage")
 	GlobalCanvasLayer.memory_fragments_acquired = 0 #set to zero at the beginning of every world
 	base_attack_damage = Global.base_attack_damage*Global.level
 	health_box_component.maxHealth = Global.maxHealth
 	health_box_component.health = Global.maxHealth
-	print("Blur removed")
 	
 func _physics_process(delta: float) -> void:
 		#print(direction)
@@ -81,8 +79,8 @@ func _physics_process(delta: float) -> void:
 		
 		
 func _input(event: InputEvent) -> void:
-	if dead:
-		return
+		if dead:
+			return
 		update_animation()
 		if Input.is_action_pressed("Shift"):
 			speed=100
@@ -102,7 +100,9 @@ func _input(event: InputEvent) -> void:
 			shock_wave()
 		if Input.is_action_pressed("satyr_spell") and Global.player_abilities.has("satyr_spell"):
 			satyr_spell()
-				
+		if Input.is_action_pressed("dark_spell") and Global.player_abilities.has("dark_spell"):
+			dark_spell()		
+			
 func _on_animated_sprite_2d_animation_finished() -> void:
 	animated_sprite_2d.play("idle")
 	update_animation()
@@ -114,9 +114,7 @@ func base_attack():
 	animated_sprite_2d.play("base_attack")
 	update_animation()
 	for enemy in enemies_in_range:
-		
 		if (last_dir.x >0 and enemy.global_position.x>=global_position.x) or (last_dir.x<0 and enemy.global_position.x<=global_position.x) or (last_dir.y<0 and enemy.global_position.y<=global_position.y) or (last_dir.y>0 and enemy.global_position.y>=global_position.y) :
-			#print("enemy : ",enemy.name)
 			enemy.take_damage(base_attack_damage)
 			break
 	
@@ -134,6 +132,8 @@ func die():
 	update_animation()
 	animated_sprite_2d.play("die")
 	GlobalCanvasLayer.switching_worlds = true
+	center_message_label.add_theme_font_size_override("normal_font_size", 200)
+	center_message_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 	center_message_label.text="GAME OVER"
 	center_message_box.visible = true
 	center_message_box.get_node("PlayAgain").visible = true
@@ -153,11 +153,10 @@ func _on_range_area_exited(area: Area2D) -> void:
 
 func slow_mo():
 	if special_ability_cooldown>0:
-		print("Time remianing : ",special_ability_cooldown)
 		return
 	sfx.stream = slow_time
 	sfx.play()
-	special_ability_cooldown = 35.0
+	special_ability_cooldown = 30.0
 	Engine.time_scale   = 0.2
 	speed = speed*100
 	animated_sprite_2d.speed_scale = animated_sprite_2d.speed_scale*3
@@ -176,6 +175,7 @@ func ice_rain():
 		ice.direction = Vector2(last_dir.x,0)
 		ice.global_position = global_position
 		ice.scale = Vector2(0.8,0.8)
+		ice.speed = 100
 		ice.top_level = true
 		add_child(ice)
 		ice.get_node("AnimatedSprite2D").flip_h = animated_sprite_2d.flip_h
@@ -188,7 +188,6 @@ func shock_wave():
 	add_child(shockwave)
 	
 func sound_wave():
-		print("Call sound wave ")
 		var shockwave = SHOCK_WAVE.instantiate()
 		shockwave.type = "shockwave"
 		shockwave.total_time = 1
@@ -201,7 +200,6 @@ func satyr_spell():
 		satyr_spell.player_cast_satyr_spell = true
 		satyr_spell.type = "red"
 		satyr_spell.direction = Vector2(last_dir.x,0)
-		#satyr_spell.global_position = Vector2(global_position.x,starting_pos)
 		satyr_spell.global_position = global_position
 		satyr_spell.scale = Vector2(0.6,0.6)
 		add_child(satyr_spell)
@@ -211,7 +209,22 @@ func satyr_spell():
 		starting_pos+=10
 		#print("Add spell")
 	
-	
+func dark_spell():
+		var starting_pos = global_position.y-30
+		for i in range(5):
+			var spell = SATYR_SPELL.instantiate()
+			spell.direction = Vector2(last_dir.x,0)
+			spell.type = "dark"
+			spell.spell_damage = 30
+			spell.player_cast_satyr_spell = true
+			spell.scale = Vector2(0.5,0.5)
+			spell.global_position = global_position
+			add_child(spell)	
+			spell.top_level = true
+			spell.animated_sprite_2d.flip_h  = animated_sprite_2d.flip_h 
+			spell.global_position.y = starting_pos
+			starting_pos+=10
+			
 func stun_effect():
 	pass
 

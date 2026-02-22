@@ -1017,4 +1017,4 @@ autoplay = true
 [node name="SFX" type="AudioStreamPlayer2D" parent="." unique_id=601873901]
 
 [node name="DarkEnemy" parent="." unique_id=1540649991 instance=ExtResource("8_4mrxx")]
-position = Vector2(992, 140)
+position = Vector2(158, 144)
